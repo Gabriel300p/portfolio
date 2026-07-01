@@ -105,6 +105,10 @@ export const experience: Job[] = [
         pt: "Criei e mantive o principal design system do produto do zero: padrões reutilizáveis, responsividade, acessibilidade e evolução escalável.",
       },
       {
+        en: "Led the migration from vanilla CSS to Tailwind, cutting the time to build and iterate on screens.",
+        pt: "Liderei a migração de CSS puro para Tailwind, reduzindo o tempo de construir e iterar telas.",
+      },
+      {
         en: "Designed in Figma and implemented responsive interfaces in React, TypeScript, and Tailwind, with clear handoff between design, frontend, QA, and business.",
         pt: "Desenhei no Figma e implementei interfaces responsivas em React, TypeScript e Tailwind, com handoff claro entre design, frontend, QA e negócio.",
       },
