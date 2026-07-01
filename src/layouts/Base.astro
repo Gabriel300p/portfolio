@@ -45,6 +45,9 @@ const {
                   : "light";
           document.documentElement.setAttribute("data-theme", theme);
           if (param === "dark" || param === "light") localStorage.setItem("theme", param);
+          // Mark that JS is running so scroll-reveal can arm itself. Without this
+          // class, revealed content stays visible (fail-safe, no blank page).
+          document.documentElement.classList.add("js");
         } catch (e) {}
       })();
     </script>

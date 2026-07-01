@@ -1,0 +1,483 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import bbossDesktop from "../../assets/img/projects/bboss-desktop.jpg";
+import bbossMobile1 from "../../assets/img/projects/bboss-mobile-1.jpg";
+import bbossMobile2 from "../../assets/img/projects/bboss-mobile-2.jpg";
+import bbossMobile3 from "../../assets/img/projects/bboss-mobile-3.jpg";
+import bbossMobile4 from "../../assets/img/projects/bboss-mobile-4.jpg";
+
+const screens = [
+  {
+    src: bbossMobile1,
+    alt: "B-Boss Club customer hub home screen",
+  },
+  {
+    src: bbossMobile2,
+    alt: "B-Boss Club booking flow on a mobile screen",
+  },
+  {
+    src: bbossMobile3,
+    alt: "B-Boss Club customer history on a mobile screen",
+  },
+  {
+    src: bbossMobile4,
+    alt: "B-Boss Club loyalty screen in the customer hub",
+  },
+];
+
+const ecosystem = [
+  {
+    name: "Barbershop Management",
+    type: "Web",
+    detail: "Scheduling, team, and finances for the shop operation.",
+  },
+  {
+    name: "Customer Hub",
+    type: "PWA",
+    detail: "Booking, history, and loyalty for end customers.",
+  },
+  {
+    name: "Barber App",
+    type: "PWA",
+    detail: "Agenda and earnings for each professional.",
+  },
+  {
+    name: "Admin backoffice",
+    type: "Web",
+    detail: "Marketplace and oversight for the business team.",
+  },
+];
+---
+
+<Base
+  title="B-Boss Club — case study · Gabriel Andrade"
+  description="A case study for B-Boss Club, an ecosystem for barbershops with management, customer, barber, and admin surfaces sharing one design system and one codebase."
+>
+  <Nav />
+
+  <main class="case">
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back-link mono" href="/#work">← Back to work</a>
+
+        <div class="head case-head" data-reveal>
+          <div class="k">Case study</div>
+          <h2>B-Boss Club</h2>
+          <p>
+            An ecosystem for barbershops: management, a customer hub, a barber app, and an admin backoffice,
+            sharing one design system and one codebase. I led design and engineering end to end.
+          </p>
+          <div class="tags">
+            <span class="tag">SaaS</span>
+            <span class="tag">Marketplace</span>
+            <span class="tag">Design system</span>
+            <span class="tag">PWA</span>
+            <span class="tag">Front to back</span>
+          </div>
+          <p class="metric mono">Ecosystem of 4 apps · one codebase · one design system</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap split" data-reveal>
+        <div class="head section-head">
+          <div class="k">The problem</div>
+          <h2>Fragmented tools in a large market.</h2>
+        </div>
+        <div class="copy">
+          <p>
+            Brazil has 600k+ registered barbershops, but digitalization is fragmented. Shop management,
+            the end customer, and the barber usually sit in separate tools with no consolidated hub.
+            B-Boss is that hub.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap split" data-reveal>
+        <div class="head section-head">
+          <div class="k">What I did</div>
+          <h2>Design + engineering, end to end.</h2>
+        </div>
+        <div class="copy">
+          <p>
+            I designed the system from scratch, then built the web management dashboard, the customer hub
+            as a PWA, and the shared frontend architecture from Figma to production.
+          </p>
+          <p class="stack mono">Vite monorepo · PWA · React · TypeScript · Tailwind</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap" data-reveal>
+        <div class="head">
+          <div class="k">The ecosystem</div>
+          <h2>Four surfaces around one shared design system.</h2>
+        </div>
+
+        <div class="ecosystem">
+          {ecosystem.map((item) => (
+            <article class="eco-item">
+              <div class="eco-top">
+                <h3 class="pname">{item.name}</h3>
+                <span class="tag">{item.type}</span>
+              </div>
+              <p class="pdesc">{item.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section gallery-section">
+      <div class="wrap" data-reveal>
+        <div class="head">
+          <div class="k">Screen gallery</div>
+          <h2>Dashboard and mobile product surfaces.</h2>
+        </div>
+
+        <div class="gallery">
+          <figure class="shot case-shot desktop-shot">
+            <Image
+              src={bbossDesktop}
+              alt="B-Boss Club desktop dashboard with scheduling and shop management data"
+              widths={[720, 1100, 1440, 1800]}
+              sizes="(max-width: 900px) calc(100vw - 40px), 1100px"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="mobile-grid">
+            {screens.map((screen) => (
+              <figure class="shot case-shot mobile-shot">
+                <Image
+                  src={screen.src}
+                  alt={screen.alt}
+                  widths={[220, 360, 520]}
+                  sizes="(max-width: 700px) calc((100vw - 56px) / 2), 240px"
+                  loading="lazy"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap" data-reveal>
+        <div class="head">
+          <div class="k">Key decisions</div>
+          <h2>Built for consistency and speed.</h2>
+        </div>
+
+        <div class="decision-list">
+          <article>
+            <h3 class="pname">Single codebase</h3>
+            <p class="pdesc">
+              A shared architecture and design system kept four surfaces consistent and shippable by a small team.
+            </p>
+          </article>
+          <article>
+            <h3 class="pname">PWA over native</h3>
+            <p class="pdesc">
+              The mobile surfaces could ship faster across devices while keeping installable app behavior.
+            </p>
+          </article>
+          <article>
+            <h3 class="pname">Design QA in handoff</h3>
+            <p class="pdesc">
+              Components, spacing, states, and interaction details were checked as part of implementation, not after it.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap split" data-reveal>
+        <div class="head section-head">
+          <div class="k">Status</div>
+          <h2>MVP milestone reached.</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <p>
+              The MVP milestone has been reached. The next business validation goal is 100 paying barbershops.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-cta">
+      <div class="wrap" data-reveal>
+        <div class="head">
+          <div class="k">Next</div>
+          <h2>Keep exploring the work.</h2>
+        </div>
+        <div class="cta-row">
+          <a class="btn primary" href="/#work">Back to work</a>
+          <a class="btn" href="mailto:contact@gabrielandrade.com">contact@gabrielandrade.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .case {
+    overflow: clip;
+  }
+
+  .case-hero {
+    padding-top: clamp(42px, 7vw, 86px);
+    padding-bottom: clamp(58px, 8vw, 104px);
+  }
+
+  .back-link {
+    display: inline-flex;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 44px;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .case-head {
+    max-width: 820px;
+    margin-bottom: 0;
+  }
+
+  .case-head h2 {
+    font-size: clamp(2.9rem, 8vw, 5.4rem);
+    max-width: 9ch;
+  }
+
+  .case-head p {
+    font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+  }
+
+  .metric {
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .case-section,
+  .case-cta {
+    border-top: 1px solid var(--line);
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 0.42fr 0.58fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .section-head {
+    margin-bottom: 0;
+  }
+
+  .copy {
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  .copy p {
+    margin: 0;
+  }
+
+  .copy p + p {
+    margin-top: 18px;
+  }
+
+  .stack {
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ecosystem {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .eco-item {
+    min-height: 240px;
+    padding: clamp(20px, 2.8vw, 30px);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-elevated);
+  }
+
+  .eco-top {
+    display: flex;
+    min-height: 108px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .eco-item .pname,
+  .decision-list .pname {
+    margin: 0;
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+  }
+
+  .gallery {
+    display: grid;
+    gap: clamp(18px, 3vw, 32px);
+  }
+
+  .case-shot {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg-elevated);
+  }
+
+  .desktop-shot img {
+    width: 100%;
+  }
+
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 22px);
+  }
+
+  .mobile-shot {
+    align-self: start;
+  }
+
+  .decision-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .decision-list article {
+    padding: clamp(22px, 3vw, 32px);
+    background: var(--bg);
+  }
+
+  .timeline {
+    border-top: 1px solid var(--line);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 22px 0 0 34px;
+    color: var(--text-muted);
+  }
+
+  .timeline-item p {
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .timeline-dot::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    width: 1px;
+    height: 44px;
+    background: var(--line-strong);
+  }
+
+  .case-cta {
+    padding-block: clamp(72px, 10vw, 120px);
+  }
+
+  .case-cta .head {
+    margin-bottom: 28px;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  @media (max-width: 980px) {
+    .split,
+    .decision-list {
+      grid-template-columns: 1fr;
+    }
+
+    .ecosystem {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .eco-item {
+      min-height: 220px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .case-hero {
+      padding-top: 34px;
+    }
+
+    .back-link {
+      margin-bottom: 34px;
+    }
+
+    .ecosystem,
+    .mobile-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .eco-item {
+      min-height: 190px;
+    }
+
+    .eco-top {
+      min-height: 96px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ecosystem,
+    .mobile-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-row .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

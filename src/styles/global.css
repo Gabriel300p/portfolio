@@ -416,6 +416,49 @@ h1 em {
   color: var(--text-muted);
 }
 
+/* hero proof band — real numbers as first-class UI */
+.hero-stats {
+  list-style: none;
+  margin: 40px auto 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 30px;
+  max-width: 720px;
+}
+.hero-stats li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.hero-stats b {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.hero-stats span {
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.hero-stats li + li {
+  padding-left: 30px;
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 560px) {
+  .hero-stats {
+    gap: 12px 20px;
+  }
+  .hero-stats li + li {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
 /* ============================================================
    Tech strip
    ============================================================ */
@@ -448,10 +491,10 @@ h1 em {
    Sections
    ============================================================ */
 section {
-  padding-block: clamp(72px, 10vw, 140px);
+  padding-block: clamp(56px, 7vw, 104px);
 }
 .head {
-  margin-bottom: 52px;
+  margin-bottom: 44px;
 }
 .head .k {
   font-family: var(--mono);
@@ -881,6 +924,16 @@ footer .wrap {
 .proj-text .tags {
   margin-top: 18px;
 }
+.proj-text .pmetric {
+  margin: 16px 0 0;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.proj-text .case-link {
+  margin-top: 14px;
+}
 .pname-sub {
   font-size: 0.6em;
   color: var(--text-muted);
@@ -888,23 +941,30 @@ footer .wrap {
   font-weight: 400;
 }
 
-/* media panel — always a deep charcoal stage with window light */
+/* media panel — a theme-aware stage so the screenshot never clashes with the page.
+   Light: warm paper surface (belongs to the palette). Dark: deep charcoal stage. */
 .panel {
   position: relative;
   overflow: hidden;
   border-radius: 15px;
-  border: 1px solid #232323;
+  border: 1px solid var(--line-strong);
   background:
-    radial-gradient(120% 90% at 78% 8%, rgba(255, 255, 255, 0.09), transparent 55%),
-    linear-gradient(180deg, #191919, #101010);
+    radial-gradient(120% 90% at 78% 8%, color-mix(in srgb, var(--text) 5%, transparent), transparent 55%),
+    var(--panel);
   aspect-ratio: 16 / 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(22px, 3vw, 40px);
+  padding: clamp(18px, 2.4vw, 32px);
   box-shadow: 0 40px 90px -50px var(--shadow);
 }
-/* window-blinds light overlay (the eftakher signature) */
+[data-theme="dark"] .panel {
+  border-color: #232323;
+  background:
+    radial-gradient(120% 90% at 78% 8%, rgba(255, 255, 255, 0.09), transparent 55%),
+    linear-gradient(180deg, #191919, #101010);
+}
+/* window-blinds light overlay (the eftakher signature) — dark stage only */
 .lightbands {
   position: absolute;
   inset: -20%;
@@ -917,6 +977,10 @@ footer .wrap {
   mask-image: radial-gradient(120% 90% at 72% 6%, #000 0%, transparent 62%);
   pointer-events: none;
   z-index: 3;
+  display: none;
+}
+[data-theme="dark"] .lightbands {
+  display: block;
 }
 
 .stage {
@@ -928,11 +992,11 @@ footer .wrap {
   justify-content: center;
 }
 .tilt {
-  transform: perspective(1400px) rotateY(-9deg) rotateX(2deg);
+  transform: perspective(1600px) rotateY(-5deg) rotateX(1deg);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .proj:hover .tilt {
-  transform: perspective(1400px) rotateY(-5deg) rotateX(1deg);
+  transform: perspective(1600px) rotateY(-2deg) rotateX(0.5deg);
 }
 
 /* browser frame */
@@ -994,13 +1058,13 @@ footer .wrap {
 
 /* dual (B-Boss): desktop browser + overlapping phone */
 .stage-dual .browser {
-  width: 82%;
+  width: 90%;
 }
 .stage-dual .phone {
   position: absolute;
-  right: 4%;
+  right: 3%;
   bottom: -4%;
-  width: 23%;
+  width: 24%;
   z-index: 2;
 }
 /* phone-only (Movie Match) */
@@ -1319,6 +1383,19 @@ footer .wrap {
   height: 10px;
 }
 
+/* open-source lead card at the tail of the Stack section */
+.opensource {
+  margin-top: clamp(44px, 6vw, 68px);
+  max-width: 620px;
+}
+.os-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 16px;
+}
+
 /* ============================================================
    Experience section
    ============================================================ */
@@ -1602,24 +1679,24 @@ footer .wrap {
   transform: translateY(-2px) scale(1.06);
 }
 
-/* section-heading wipe reveal (only when motion is welcome) */
+/* section-heading wipe reveal (only when motion is welcome AND JS armed it) */
 @media (prefers-reduced-motion: no-preference) {
-  .head h2 {
+  html.js .head h2 {
     clip-path: inset(-0.12em 100% -0.18em 0);
     transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
   }
-  .head.in h2 {
+  html.js .head.in h2 {
     clip-path: inset(-0.12em -3% -0.18em 0);
   }
 }
 
-/* reveal on scroll */
-[data-reveal] {
+/* reveal on scroll — only hide when JS is present to reveal it again (fail-safe) */
+html.js [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-[data-reveal].in {
+html.js [data-reveal].in {
   opacity: 1;
   transform: none;
 }
