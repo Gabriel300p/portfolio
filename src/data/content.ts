@@ -77,17 +77,24 @@ export const stackLogos: string[] = [
 export interface Job {
   company: string;
   role: Bilingual;
-  period: Bilingual;
+  /** icon key resolved in Experience.astro: "code" | "server" */
+  icon: "code" | "server";
+  employment: Bilingual;
+  period: string;
   current?: boolean;
   bullets: Bilingual[];
+  stack: string[];
 }
 
 export const experience: Job[] = [
   {
     company: "Acesso Energia",
     role: { en: "Frontend Developer & UI Designer", pt: "Frontend Developer & UI Designer" },
-    period: { en: "Oct 2021 — Present", pt: "Out 2021 — Presente" },
+    icon: "code",
+    employment: { en: "Full-time", pt: "Tempo integral" },
+    period: "10.2021 — Present",
     current: true,
+    stack: ["React", "TypeScript", "Tailwind", "Figma", "Design Systems", "Accessibility", "Design QA", "AI-assisted"],
     bullets: [
       {
         en: "Designed and maintained interfaces across internal platforms, client portals, mobile flows, and landing pages, covering 1,000+ screens and 200+ complete product flows.",
@@ -114,7 +121,10 @@ export const experience: Job[] = [
   {
     company: "Ômega Digital Center",
     role: { en: "Network & Infrastructure Analyst", pt: "Analista de Redes e Infraestrutura" },
-    period: { en: "Mar 2019 — Oct 2021", pt: "Mar 2019 — Out 2021" },
+    icon: "server",
+    employment: { en: "Full-time", pt: "Tempo integral" },
+    period: "03.2019 — 10.2021",
+    stack: ["Networking", "Infrastructure", "Tech Support", "Monitoring", "Troubleshooting"],
     bullets: [
       {
         en: "Real-time technical support, network maintenance, and infrastructure monitoring for continuous system availability.",

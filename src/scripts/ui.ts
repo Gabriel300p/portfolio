@@ -101,6 +101,41 @@ function initCopy() {
   });
 }
 
+function initExperience() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const jobs = document.querySelectorAll<HTMLElement>(".xp");
+  jobs.forEach((xp) => {
+    const btn = xp.querySelector<HTMLButtonElement>(".xp-role-row");
+    const panel = xp.querySelector<HTMLElement>(".xp-panel");
+    if (!btn || !panel) return;
+
+    const setOpen = (open: boolean, animate: boolean) => {
+      xp.setAttribute("data-open", String(open));
+      btn.setAttribute("aria-expanded", String(open));
+      if (!animate || reduce) {
+        panel.style.height = open ? "auto" : "0px";
+        return;
+      }
+      if (open) {
+        panel.style.height = panel.scrollHeight + "px";
+        const done = () => {
+          panel.style.height = "auto";
+          panel.removeEventListener("transitionend", done);
+        };
+        panel.addEventListener("transitionend", done);
+      } else {
+        panel.style.height = panel.scrollHeight + "px";
+        void panel.offsetHeight; // force reflow so the transition to 0 runs
+        panel.style.height = "0px";
+      }
+    };
+
+    // Initial state: the current role is open, the rest collapsed.
+    setOpen(xp.getAttribute("data-current") === "true", false);
+    btn.addEventListener("click", () => setOpen(xp.getAttribute("data-open") !== "true", true));
+  });
+}
+
 function initTheme() {
   const btn = document.getElementById("themeBtn");
   btn?.addEventListener("click", () => {
@@ -120,4 +155,5 @@ initReveal();
 initLang();
 initClock();
 initCopy();
+initExperience();
 initTheme();
