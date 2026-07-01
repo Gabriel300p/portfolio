@@ -267,7 +267,7 @@ img {
   isolation: isolate;
   overflow: clip;
 }
-/* monochromatic binary rain, contained within the hero */
+/* green binary rain, revealed only in a soft circle that follows the cursor */
 .hero-rain {
   position: absolute;
   inset: 0;
@@ -275,7 +275,23 @@ img {
   height: 100%;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.55;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  -webkit-mask-image: radial-gradient(
+    circle var(--rain-r, 200px) at var(--mx, -999px) var(--my, -999px),
+    #000 0%,
+    #000 34%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    circle var(--rain-r, 200px) at var(--mx, -999px) var(--my, -999px),
+    #000 0%,
+    #000 34%,
+    transparent 72%
+  );
+}
+.hero[data-glow="on"] .hero-rain {
+  opacity: 1;
 }
 .hero .wrap {
   position: relative;

@@ -152,7 +152,7 @@ function initTheme() {
   });
 }
 
-// Monochromatic binary rain in the hero (Matrix motif, in the theme's own tones).
+// Green binary rain revealed only under the cursor (Matrix motif on hover).
 function initHeroRain() {
   if (reduceMotion) return;
   const hero = document.querySelector<HTMLElement>("[data-hero]");
@@ -166,14 +166,13 @@ function initHeroRain() {
   let w = 0,
     h = 0,
     dpr = 1;
-  let mouseX = -9999;
 
-  // Palette per theme: bg fade for trails + faint/bright char alpha (monochrome).
-  const palette = () => {
+  // Green per theme (vibrant, matches the accent).
+  const green = () => {
     const dark = document.documentElement.getAttribute("data-theme") === "dark";
     return dark
-      ? { bg: "22, 21, 15", fg: "240, 236, 225", fade: 0.11, faint: 0.16, bright: 0.5 }
-      : { bg: "245, 244, 239", fg: "28, 26, 23", fade: 0.12, faint: 0.1, bright: 0.34 };
+      ? { head: "180, 255, 210", body: "69, 224, 138", fade: 0.09 }
+      : { head: "20, 150, 90", body: "11, 125, 69", fade: 0.1 };
   };
 
   const resize = () => {
@@ -188,25 +187,25 @@ function initHeroRain() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cols = Math.ceil(w / fontSize);
     drops = Array.from({ length: cols }, () => Math.floor((Math.random() * h) / fontSize));
-    const p = palette();
-    ctx.fillStyle = `rgb(${p.bg})`;
-    ctx.fillRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
   };
 
   let last = 0;
   const frame = (t: number) => {
     raf = requestAnimationFrame(frame);
-    if (t - last < 45) return; // ~22fps, calm and cheap
+    if (t - last < 55) return; // ~18fps, calm
     last = t;
-    const p = palette();
-    ctx.fillStyle = `rgba(${p.bg}, ${p.fade})`;
+    const g = green();
+    // Fade the previous frame's pixels (transparent trail, no background color).
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.fillStyle = `rgba(0,0,0,${g.fade})`;
     ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = "source-over";
     ctx.font = `${fontSize}px "Geist Mono", ui-monospace, monospace`;
     for (let i = 0; i < cols; i++) {
       const x = i * fontSize;
       const y = drops[i] * fontSize;
-      const near = mouseX > -9999 && Math.abs(x - mouseX) < 90;
-      ctx.fillStyle = `rgba(${p.fg}, ${near ? p.bright : p.faint})`;
+      ctx.fillStyle = `rgba(${Math.random() < 0.12 ? g.head : g.body}, 0.95)`;
       ctx.fillText(Math.random() < 0.5 ? "0" : "1", x, y);
       if (y > h && Math.random() > 0.975) drops[i] = 0;
       drops[i]++;
@@ -214,6 +213,7 @@ function initHeroRain() {
   };
 
   let raf = 0;
+  let stopTimer: number | undefined;
   const start = () => {
     if (!raf) raf = requestAnimationFrame(frame);
   };
@@ -222,20 +222,28 @@ function initHeroRain() {
       cancelAnimationFrame(raf);
       raf = 0;
     }
+    ctx.clearRect(0, 0, w, h);
   };
 
   resize();
   window.addEventListener("resize", resize);
-  hero.addEventListener("pointermove", (e: PointerEvent) => {
-    mouseX = e.clientX - hero.getBoundingClientRect().left;
+  const place = (e: PointerEvent) => {
+    const r = hero.getBoundingClientRect();
+    hero.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    hero.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+  hero.addEventListener("pointerenter", (e: PointerEvent) => {
+    window.clearTimeout(stopTimer);
+    place(e);
+    hero.setAttribute("data-glow", "on");
+    start();
   });
+  hero.addEventListener("pointermove", place);
   hero.addEventListener("pointerleave", () => {
-    mouseX = -9999;
+    hero.setAttribute("data-glow", "off");
+    // let the mask fade out (0.45s) before stopping the loop
+    stopTimer = window.setTimeout(stop, 500);
   });
-  // Only animate while the hero is on screen.
-  new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()), {
-    threshold: 0,
-  }).observe(hero);
 }
 
 // Buttons that lean toward the cursor.
