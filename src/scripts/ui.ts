@@ -283,6 +283,34 @@ function initMagnetic() {
   });
 }
 
+// Auto-advancing screen carousels inside the project mockups.
+function initCarousels() {
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => {
+    const slides = Array.from(el.querySelectorAll<HTMLElement>(".slide"));
+    if (slides.length < 2 || reduceMotion) return; // static first slide otherwise
+    const interval = Number(el.getAttribute("data-interval")) || 3000;
+    let idx = 0;
+    let timer = 0;
+    const go = () => {
+      slides[idx].classList.remove("is-active");
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add("is-active");
+    };
+    const play = () => {
+      if (!timer) timer = window.setInterval(go, interval);
+    };
+    const pause = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = 0;
+      }
+    };
+    el.addEventListener("pointerenter", pause);
+    el.addEventListener("pointerleave", play);
+    new IntersectionObserver(([e]) => (e.isIntersecting ? play() : pause()), { threshold: 0 }).observe(el);
+  });
+}
+
 // Smooth scrolling (loaded only when motion is welcome).
 async function initSmoothScroll() {
   if (reduceMotion) return;
@@ -320,4 +348,5 @@ initExperience();
 initTheme();
 initHeroRain();
 initMagnetic();
+initCarousels();
 initSmoothScroll();

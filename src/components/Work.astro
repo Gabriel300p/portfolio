@@ -1,9 +1,64 @@
 ---
 import { Image } from "astro:assets";
-import bbossWeb from "../assets/img/bboss-web.jpg";
-import bbossMobile from "../assets/img/bboss-mobile.jpg";
-import checkmidia from "../assets/img/checkmidia.jpg";
-import moviematch from "../assets/img/moviematch.jpg";
+import bbossDesktop from "../assets/img/projects/bboss-desktop.jpg";
+import bm1 from "../assets/img/projects/bboss-mobile-1.jpg";
+import bm2 from "../assets/img/projects/bboss-mobile-2.jpg";
+import bm3 from "../assets/img/projects/bboss-mobile-3.jpg";
+import bm4 from "../assets/img/projects/bboss-mobile-4.jpg";
+import mm1 from "../assets/img/projects/moviematch-1.jpg";
+import mm2 from "../assets/img/projects/moviematch-2.jpg";
+import mm3 from "../assets/img/projects/moviematch-3.jpg";
+import mm4 from "../assets/img/projects/moviematch-4.jpg";
+
+const bbossPhones = [bm1, bm2, bm3, bm4];
+const moviePhones = [mm1, mm2, mm3, mm4];
+
+const compact = [
+  {
+    name: "Landing kernel",
+    blurb: {
+      en: "One codebase syncing many client landing pages, config-validated in TypeScript.",
+      pt: "Uma base sincronizando várias landing pages de clientes, config validada em TypeScript.",
+    },
+    tags: ["System", "TypeScript", "Nx"],
+    href: "https://github.com/Gabriel300p/landing-pages",
+  },
+  {
+    name: "Check Mídia",
+    blurb: {
+      en: "A marketing agency site, designed and built from scratch.",
+      pt: "Site de agência de marketing, projetado e construído do zero.",
+    },
+    tags: ["Website", "Next.js"],
+    href: "https://www.checkmidia.com/",
+  },
+  {
+    name: "Safira",
+    blurb: {
+      en: "An MVP management platform for an animal-welfare NGO, shipped in a month.",
+      pt: "Plataforma de gestão MVP para uma ONG de proteção animal, entregue em um mês.",
+    },
+    tags: ["App", "Prisma"],
+    href: "https://safira-two.vercel.app/",
+  },
+  {
+    name: "Controle Financeiro",
+    blurb: {
+      en: "A finance-tracking product for barbershops: dashboards and reports.",
+      pt: "Produto de controle financeiro para barbearias: dashboards e relatórios.",
+    },
+    tags: ["Product design", "Mobile"],
+  },
+  {
+    name: "Metaverso",
+    blurb: {
+      en: "An early study landing page exploring layout and motion.",
+      pt: "Uma landing de estudo explorando layout e movimento.",
+    },
+    tags: ["Study", "Frontend"],
+    href: "https://metaverso-green.vercel.app/",
+  },
+];
 ---
 
 <section id="work">
@@ -19,95 +74,57 @@ import moviematch from "../assets/img/moviematch.jpg";
       </h2>
     </div>
 
-    {/* B-Boss — feature */}
-    <div class="feature" data-reveal>
-      <div class="ftext">
+    {/* ---------------- Featured 1 — B-Boss (desktop + phone) ---------------- */}
+    <article class="proj" data-reveal>
+      <div class="proj-text">
         <div class="tags">
           <span class="tag">SaaS</span>
           <span class="tag">Marketplace</span>
           <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
           <span class="tag i18n" data-en="Front to back" data-pt="Front to back">Front to back</span>
         </div>
-        <div class="pname" style="margin-top:18px">B-Boss Club</div>
+        <h3 class="pname">B-Boss Club</h3>
         <p
           class="pdesc i18n"
-          data-en="A SaaS and marketplace for barbershops. Subscriptions and vouchers for clients, scheduling and analytics for shops. I own it end to end: the design system, the web dashboard, and the mobile app, all built on one codebase."
-          data-pt="Um SaaS e marketplace para barbearias. Assinaturas e vouchers para clientes, agenda e analytics para as barbearias. Cuido de tudo: o design system, o painel web e o app mobile, tudo sobre uma base única."
+          data-en="A SaaS and marketplace for barbershops. Subscriptions and vouchers for clients, scheduling and analytics for shops. Owned end to end: the design system, the web dashboard, and the client app."
+          data-pt="Um SaaS e marketplace para barbearias. Assinaturas e vouchers para clientes, agenda e analytics para as barbearias. Dono de ponta a ponta: o design system, o painel web e o app do cliente."
         >
           A SaaS and marketplace for barbershops. Subscriptions and vouchers for clients, scheduling
-          and analytics for shops. I own it end to end: the design system, the web dashboard, and the
-          mobile app, all built on one codebase.
+          and analytics for shops. Owned end to end: the design system, the web dashboard, and the
+          client app.
         </p>
       </div>
-      <div>
-        <div class="shot hoverable">
-          <Image
-            src={bbossWeb}
-            alt="B-Boss Club web dashboard: recurring clients, weekly performance chart, ratings and recent appointments"
-            widths={[400, 800, 1200]}
-            sizes="(max-width: 840px) 92vw, 55vw"
-            loading="eager"
-          />
+
+      <div class="proj-media">
+        <div class="mock-dual">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club</span></div>
+            <div class="browser-view">
+              <Image src={bbossDesktop} alt="B-Boss Club web dashboard" widths={[400, 800, 1100]} sizes="(max-width: 900px) 92vw, 46vw" loading="lazy" />
+            </div>
+          </div>
+          <div class="phone" data-carousel data-interval="3200">
+            <div class="carousel">
+              {bbossPhones.map((img, i) => (
+                <div class:list={["slide", { "is-active": i === 0 }]}>
+                  <Image src={img} alt={`B-Boss client app screen ${i + 1}`} widths={[220, 440]} sizes="180px" loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="feature-sub" data-reveal>
-      <div class="shot hoverable">
-        <Image
-          src={bbossMobile}
-          alt="B-Boss Club mobile app: barbershop detail with reviews, voucher confirmation, voucher with map, and profile"
-          widths={[500, 900, 1200]}
-          sizes="(max-width: 1160px) 92vw, 1100px"
-          loading="lazy"
-        />
-      </div>
-      <div class="cap i18n" data-en="Client app, iOS and Android" data-pt="App do cliente, iOS e Android">
-        Client app, iOS and Android
-      </div>
-    </div>
-
-    {/* Check Mídia — row */}
-    <div class="row" data-reveal style="margin-top:clamp(72px,10vw,132px)">
-      <div class="rtext">
-        <div class="tags">
-          <span class="tag i18n" data-en="Website" data-pt="Website">Website</span>
-          <span class="tag i18n" data-en="Design + build" data-pt="Design + build">Design + build</span>
-          <span class="tag">Tailwind</span>
-        </div>
-        <div class="pname" style="margin-top:18px">Check Mídia</div>
-        <p
-          class="pdesc i18n"
-          data-en="A marketing agency site built to help small businesses grow online. Designed and coded from scratch: hero, services, and a clear path to contact."
-          data-pt="Um site de agência de marketing feito para ajudar pequenos negócios a crescer online. Projetado e codado do zero: hero, serviços e um caminho claro até o contato."
-        >
-          A marketing agency site built to help small businesses grow online. Designed and coded from
-          scratch: hero, services, and a clear path to contact.
-        </p>
-        <a href="https://www.checkmidia.com/" target="_blank" rel="noopener">
-          <span class="plink">checkmidia.com <span class="arr">&rarr;</span></span>
-        </a>
-      </div>
-      <a class="shot" href="https://www.checkmidia.com/" target="_blank" rel="noopener">
-        <Image
-          src={checkmidia}
-          alt="Check Mídia agency website hero with headline, call to action and a photo composition"
-          widths={[400, 800, 1280]}
-          sizes="(max-width: 840px) 92vw, 48vw"
-          loading="lazy"
-        />
-      </a>
-    </div>
-
-    {/* Movie Match — row, flipped */}
-    <div class="row flip" data-reveal>
-      <div class="rtext">
+    {/* ---------------- Featured 2 — Movie Match (phone) ---------------- */}
+    <article class="proj flip" data-reveal>
+      <div class="proj-text">
         <div class="tags">
           <span class="tag i18n" data-en="Mobile" data-pt="Mobile">Mobile</span>
           <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
           <span class="tag">UI</span>
         </div>
-        <div class="pname" style="margin-top:18px">Movie Match</div>
+        <h3 class="pname">Movie Match</h3>
         <p
           class="pdesc i18n"
           data-en="A native app for movie recommendation and tracking. Search, rich filters by streaming and rating, watchlists, and a detail view that makes deciding what to watch easy."
@@ -117,15 +134,87 @@ import moviematch from "../assets/img/moviematch.jpg";
           rating, watchlists, and a detail view that makes deciding what to watch easy.
         </p>
       </div>
-      <div class="shot hoverable">
-        <Image
-          src={moviematch}
-          alt="Movie Match mobile app: home recommendations, search results, filter panel and a movie detail screen"
-          widths={[400, 800, 1280]}
-          sizes="(max-width: 840px) 92vw, 48vw"
-          loading="lazy"
-        />
+
+      <div class="proj-media">
+        <div class="mock-phone-solo">
+          <div class="phone big" data-carousel data-interval="2800">
+            <div class="carousel">
+              {moviePhones.map((img, i) => (
+                <div class:list={["slide", { "is-active": i === 0 }]}>
+                  <Image src={img} alt={`Movie Match screen ${i + 1}`} widths={[240, 480]} sizes="230px" loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+    </article>
+
+    {/* ---------------- Featured 3 — Pandora ---------------- */}
+    <article class="proj" data-reveal>
+      <div class="proj-text">
+        <div class="tags">
+          <span class="tag i18n" data-en="AI-native" data-pt="AI-native">AI-native</span>
+          <span class="tag i18n" data-en="Systems" data-pt="Sistemas">Systems</span>
+          <span class="tag i18n" data-en="Personal R&amp;D" data-pt="P&amp;D pessoal">Personal R&D</span>
+        </div>
+        <h3 class="pname">Pandora <span class="pname-sub">— Vault Harness</span></h3>
+        <p
+          class="pdesc i18n"
+          data-en="A self-improving, AI-native knowledge system: a multi-agent workflow with shared memory, semantic search, and safety guards that researches, plans, and reviews alongside me."
+          data-pt="Um sistema de conhecimento AI-native que se aprimora sozinho: um workflow multi-agente com memória compartilhada, busca semântica e guardas de segurança que pesquisa, planeja e revisa comigo."
+        >
+          A self-improving, AI-native knowledge system: a multi-agent workflow with shared memory,
+          semantic search, and safety guards that researches, plans, and reviews alongside me.
+        </p>
+        <a href="https://github.com/Gabriel300p/pandora" target="_blank" rel="noopener">
+          <span class="plink">github.com/Gabriel300p/pandora <span class="arr">&rarr;</span></span>
+        </a>
+      </div>
+
+      <div class="proj-media">
+        <div class="browser terminal">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">pandora ~ vault</span></div>
+          <div class="term-body mono">
+            <p><span class="tp">$</span> claude · <span class="tg">ingest</span> session</p>
+            <p class="tdim">→ routing knowledge to wiki/ · brain/ · raw/</p>
+            <p><span class="tp">$</span> qmd <span class="tg">query</span> "auth decisions"</p>
+            <p class="tdim">→ 12 notes · 3 backlinks · 1 ADR</p>
+            <p><span class="tp">$</span> agents · <span class="tg">scout</span> + <span class="tg">verify</span></p>
+            <p class="tdim">→ 2 opportunities · 0 secrets leaked <span class="tok">ok</span></p>
+            <p class="tcursor"><span class="tp">$</span> <span class="blink">▍</span></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    {/* ---------------- Compact projects ---------------- */}
+    <div class="compact" data-reveal>
+      <div class="compact-label i18n" data-en="Also in the archive" data-pt="Também no arquivo">Also in the archive</div>
+      {
+        compact.map((p) =>
+          p.href ? (
+            <a class="crow" href={p.href} target="_blank" rel="noopener">
+              <span class="cinit" aria-hidden="true">{p.name.charAt(0)}</span>
+              <span class="cbody">
+                <span class="cname">{p.name}</span>
+                <span class="cblurb i18n" data-en={p.blurb.en} data-pt={p.blurb.pt}>{p.blurb.en}</span>
+              </span>
+              <span class="ctags mono">{p.tags.join(" · ")}</span>
+              <span class="carr" aria-hidden="true">&rarr;</span>
+            </a>
+          ) : (
+            <div class="crow static">
+              <span class="cinit" aria-hidden="true">{p.name.charAt(0)}</span>
+              <span class="cbody">
+                <span class="cname">{p.name}</span>
+                <span class="cblurb i18n" data-en={p.blurb.en} data-pt={p.blurb.pt}>{p.blurb.en}</span>
+              </span>
+              <span class="ctags mono">{p.tags.join(" · ")}</span>
+            </div>
+          )
+        )
+      }
     </div>
   </div>
 </section>
