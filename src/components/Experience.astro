@@ -1,0 +1,119 @@
+---
+import { experience, education, languages } from "../data/content";
+
+const current = experience.filter((j) => j.current);
+const past = experience.filter((j) => !j.current);
+---
+
+<section id="experience">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <div class="k i18n" data-en="Experience" data-pt="Experiência">Experience</div>
+      <h2 class="i18n" data-en="Where I've <em>worked.</em>" data-pt="Onde eu <em>trabalhei.</em>">
+        Where I've <em>worked.</em>
+      </h2>
+    </div>
+
+    {/* Current role — highlighted and open */}
+    {
+      current.map((job) => (
+        <article class="xp-current" data-reveal>
+          <div class="xp-rail" aria-hidden="true" />
+          <div class="xp-body">
+            <div class="xp-top">
+              <div>
+                <div class="xp-company">
+                  {job.company}
+                  <span class="xp-flag i18n" data-en="Current" data-pt="Atual">
+                    Current
+                  </span>
+                </div>
+                <div class="xp-role i18n" data-en={job.role.en} data-pt={job.role.pt}>
+                  {job.role.en}
+                </div>
+              </div>
+              <div class="xp-period mono i18n" data-en={job.period.en} data-pt={job.period.pt}>
+                {job.period.en}
+              </div>
+            </div>
+            <ul class="xp-bullets">
+              {job.bullets.map((b) => (
+                <li class="i18n" data-en={b.en} data-pt={b.pt}>
+                  {b.en}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+
+    {/* Past roles — de-emphasized, expandable */}
+    <div class="xp-past-list" data-reveal>
+      {
+        past.map((job) => (
+          <details class="xp-past">
+            <summary>
+              <div class="xp-past-main">
+                <span class="xp-past-company">{job.company}</span>
+                <span class="xp-past-role i18n" data-en={job.role.en} data-pt={job.role.pt}>
+                  {job.role.en}
+                </span>
+              </div>
+              <span class="xp-past-period mono i18n" data-en={job.period.en} data-pt={job.period.pt}>
+                {job.period.en}
+              </span>
+              <span class="xp-chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </summary>
+            <ul class="xp-bullets">
+              {job.bullets.map((b) => (
+                <li class="i18n" data-en={b.en} data-pt={b.pt}>
+                  {b.en}
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))
+      }
+    </div>
+
+    {/* Education + languages */}
+    <div class="xp-meta" data-reveal>
+      <div class="xp-meta-col">
+        <div class="xp-meta-label i18n" data-en="Education" data-pt="Educação">Education</div>
+        <ul class="xp-meta-list">
+          {
+            education.map((e) => (
+              <li>
+                <span class="xp-meta-title i18n" data-en={e.title.en} data-pt={e.title.pt}>
+                  {e.title.en}
+                </span>
+                <span class="xp-meta-sub mono">
+                  {e.school} · {e.period}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="xp-meta-col">
+        <div class="xp-meta-label i18n" data-en="Languages" data-pt="Idiomas">Languages</div>
+        <ul class="xp-meta-list">
+          {
+            languages.map((l) => (
+              <li>
+                <span class="xp-meta-title i18n" data-en={l.en} data-pt={l.pt}>
+                  {l.en}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

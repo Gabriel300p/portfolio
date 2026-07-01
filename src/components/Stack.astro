@@ -1,0 +1,133 @@
+---
+import * as allIcons from "simple-icons";
+import { skillGroups, stackLogos } from "../data/content";
+
+// Resolve simple-icons by slug (export name is "si" + Capitalized slug).
+type Icon = { title: string; hex: string; path: string };
+const logos = stackLogos
+  .map((slug) => {
+    const name = "si" + slug.charAt(0).toUpperCase() + slug.slice(1);
+    return (allIcons as Record<string, Icon>)[name];
+  })
+  .filter(Boolean);
+
+// GitHub contribution graph — fetched at build time, rendered in our own theme.
+type Day = { date: string; count: number; level: number };
+let weeks: (Day | null)[][] = [];
+let totalContrib = 0;
+try {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 6000);
+  const res = await fetch("https://github-contributions-api.jogruber.de/v4/Gabriel300p?y=last", {
+    signal: ctrl.signal,
+  });
+  clearTimeout(t);
+  if (res.ok) {
+    const data = (await res.json()) as { total: Record<string, number>; contributions: Day[] };
+    const days = data.contributions ?? [];
+    totalContrib = data.total?.lastYear ?? days.reduce((n, d) => n + d.count, 0);
+    if (days.length) {
+      const startPad = new Date(days[0].date + "T00:00:00Z").getUTCDay();
+      const cells: (Day | null)[] = [...Array(startPad).fill(null), ...days];
+      for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+    }
+  }
+} catch {
+  weeks = [];
+}
+const numberFmt = new Intl.NumberFormat("en-US");
+---
+
+<section id="stack">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <div class="k i18n" data-en="Stack" data-pt="Stack">Stack</div>
+      <h2
+        class="i18n"
+        data-en="What I <em>work with.</em>"
+        data-pt="Com o que eu <em>trabalho.</em>"
+      >
+        What I <em>work with.</em>
+      </h2>
+    </div>
+
+    {/* Grouped skills */}
+    <div class="stack-groups" data-reveal>
+      {
+        skillGroups.map((g) => (
+          <div class="stack-group">
+            <div class="sg-label i18n" data-en={g.label.en} data-pt={g.label.pt}>
+              {g.label.en}
+            </div>
+            <ul class="sg-items">
+              {g.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Tech logo marquee */}
+    {
+      logos.length > 0 && (
+        <div class="stack-marquee" data-reveal aria-hidden="true">
+          <div class="sm-track">
+            {[...logos, ...logos].map((icon) => (
+              <span class="sm-logo" title={icon.title}>
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                  <path d={icon.path} fill="currentColor" />
+                </svg>
+              </span>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    {/* GitHub contribution graph */}
+    {
+      weeks.length > 0 && (
+        <div class="ghgraph" data-reveal>
+          <div class="gh-head">
+            <span class="gh-title mono">github.com/Gabriel300p</span>
+            <span class="gh-total mono">
+              <b>{numberFmt.format(totalContrib)}</b>
+              <span class="i18n" data-en="contributions in the last year" data-pt="contribuições no último ano">
+                contributions in the last year
+              </span>
+            </span>
+          </div>
+          <div class="gh-scroll">
+            <div class="gh-grid">
+              {weeks.map((week) => (
+                <div class="gh-col">
+                  {Array.from({ length: 7 }).map((_, d) => {
+                    const day = week[d];
+                    return (
+                      <span
+                        class="gh-cell"
+                        data-level={day ? day.level : 0}
+                        title={day ? `${day.count} on ${day.date}` : undefined}
+                      />
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="gh-legend mono">
+            <span class="i18n" data-en="Less" data-pt="Menos">Less</span>
+            <span class="gh-cell" data-level="0"></span>
+            <span class="gh-cell" data-level="1"></span>
+            <span class="gh-cell" data-level="2"></span>
+            <span class="gh-cell" data-level="3"></span>
+            <span class="gh-cell" data-level="4"></span>
+            <span class="i18n" data-en="More" data-pt="Mais">More</span>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
