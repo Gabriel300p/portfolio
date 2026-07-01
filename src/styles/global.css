@@ -267,30 +267,15 @@ img {
   isolation: isolate;
   overflow: clip;
 }
-/* cursor-following glow (set --gx/--gy in px via JS) */
-.hero-glow {
+/* monochromatic binary rain, contained within the hero */
+.hero-rain {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 620px;
-  height: 620px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--accent-mid) 60%, transparent),
-    transparent 68%
-  );
-  filter: blur(70px);
-  opacity: 0;
-  transform: translate3d(-50%, -50%, 0);
-  transform-origin: center;
-  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  transition: opacity 0.5s ease;
-  will-change: transform, opacity;
-}
-.hero[data-glow="on"] .hero-glow {
-  opacity: 0.5;
+  pointer-events: none;
+  opacity: 0.55;
 }
 .hero .wrap {
   position: relative;
