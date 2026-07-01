@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Gabriel Andrade · Design Engineer",
+  description = "Gabriel Andrade — a design engineer from São Paulo. I design and build web products end to end, from Figma to production.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/Playfair.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    {/* Set theme before first paint to avoid a flash of the wrong theme. */}
+    <script is:inline>
+      (function () {
+        try {
+          var param = new URLSearchParams(window.location.search).get("theme");
+          var stored = localStorage.getItem("theme");
+          var theme =
+            param === "dark" || param === "light"
+              ? param
+              : stored === "dark" || stored === "light"
+                ? stored
+                : window.matchMedia("(prefers-color-scheme: dark)").matches
+                  ? "dark"
+                  : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+          if (param === "dark" || param === "light") localStorage.setItem("theme", param);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import "../scripts/ui.ts";
+    </script>
+  </body>
+</html>

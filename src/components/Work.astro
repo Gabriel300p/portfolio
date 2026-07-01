@@ -1,0 +1,131 @@
+---
+import { Image } from "astro:assets";
+import bbossWeb from "../assets/img/bboss-web.jpg";
+import bbossMobile from "../assets/img/bboss-mobile.jpg";
+import checkmidia from "../assets/img/checkmidia.jpg";
+import moviematch from "../assets/img/moviematch.jpg";
+---
+
+<section id="work">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <div class="k i18n" data-en="Selected work" data-pt="Trabalhos selecionados">Selected work</div>
+      <h2
+        class="i18n"
+        data-en="Products I designed <em>and built.</em>"
+        data-pt="Produtos que projetei <em>e construí.</em>"
+      >
+        Products I designed <em>and built.</em>
+      </h2>
+    </div>
+
+    {/* B-Boss — feature */}
+    <div class="feature" data-reveal>
+      <div class="ftext">
+        <div class="tags">
+          <span class="tag">SaaS</span>
+          <span class="tag">Marketplace</span>
+          <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
+          <span class="tag i18n" data-en="Front to back" data-pt="Front to back">Front to back</span>
+        </div>
+        <div class="pname" style="margin-top:18px">B-Boss Club</div>
+        <p
+          class="pdesc i18n"
+          data-en="A SaaS and marketplace for barbershops. Subscriptions and vouchers for clients, scheduling and analytics for shops. I own it end to end: the design system, the web dashboard, and the mobile app, all built on one codebase."
+          data-pt="Um SaaS e marketplace para barbearias. Assinaturas e vouchers para clientes, agenda e analytics para as barbearias. Cuido de tudo: o design system, o painel web e o app mobile, tudo sobre uma base única."
+        >
+          A SaaS and marketplace for barbershops. Subscriptions and vouchers for clients, scheduling
+          and analytics for shops. I own it end to end: the design system, the web dashboard, and the
+          mobile app, all built on one codebase.
+        </p>
+      </div>
+      <div>
+        <div class="shot hoverable">
+          <Image
+            src={bbossWeb}
+            alt="B-Boss Club web dashboard: recurring clients, weekly performance chart, ratings and recent appointments"
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 840px) 92vw, 55vw"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-sub" data-reveal>
+      <div class="shot hoverable">
+        <Image
+          src={bbossMobile}
+          alt="B-Boss Club mobile app: barbershop detail with reviews, voucher confirmation, voucher with map, and profile"
+          widths={[500, 900, 1200]}
+          sizes="(max-width: 1160px) 92vw, 1100px"
+          loading="lazy"
+        />
+      </div>
+      <div class="cap i18n" data-en="Client app, iOS and Android" data-pt="App do cliente, iOS e Android">
+        Client app, iOS and Android
+      </div>
+    </div>
+
+    {/* Check Mídia — row */}
+    <div class="row" data-reveal style="margin-top:clamp(72px,10vw,132px)">
+      <div class="rtext">
+        <div class="tags">
+          <span class="tag i18n" data-en="Website" data-pt="Website">Website</span>
+          <span class="tag i18n" data-en="Design + build" data-pt="Design + build">Design + build</span>
+          <span class="tag">Tailwind</span>
+        </div>
+        <div class="pname" style="margin-top:18px">Check Mídia</div>
+        <p
+          class="pdesc i18n"
+          data-en="A marketing agency site built to help small businesses grow online. Designed and coded from scratch: hero, services, and a clear path to contact."
+          data-pt="Um site de agência de marketing feito para ajudar pequenos negócios a crescer online. Projetado e codado do zero: hero, serviços e um caminho claro até o contato."
+        >
+          A marketing agency site built to help small businesses grow online. Designed and coded from
+          scratch: hero, services, and a clear path to contact.
+        </p>
+        <a href="https://www.checkmidia.com/" target="_blank" rel="noopener">
+          <span class="plink">checkmidia.com <span class="arr">&rarr;</span></span>
+        </a>
+      </div>
+      <a class="shot" href="https://www.checkmidia.com/" target="_blank" rel="noopener">
+        <Image
+          src={checkmidia}
+          alt="Check Mídia agency website hero with headline, call to action and a photo composition"
+          widths={[400, 800, 1280]}
+          sizes="(max-width: 840px) 92vw, 48vw"
+          loading="lazy"
+        />
+      </a>
+    </div>
+
+    {/* Movie Match — row, flipped */}
+    <div class="row flip" data-reveal>
+      <div class="rtext">
+        <div class="tags">
+          <span class="tag i18n" data-en="Mobile" data-pt="Mobile">Mobile</span>
+          <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
+          <span class="tag">UI</span>
+        </div>
+        <div class="pname" style="margin-top:18px">Movie Match</div>
+        <p
+          class="pdesc i18n"
+          data-en="A native app for movie recommendation and tracking. Search, rich filters by streaming and rating, watchlists, and a detail view that makes deciding what to watch easy."
+          data-pt="Um app nativo de recomendação e acompanhamento de filmes. Busca, filtros ricos por streaming e nota, listas, e uma tela de detalhe que facilita decidir o que assistir."
+        >
+          A native app for movie recommendation and tracking. Search, rich filters by streaming and
+          rating, watchlists, and a detail view that makes deciding what to watch easy.
+        </p>
+      </div>
+      <div class="shot hoverable">
+        <Image
+          src={moviematch}
+          alt="Movie Match mobile app: home recommendations, search results, filter panel and a movie detail screen"
+          widths={[400, 800, 1280]}
+          sizes="(max-width: 840px) 92vw, 48vw"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
