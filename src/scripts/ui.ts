@@ -4,6 +4,8 @@
 
 type Lang = "en" | "pt";
 
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 function initNav() {
   const nav = document.getElementById("nav");
   const sentinel = document.getElementById("top-sentinel");
@@ -150,6 +152,108 @@ function initTheme() {
   });
 }
 
+// A soft glow that trails the cursor across the hero (pixels.studio homage).
+function initHeroGlow() {
+  if (reduceMotion) return;
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const glow = hero?.querySelector<HTMLElement>(".hero-glow");
+  if (!hero || !glow) return;
+  let tx = 0,
+    ty = 0,
+    cx = 0,
+    cy = 0,
+    raf = 0,
+    running = false;
+  const loop = () => {
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    glow.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+    raf = requestAnimationFrame(loop);
+  };
+  hero.addEventListener("pointermove", (e: PointerEvent) => {
+    const r = hero.getBoundingClientRect();
+    tx = e.clientX - r.left;
+    ty = e.clientY - r.top;
+    if (!running) {
+      running = true;
+      hero.setAttribute("data-glow", "on");
+      cx = tx;
+      cy = ty;
+      loop();
+    }
+  });
+  hero.addEventListener("pointerleave", () => {
+    hero.setAttribute("data-glow", "off");
+    running = false;
+    cancelAnimationFrame(raf);
+  });
+}
+
+// Buttons that lean toward the cursor.
+function initMagnetic() {
+  if (reduceMotion) return;
+  document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
+    let tx = 0,
+      ty = 0,
+      cx = 0,
+      cy = 0,
+      raf = 0;
+    const strength = 0.28;
+    const max = 9;
+    const clamp = (v: number) => Math.max(-max, Math.min(max, v));
+    const loop = () => {
+      cx += (tx - cx) * 0.2;
+      cy += (ty - cy) * 0.2;
+      if (tx === 0 && ty === 0 && Math.abs(cx) < 0.1 && Math.abs(cy) < 0.1) {
+        el.style.transform = "";
+        raf = 0;
+        return;
+      }
+      el.style.transform = `translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    el.addEventListener("pointermove", (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      tx = clamp((e.clientX - (r.left + r.width / 2)) * strength);
+      ty = clamp((e.clientY - (r.top + r.height / 2)) * strength);
+      if (!raf) loop();
+    });
+    el.addEventListener("pointerleave", () => {
+      tx = 0;
+      ty = 0;
+      if (!raf) loop();
+    });
+  });
+}
+
+// Smooth scrolling (loaded only when motion is welcome).
+async function initSmoothScroll() {
+  if (reduceMotion) return;
+  try {
+    const { default: Lenis } = await import("lenis");
+    document.documentElement.style.scrollBehavior = "auto";
+    const lenis = new Lenis({ duration: 1.1 });
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector<HTMLElement>(id);
+        if (target) {
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: -70 });
+        }
+      });
+    });
+  } catch {
+    /* smooth scroll is a nicety; ignore load failures */
+  }
+}
+
 initNav();
 initReveal();
 initLang();
@@ -157,3 +261,6 @@ initClock();
 initCopy();
 initExperience();
 initTheme();
+initHeroGlow();
+initMagnetic();
+initSmoothScroll();
