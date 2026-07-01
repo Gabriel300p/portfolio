@@ -416,47 +416,13 @@ h1 em {
   color: var(--text-muted);
 }
 
-/* hero proof band — real numbers as first-class UI */
-.hero-stats {
-  list-style: none;
-  margin: 40px auto 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px 30px;
-  max-width: 720px;
-}
-.hero-stats li {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.hero-stats b {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-}
-.hero-stats span {
-  font-size: 11.5px;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-.hero-stats li + li {
-  padding-left: 30px;
-  border-left: 1px solid var(--line);
-}
-@media (max-width: 560px) {
-  .hero-stats {
-    gap: 12px 20px;
-  }
-  .hero-stats li + li {
-    padding-left: 0;
-    border-left: none;
-  }
+/* hero secondary line — how I work now, kept quieter than the lead */
+.hero-sub {
+  margin: 16px auto 0;
+  max-width: 54ch;
+  color: var(--text-faint);
+  font-size: clamp(0.94rem, 1.2vw, 1.02rem);
+  line-height: 1.6;
 }
 
 /* ============================================================
@@ -1616,37 +1582,6 @@ footer .wrap {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-}
-
-/* ============================================================
-   About section
-   ============================================================ */
-.about-wrap {
-  max-width: 760px;
-}
-.about-wrap .k {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-}
-.about-lead {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
-  line-height: 1.28;
-  letter-spacing: -0.012em;
-  color: var(--text);
-  font-weight: 500;
-  margin: 18px 0 0;
-  max-width: 20ch;
-}
-.about-body {
-  margin: 26px 0 0;
-  font-size: 1.05rem;
-  line-height: 1.72;
-  color: var(--text-muted);
-  max-width: 60ch;
 }
 
 /* ============================================================
