@@ -18,7 +18,13 @@ function initNav() {
 
 function initReveal() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const reveals = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  // Index children of staggered groups so CSS can cascade them (--i * 60ms).
+  document.querySelectorAll<HTMLElement>("[data-stagger]").forEach((group) => {
+    Array.from(group.children).forEach((child, i) =>
+      (child as HTMLElement).style.setProperty("--i", String(i))
+    );
+  });
+  const reveals = document.querySelectorAll<HTMLElement>("[data-reveal], [data-stagger]");
   if (reduce) {
     reveals.forEach((el) => el.classList.add("in"));
     return;
@@ -471,12 +477,16 @@ function initVideoGate() {
       v.pause();
       return;
     }
+    // Open the loop on a meaningful frame, not a mid-scroll blur (eftakher pattern).
+    v.addEventListener("loadedmetadata", () => {
+      if (v.currentTime < 1.5) v.currentTime = 1.5;
+    });
     new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) v.play().catch(() => {});
         else v.pause();
       },
-      { threshold: 0.2 }
+      { threshold: 0.5 }
     ).observe(v);
   });
 }

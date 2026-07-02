@@ -51,8 +51,8 @@ const numberFmt = new Intl.NumberFormat("en-US");
       </h2>
     </div>
 
-    {/* Grouped skills */}
-    <div class="stack-groups" data-reveal>
+    {/* Grouped skills — cascade in, one column at a time */}
+    <div class="stack-groups" data-stagger>
       {
         skillGroups.map((g) => (
           <div class="stack-group">

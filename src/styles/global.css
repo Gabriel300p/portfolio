@@ -34,10 +34,13 @@
   --maxw: 1160px;
   --pad: clamp(20px, 5vw, 56px);
 
-  /* motion — strong custom curves (built-ins lack punch) */
+  /* motion — strong custom curves (built-ins lack punch).
+     --ease-expo is the house curve: every reveal, wipe and drawer rides it. */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* lets height/block-size animate to auto (details accordions), Chrome 129+ */
+  interpolate-size: allow-keywords;
 
   /* light palette (warm paper editorial) */
   --bg: #f5f4ef;
@@ -318,7 +321,7 @@ h1 em::after {
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s var(--ease-expo);
 }
 h1:hover em::after {
   transform: scaleX(1);
@@ -503,7 +506,7 @@ section {
 .shot img {
   width: 100%;
   height: auto;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s var(--ease-expo);
 }
 a.shot:hover img,
 .shot.hoverable:hover img {
@@ -1008,7 +1011,7 @@ html.js .proj:not(.in) .tilt {
 @media (hover: hover) and (pointer: fine) {
   .proj:hover .tilt {
     transform: perspective(1650px) rotateY(-1.5deg) rotateX(0.5deg) scale(1.006);
-    transition: transform 0.6s var(--ease-out);
+    transition: transform 0.45s var(--ease-out);
   }
 }
 
@@ -1152,7 +1155,6 @@ html.js .proj:not(.in) .tilt {
     opacity 0.5s var(--ease-out),
     transform 0.65s var(--ease-out),
     filter 0.5s var(--ease-out);
-  will-change: opacity, transform, filter;
 }
 .screen.is-active {
   opacity: 1;
@@ -1316,6 +1318,18 @@ html.js .proj:not(.in) .tilt {
 }
 .acc {
   border-bottom: 1px solid var(--line);
+}
+/* details open/close glides instead of snapping (progressive: needs
+   interpolate-size support; older browsers keep the instant toggle) */
+.acc::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.32s var(--ease-expo),
+    content-visibility 0.32s allow-discrete;
+}
+.acc[open]::details-content {
+  block-size: auto;
 }
 .acc summary {
   display: grid;
@@ -1702,7 +1716,7 @@ html.js .proj:not(.in) .tilt {
 /* collapsible panel (bullets) */
 .xp-panel {
   overflow: hidden;
-  transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: height 0.32s var(--ease-expo);
 }
 .xp-bullets {
   margin: 20px 0 0;
@@ -1850,7 +1864,7 @@ html.js .proj:not(.in) .tilt {
 .edu-verify svg {
   width: 12px;
   height: 12px;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.22s var(--ease-expo);
 }
 .edu-verify:hover svg {
   transform: translate(1.5px, -1.5px);
@@ -1904,7 +1918,7 @@ html.js .edu-more-btn {
   display: inline-flex;
   width: 15px;
   height: 15px;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s var(--ease-expo);
 }
 .edu-more-chevron svg {
   width: 100%;
@@ -1915,7 +1929,7 @@ html.js .edu-more-btn {
 }
 .edu-more-panel {
   overflow: hidden;
-  transition: height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: height 0.32s var(--ease-expo);
 }
 .edu-cert-list {
   list-style: none;
@@ -1956,7 +1970,7 @@ a.edu-cert-row:hover .edu-cert-arrow {
   height: 15px;
   color: var(--text-faint);
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s ease, transform 0.22s var(--ease-expo);
 }
 .edu-cert-arrow svg {
   width: 100%;
@@ -2204,19 +2218,22 @@ a.edu-cert-row:hover .edu-cert-arrow {
   transform: translateY(-1px);
 }
 .sm-logo {
-  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.25s ease, transform 0.25s var(--ease-expo);
 }
 .sm-logo:hover {
   transform: translateY(-2px) scale(1.06);
 }
 
-/* section-heading wipe reveal (only when motion is welcome AND JS armed it) */
+/* section-heading wipe reveal (only when motion is welcome AND JS armed it).
+   Unclips when the .head itself is revealed OR any revealed ancestor carries
+   data-reveal (case-study pages put data-reveal on the section wrapper). */
 @media (prefers-reduced-motion: no-preference) {
   html.js .head h2 {
     clip-path: inset(-0.12em 100% -0.18em 0);
-    transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
+    transition: clip-path 0.9s var(--ease-expo) 0.08s;
   }
-  html.js .head.in h2 {
+  html.js .head.in h2,
+  html.js [data-reveal].in .head h2 {
     clip-path: inset(-0.12em -3% -0.18em 0);
   }
 }
@@ -2225,11 +2242,131 @@ a.edu-cert-row:hover .edu-cert-arrow {
 html.js [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
 }
 html.js [data-reveal].in {
   opacity: 1;
   transform: none;
+}
+
+/* staggered children — initReveal indexes direct children of [data-stagger]
+   with --i, so grouped items cascade (60ms steps) instead of arriving as one slab */
+html.js [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+html.js [data-stagger].in > * {
+  opacity: 1;
+  transform: none;
+}
+/* a staggered container must not double-hide via the base reveal recipe */
+html.js [data-stagger][data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   Scroll-driven motion — scroll progress pilots the timeline
+   (progressive: browsers without support keep the IO reveal)
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* showcase media panels scrub up + settle as they cross the fold;
+       the IO fade on the parent .proj stays for text — layered, not doubled */
+    .proj-media .panel {
+      animation: panel-scrub linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 70%;
+    }
+    /* the branded glow breathes in with scroll progress (subordinate to the shot) */
+    .proj-media .panel::before {
+      animation: glow-scrub linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+    /* testimonial rules draw themselves left→right as the quotes enter */
+    .quote {
+      position: relative;
+      border-top-color: transparent;
+    }
+    .quote::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--line-strong);
+      transform-origin: left;
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+@keyframes panel-scrub {
+  from {
+    transform: translateY(34px) scale(0.972);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes glow-scrub {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4; /* the glow's resting value — scrub lands exactly on it */
+  }
+}
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
+   Hero entrance — one load choreography (not scroll-gated: the
+   hero is the fold). Rise + soft blur clears, staggered top-down.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hero .monogram,
+  html.js .hero h1,
+  html.js .hero h1 + p,
+  html.js .hero .hero-sub,
+  html.js .hero .meta-strip {
+    animation: hero-rise 0.9s var(--ease-expo) backwards;
+  }
+  html.js .hero h1 {
+    animation-delay: 0.08s;
+  }
+  html.js .hero h1 + p {
+    animation-delay: 0.18s;
+  }
+  html.js .hero .hero-sub {
+    animation-delay: 0.26s;
+  }
+  html.js .hero .meta-strip {
+    animation-delay: 0.34s;
+  }
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 /* toast */

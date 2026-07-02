@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1",
+  "task": "portfolio-awwwards-uplift",
+  "contractRef": "contract.md",
+  "features": [
+    {
+      "id": "F1",
+      "title": "Sistema de motion scroll-linked (anti-slop)",
+      "acceptance": [
+        "nenhum reveal é fade-in puro: clip-path/stagger/wipe/scroll-progress",
+        "grep 'transition: all' em src/ retorna 0",
+        "toda animação de reveal com intenção documentada em decisions.md",
+        "prefers-reduced-motion → estático e legível (evidência Playwright)",
+        "página legível com JS desligado (reveal armado só com html.js)"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F2",
+      "title": "Cursor customizado com spring physics",
+      "acceptance": [
+        "lerp/spring com trail ~100-150ms em pointer fino; desativado em touch",
+        "estados default / hover interativo / hover mídia",
+        "reduced-motion → cursor nativo sem trail",
+        "a11y intacta: foco por teclado, sem cursor invisível em área sem custom"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F3",
+      "title": "Transições de página coreografadas (View Transitions)",
+      "acceptance": [
+        "home ↔ case study com coreografia própria, não corte seco",
+        "fallback limpo em browsers sem suporte (console sem erro)",
+        "reduced-motion → crossfade mínimo ou corte"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F4",
+      "title": "Showcases: auditoria + polish vs spec",
+      "acceptance": [
+        "B-Boss: vídeo gated IO (nunca eager), poster, pausa off-screen, phone, glow gold",
+        "Movie Match: walkthrough iPhone com telas Figma reais; reduced-motion → estático",
+        "Pandora: terminal WAAPI, cursor não-selecionável, 3 demos; reduced-motion → transcript",
+        "zero layout shift na seção; legível claro+escuro × desktop+mobile"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F5",
+      "title": "Case study B-Boss scannable (padrão Pafolios)",
+      "acceptance": [
+        "blocos problema → abordagem → solução; outcome antes do polish",
+        "escaneável em ~30s: headers + 1 métrica concreta por bloco",
+        "assets do app real, nunca print cru de Figma",
+        "mesma régua de motion/tema/responsivo"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F6",
+      "title": "Hero: prova social sem stat-card (verificação + polish)",
+      "acceptance": [
+        "nenhuma faixa stat-card genérica em toda a página",
+        "prova em prosa mantém números reais legíveis em EN e PT",
+        "reescrita de posicionamento só via gate amarelo"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F7",
+      "title": "Educação/certificados padronizados + stack em destaque",
+      "acceptance": [
+        "badges padronizados com logos reais; links de verificação funcionam",
+        "linguagens/stack com destaque visual claro",
+        "responsivo + ambos temas + reduced-motion com evidência"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F8",
+      "title": "Extração de padrões das referências → DESIGN.md",
+      "acceptance": [
+        "DESIGN.md com padrões concretos (timings/easing/mecânica) dos 4 sites validados",
+        "cada padrão anotado com aplicabilidade neste portfolio"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F9",
+      "title": "Performance/WPO + Semantics/SEO",
+      "acceptance": [
+        "pnpm build limpo; Lighthouse Perf ≥90 mobile, A11y ≥95, SEO ≥95 (home + case)",
+        "fontes preload/font-display; vídeo fora do payload inicial; imagens sem CLS",
+        "landmarks, heading order, meta/OG, sitemap"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F10",
+      "title": "Sweep responsivo + acessibilidade",
+      "acceptance": [
+        "375px e 1440px × claro/escuro sem quebra (screenshots por seção)",
+        "teclado completo: foco visível, ordem lógica, skip link",
+        "contraste AA nos dois temas"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    }
+  ]
+}
