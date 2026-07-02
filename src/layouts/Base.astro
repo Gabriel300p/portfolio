@@ -47,7 +47,12 @@ const {
           if (param === "dark" || param === "light") localStorage.setItem("theme", param);
           // Mark that JS is running so scroll-reveal can arm itself. Without this
           // class, revealed content stays visible (fail-safe, no blank page).
-          document.documentElement.classList.add("js");
+          document.documentElement.classList.add("js", "reveal");
+          // Failsafe: if the UI module never executes (network/CSP/extension),
+          // disarm the reveal-hiding so content is never stuck invisible.
+          setTimeout(function () {
+            if (!window.__uiReady) document.documentElement.classList.remove("reveal");
+          }, 2500);
         } catch (e) {}
       })();
     </script>

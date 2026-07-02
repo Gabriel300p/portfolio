@@ -78,3 +78,21 @@ tags:
   completos, 21 findings) e re-rodar o resto do grounding quando a cota voltar.
 - **Motivo:** os blockers acionáveis já estão identificados; esperar seria desperdiçar
   a janela de main-loop restante.
+
+## 2026-07-02 — Clip-reveal em elemento observado: trap do IntersectionObserver
+
+- **Contexto:** tentativa de variante `[data-reveal="clip"]` (bloco "imprime" top-down).
+- **Decisão:** abandonada; wipes só em descendentes não-observados (padrão .head h2).
+- **Motivo:** Chromium fatora o clip-path do próprio alvo no cálculo de interseção —
+  elemento 100% clipado reporta ratio 0 para sempre e nunca revela (verificado ao vivo:
+  elemento centrado na viewport, intersectionRatio 0). Chicken-and-egg estrutural.
+- **Alternativas descartadas:** clipar um wrapper filho (complexidade de markup);
+  threshold 0 (não dispara com área 0 de qualquer forma).
+
+## 2026-07-02 — Gate de reveal separado do gate de JS (anti-blank-page)
+
+- **Contexto:** Evaluator reprovou F1: html.js armava o hide no <head>, mas se o módulo
+  ui.ts falhasse (rede/CSP/extensão), nada revelava — página em branco abaixo do hero.
+- **Decisão:** hides keyed em `html.reveal`; head script arma `js + reveal` e agenda
+  failsafe de 2.5s que remove `reveal` se `window.__uiReady` não foi setado pelo módulo.
+- **Motivo:** conteúdo nunca pode depender de um módulo externo executar para existir.

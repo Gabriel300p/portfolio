@@ -72,7 +72,7 @@ const numberFmt = new Intl.NumberFormat("en-US");
     {/* Tech logo marquee */}
     {
       logos.length > 0 && (
-        <div class="stack-marquee" data-reveal aria-hidden="true">
+        <div class="stack-marquee" aria-hidden="true">
           <div class="sm-track">
             {[...logos, ...logos].map((icon) => (
               <span class="sm-logo" title={icon.title}>
@@ -89,7 +89,7 @@ const numberFmt = new Intl.NumberFormat("en-US");
     {/* GitHub contribution graph */}
     {
       weeks.length > 0 && (
-        <div class="ghgraph" data-reveal>
+        <div class="ghgraph" data-stagger>
           <div class="gh-head">
             <span class="gh-title mono">github.com/Gabriel300p</span>
             <span class="gh-total mono">
@@ -131,7 +131,7 @@ const numberFmt = new Intl.NumberFormat("en-US");
     }
 
     {/* Systems & open source — Elemento UI */}
-    <div class="opensource" data-reveal>
+    <div class="opensource" data-stagger>
       <div class="os-label mono i18n" data-en="Systems and open source" data-pt="Sistemas e open source">
         Systems and open source
       </div>

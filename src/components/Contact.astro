@@ -3,9 +3,8 @@ const email = "contact@gabrielandrade.com";
 ---
 
 <section id="contact" class="contact">
-  <div class="wrap">
+  <div class="wrap" data-stagger>
     <h2
-      data-reveal
       class="i18n"
       data-en="Let's make something <em>good.</em>"
       data-pt="Vamos fazer algo <em>bom.</em>"
@@ -13,7 +12,6 @@ const email = "contact@gabrielandrade.com";
       Let's make something <em>good.</em>
     </h2>
     <p
-      data-reveal
       class="i18n"
       data-en="Have a product that needs design and engineering in the same head? Say hello."
       data-pt="Tem um produto que precisa de design e engenharia na mesma cabeça? Manda um oi."
@@ -21,14 +19,14 @@ const email = "contact@gabrielandrade.com";
       Have a product that needs design and engineering in the same head? Say hello.
     </p>
 
-    <div class="btn-row" data-reveal>
+    <div class="btn-row">
       <button class="btn primary copy-email" type="button" data-email={email} data-magnetic>
         <span class="i18n" data-en="Copy email" data-pt="Copiar email">Copy email</span>
       </button>
       <a class="btn" href={`mailto:${email}`} data-magnetic>{email}</a>
     </div>
 
-    <div class="links" data-reveal>
+    <div class="links">
       <a href="https://www.linkedin.com/in/gabrieltech/" target="_blank" rel="noopener">
         <span class="k">in</span> linkedin.com/in/gabrieltech
       </a>

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1",
+  "iteration": 2,
+  "feature": "F1",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": true },
+  "repairs": [
+    "A: reduced-motion net now uses !important and covers [data-stagger] > * and .head h2 clip",
+    "B: reveal-hiding gates moved from html.js to html.reveal; head-script failsafe removes .reveal after 2.5s if window.__uiReady unset (ui.ts sets it on module execution)",
+    "C: plain-fade blocks converted — contact wrap/more/opensource/edu-list/edu-more/edu-langs/xp-list/ghgraph → data-stagger; stack-marquee reveal removed (constant-motion element)",
+    "extra: clip-reveal variant abandoned — Chromium factors target clip-path into IntersectionObserver (ratio 0 forever); trap documented in global.css comment + decisions.md"
+  ],
+  "results": [
+    { "name": "build", "cmd": "pnpm build", "exitCode": 0, "passed": true, "required": true, "summary": "0 errors" },
+    { "name": "grep-transition-all", "cmd": "grep -rn 'transition: all' src/ | wc -l", "exitCode": 0, "passed": true, "required": true, "summary": "0" },
+    {
+      "name": "module-blocked-failsafe",
+      "cmd": "playwright: route-abort **/ui* + **/scripts/**, goto /, wait 3.2s",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "html.reveal removed by failsafe; 0 hidden reveals/stagger children, 0 clipped h2 — the evaluator's blank-content hole is closed"
+    },
+    {
+      "name": "reduced-motion-and-blocked",
+      "cmd": "playwright: reducedMotion=reduce + module blocked",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "0 hidden, 0 clipped at 400ms (pure-CSS net holds without JS)"
+    },
+    {
+      "name": "continuous-scroll-sweep-home",
+      "cmd": "playwright: scroll 0→bottom in 400px steps, check all reveals",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "hidden=[] clipped=0 after full pass; contact stagger delays 0/.06/.12/.18s"
+    },
+    {
+      "name": "continuous-scroll-sweep-case-study",
+      "cmd": "playwright: same on /work/bboss",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "hidden=0 clipped=0"
+    }
+  ]
+}
