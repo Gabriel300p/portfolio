@@ -116,3 +116,33 @@ tags:
   rápido (~40ms) + anel que persegue (~110ms); anel aperta em interativos ("mirou"),
   abre em mídia de projeto ("olhe mais de perto"). Nativo escondido só depois de
   html.cursor-on provar que o custom renderiza; touch/reduced-motion ficam nativos.
+
+## 2026-07-02 — F4: capturas reais do app B-Boss (mandato de assets cumprido)
+
+- **Contexto:** os 4 mobile shots eram exports de 204×769 (aspecto errado, cortados ~40%
+  pelo frame). Mandato: tentar gerar de verdade primeiro.
+- **Tentativa real (funcionou):** Postgres 16 descartável em Docker (`bboss-capture-pg`,
+  porta 5433) → prisma migrate deploy + seed TS (12 barbearias/26 unidades) →
+  `DATABASE_URL`/`DIRECT_URL` locais exportados em todo comando (dotenv não sobrescreve
+  env — Neon compartilhado intocado; `run-seeds.sh` NÃO usado pois carrega o .env) →
+  API :3002 + client :3001 → Playwright mobile 390×844 DPR 3.
+- **Fricções resolvidas no DB local:** hash do seed não batia com "senha123" (comentário
+  mentiroso — hash novo gerado com bcrypt do próprio repo); MFA exigia
+  `mfa_last_verified`; app exige endereço cadastrado (não geolocation) →
+  `client_addresses` inserido; galeria da unidade reapontada (FKs órfãos,
+  relationMode=prisma) e 2 fotos não-barbearia (banda!) trocadas.
+- **Resultado:** 4 telas reais (home com banner do plano, busca com distâncias, detail
+  com galeria/CTAs, perfil) em 780×1688 substituindo os exports antigos.
+- **Limitações documentadas:** seeds SQL do repo estão desatualizados vs schema
+  (services/appointments/reviews não populam) → telas de booking/histórico ficam para
+  quando o seed for consertado; tudo mostra "Fechado" (captura fora do horário);
+  sufixo "unit" duplicado na busca é bug real do app.
+- **Alternativas descartadas:** nano-banana (desnecessário — app real disponível);
+  placeholder (proibido quando a geração real é possível).
+
+## 2026-07-02 — Contraste: token --text-faint escurecido para AA
+
+- **Decisão:** #9a948a→#756f63 (4.53:1) light; #6f6a5e→#8b8577 (4.98:1) dark.
+- **Motivo:** 2.7:1/3.4:1 falhavam AA em ~28 usos incluindo texto corrido (.hero-sub);
+  ajuste de VALOR na mesma família de matiz, não mudança de paleta (regra DESIGN.md
+  intacta: temas trocam valores, não regras).
