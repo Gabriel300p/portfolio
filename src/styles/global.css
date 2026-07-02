@@ -912,6 +912,143 @@ footer .f-place {
 }
 
 /* ============================================================
+   Work — B-Boss flagship showcase (Second Voice: sticky rail +
+   numbered panels of real product captures)
+   ============================================================ */
+.bb-show {
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) 1fr;
+  gap: clamp(32px, 5vw, 88px);
+  padding-block: clamp(40px, 6vh, 72px);
+  border-top: 1px solid var(--line);
+}
+.bb-rail {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+.bb-plus {
+  display: block;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+.bb-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin: 0 0 14px;
+}
+.bb-sep {
+  opacity: 0.6;
+}
+.bb-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+}
+.bb-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bb-dot {
+    animation: bb-pulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes bb-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.bb-name {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.bb-story {
+  margin: 0 0 26px;
+  color: var(--text-muted);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+.bb-apps {
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+.bb-apps .bb-n {
+  color: var(--accent);
+  margin-right: 10px;
+}
+.bb-panels {
+  display: grid;
+  gap: clamp(36px, 5vh, 56px);
+  min-width: 0;
+}
+.bb-panel {
+  margin: 0;
+  min-width: 0;
+}
+.bb-panel > figcaption {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 14px;
+}
+.bb-panel .bb-n {
+  color: var(--accent);
+}
+.bb-media {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-elevated);
+  padding: clamp(18px, 2.6vw, 36px);
+  overflow: clip;
+}
+.bb-media .browser {
+  max-width: 100%;
+}
+.bb-media-phone {
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(26px, 3.2vw, 44px);
+}
+.bb-media-phone .device {
+  width: min(300px, 62vw);
+}
+@media (max-width: 899px) {
+  .bb-show {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .bb-rail {
+    position: static;
+  }
+}
+
+/* ============================================================
    Work — featured projects (eftakher-style list)
    ============================================================ */
 .work-list {

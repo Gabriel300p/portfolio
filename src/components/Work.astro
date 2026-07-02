@@ -1,18 +1,28 @@
 ---
 import { Image } from "astro:assets";
-import bm1 from "../assets/img/projects/bboss-mobile-1.jpg";
-import bm2 from "../assets/img/projects/bboss-mobile-2.jpg";
-import bm3 from "../assets/img/projects/bboss-mobile-3.jpg";
-import bm4 from "../assets/img/projects/bboss-mobile-4.jpg";
+import svClientHome from "../assets/img/projects/sv/client-home.png";
+import svClientDetail from "../assets/img/projects/sv/client-barbershop-detail.png";
+import svClientSearch from "../assets/img/projects/sv/client-search.png";
+import svClientPass from "../assets/img/projects/sv/client-pass.png";
+import svAdmin from "../assets/img/projects/sv/admin-dashboard.png";
 import mmHome from "../assets/img/projects/moviematch-home.png";
 import mmSearch from "../assets/img/projects/moviematch-search.png";
 import mmFilter from "../assets/img/projects/moviematch-filter.png";
 import mmDetail from "../assets/img/projects/moviematch-detail.png";
 import mmList from "../assets/img/projects/moviematch-list.png";
 
-const bbossPhones = [bm1, bm2, bm3, bm4];
+// B-Boss panels: real captures from the running product (F14 pipeline)
+const bookingPhones = [svClientHome, svClientDetail];
+const marketPhones = [svClientSearch, svClientPass];
 // Movie Match walkthrough: browse → search → refine → decide → save
 const moviePhones = [mmHome, mmSearch, mmFilter, mmDetail, mmList];
+
+const bbApps = [
+  { n: "01", en: "client booking", pt: "agendamento" },
+  { n: "02", en: "business dashboard", pt: "painel do negócio" },
+  { n: "03", en: "admin", pt: "admin" },
+  { n: "04", en: "marketplace", pt: "marketplace" },
+];
 
 const more = [
   {
@@ -74,71 +84,163 @@ const more = [
       </h2>
     </div>
 
-    <div class="work-list">
-      {/* ---- B-Boss ---- */}
-      <article class="proj" data-reveal>
-        <div class="proj-text">
-          <span class="proj-mark serif" aria-hidden="true">B</span>
-          <h3 class="pname">B-Boss Club</h3>
-          <p
-            class="pdesc i18n"
-            data-en="A SaaS and marketplace for barbershops. Owned <b>end to end</b>: the design system, the web dashboard, and the client app, all on one codebase."
-            data-pt="Um SaaS e marketplace para barbearias. Dono de <b>ponta a ponta</b>: o design system, o painel web e o app do cliente, tudo numa base única."
+  </div>
+
+  {/* ---- B-Boss — flagship showcase: sticky rail + four real-product panels ---- */}
+  <div class="wrap-wide">
+    <div class="bb-show">
+      <aside class="bb-rail" data-reveal>
+        <span class="bb-plus" aria-hidden="true">+</span>
+        <p class="bb-meta mono">
+          <span class="i18n" data-en="Flagship" data-pt="Projeto principal">Flagship</span>
+          <span class="bb-sep" aria-hidden="true">·</span>
+          <span>Sep 2025—</span>
+          <span class="bb-sep" aria-hidden="true">·</span>
+          <span class="bb-live"
+            ><span class="i18n" data-en="Live" data-pt="No ar">Live</span>
+            <span class="bb-dot" aria-hidden="true"></span></span
           >
-            A SaaS and marketplace for barbershops. Owned <b>end to end</b>: the design system, the web
-            dashboard, and the client app, all on one codebase.
-          </p>
-          <div class="tags">
-            <span class="tag">SaaS</span>
-            <span class="tag">Marketplace</span>
-            <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
-            <span class="tag i18n" data-en="Front to back" data-pt="Front to back">Front to back</span>
-          </div>
-          <p class="pmetric mono i18n" data-en="Ecosystem of 4 apps · one codebase · one design system" data-pt="Ecossistema de 4 apps · uma base · um design system">Ecosystem of 4 apps · one codebase · one design system</p>
-          <a class="plink case-link" href="/work/bboss">
-            <span class="i18n" data-en="Read the case study" data-pt="Ler o case study">Read the case study</span>
-            <span class="arr" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-        <div class="proj-media">
-          <div class="panel stage-gold">
-            <div class="stage stage-dual">
-              <div class="browser tilt">
-                <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club/home</span></div>
-                <div class="browser-view" data-shot>
-                  <video
-                    class="dash-video"
-                    data-gate
-                    muted
-                    loop
-                    playsinline
-                    preload="none"
-                    poster="/media/bboss-dashboard-poster.webp"
-                    aria-label="B-Boss Club web dashboard, scrolling through metrics"
-                  >
-                    <source src="/media/bboss-dashboard.webm" type="video/webm" />
-                    <source src="/media/bboss-dashboard.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
-              <div class="device" aria-hidden="true">
-                <div class="device-screen">
-                  <span class="device-island"></span>
-                  <div class="screens" data-walk data-interval="2600">
-                    {bbossPhones.map((img, i) => (
+        </p>
+        <h3 class="bb-name">B-Boss</h3>
+        <p
+          class="bb-story i18n"
+          data-en="Barbershops in Brazil run on WhatsApp threads and paper books. B-Boss is one ecosystem of four apps — client booking, business dashboard, admin, and a marketplace — on a single design system. Built and shipped; every screen here is the real product."
+          data-pt="Barbearias no Brasil funcionam em threads de WhatsApp e caderno de papel. O B-Boss é um ecossistema de quatro apps — agendamento, painel do negócio, admin e um marketplace — sobre um único design system. Construído e entregue; cada tela aqui é o produto real."
+        >
+          Barbershops in Brazil run on WhatsApp threads and paper books. B-Boss is one ecosystem of
+          four apps — client booking, business dashboard, admin, and a marketplace — on a single
+          design system. Built and shipped; every screen here is the real product.
+        </p>
+        <ol class="bb-apps mono">
+          {
+            bbApps.map((a) => (
+              <li>
+                <span class="bb-n">{a.n}</span>
+                <span class="i18n" data-en={a.en} data-pt={a.pt}>
+                  {a.en}
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+        <a class="plink case-link" href="/work/bboss">
+          <span class="i18n" data-en="Read the case study" data-pt="Ler o case study">Read the case study</span>
+          <span class="arr" aria-hidden="true">&rarr;</span>
+        </a>
+      </aside>
+
+      <div class="bb-panels">
+        <figure class="bb-panel" data-reveal>
+          <figcaption class="mono">
+            <span class="bb-n">01 /</span>
+            <span class="i18n" data-en="Client booking" data-pt="Agendamento">Client booking</span>
+          </figcaption>
+          <div class="bb-media bb-media-phone">
+            <div class="device">
+              <div class="device-screen">
+                <span class="device-island"></span>
+                <div class="screens" data-walk data-interval="3200">
+                  {
+                    bookingPhones.map((img, i) => (
                       <div class:list={["screen", { "is-active": i === 0 }]}>
-                        <Image src={img} alt={`B-Boss client app screen ${i + 1}`} widths={[220, 440]} sizes="150px" loading="lazy" />
+                        <Image
+                          src={img}
+                          alt={`B-Boss client app, booking flow screen ${i + 1}`}
+                          widths={[280, 560, 840]}
+                          sizes="(min-width: 900px) 300px, 62vw"
+                          loading="lazy"
+                        />
                       </div>
-                    ))}
-                  </div>
+                    ))
+                  }
                 </div>
               </div>
             </div>
-            <span class="lightbands" aria-hidden="true"></span>
           </div>
-        </div>
-      </article>
+        </figure>
 
+        <figure class="bb-panel" data-reveal>
+          <figcaption class="mono">
+            <span class="bb-n">02 /</span>
+            <span class="i18n" data-en="Business dashboard" data-pt="Painel do negócio">Business dashboard</span>
+          </figcaption>
+          <div class="bb-media">
+            <div class="browser">
+              <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club/home</span></div>
+              <div class="browser-view" data-shot>
+                <video
+                  class="dash-video"
+                  data-gate
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="/media/bboss-dashboard-poster.webp"
+                  aria-label="B-Boss Club web dashboard, scrolling through metrics"
+                >
+                  <source src="/media/bboss-dashboard.webm" type="video/webm" />
+                  <source src="/media/bboss-dashboard.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="bb-panel" data-reveal>
+          <figcaption class="mono">
+            <span class="bb-n">03 /</span>
+            <span>Admin</span>
+          </figcaption>
+          <div class="bb-media">
+            <div class="browser">
+              <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">admin.bboss.club/home</span></div>
+              <div class="browser-view" data-shot>
+                <Image
+                  src={svAdmin}
+                  alt="B-Boss admin, platform operations dashboard with live charts"
+                  widths={[800, 1200, 1600]}
+                  sizes="(min-width: 900px) 62vw, 92vw"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="bb-panel" data-reveal>
+          <figcaption class="mono">
+            <span class="bb-n">04 /</span>
+            <span>Marketplace</span>
+          </figcaption>
+          <div class="bb-media bb-media-phone">
+            <div class="device">
+              <div class="device-screen">
+                <span class="device-island"></span>
+                <div class="screens" data-walk data-interval="3200">
+                  {
+                    marketPhones.map((img, i) => (
+                      <div class:list={["screen", { "is-active": i === 0 }]}>
+                        <Image
+                          src={img}
+                          alt={`B-Boss marketplace screen ${i + 1}`}
+                          widths={[280, 560, 840]}
+                          sizes="(min-width: 900px) 300px, 62vw"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="work-list">
       {/* ---- Movie Match ---- */}
       <article class="proj" data-reveal>
         <div class="proj-text">
