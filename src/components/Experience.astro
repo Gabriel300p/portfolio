@@ -1,5 +1,5 @@
 ---
-import { experience, education, languages } from "../data/content";
+import { experience } from "../data/content";
 
 // Small inline role glyphs (kept minimal and consistent with the chevron/theme icons).
 const icons: Record<string, string> = {
@@ -86,39 +86,5 @@ const icons: Record<string, string> = {
       }
     </div>
 
-    {/* Education + languages */}
-    <div class="xp-meta-block" data-reveal>
-      <div class="xp-meta-col">
-        <div class="xp-meta-label i18n" data-en="Education" data-pt="Educação">Education</div>
-        <ul class="xp-meta-list">
-          {
-            education.map((e) => (
-              <li>
-                <span class="xp-meta-title i18n" data-en={e.title.en} data-pt={e.title.pt}>
-                  {e.title.en}
-                </span>
-                <span class="xp-meta-sub mono">
-                  {e.school} · {e.period}
-                </span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="xp-meta-col">
-        <div class="xp-meta-label i18n" data-en="Languages" data-pt="Idiomas">Languages</div>
-        <ul class="xp-meta-list">
-          {
-            languages.map((l) => (
-              <li>
-                <span class="xp-meta-title i18n" data-en={l.en} data-pt={l.pt}>
-                  {l.en}
-                </span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
   </div>
 </section>

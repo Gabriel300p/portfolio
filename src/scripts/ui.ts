@@ -138,6 +138,41 @@ function initExperience() {
   });
 }
 
+// "See more certificates" reveal — collapsed only once JS arms it, so the
+// full list stays readable with JS disabled (progressive enhancement).
+function initEducation() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wrap = document.querySelector<HTMLElement>(".edu-more");
+  if (!wrap) return;
+  const btn = wrap.querySelector<HTMLButtonElement>(".edu-more-btn");
+  const panel = wrap.querySelector<HTMLElement>(".edu-more-panel");
+  if (!btn || !panel) return;
+
+  const setOpen = (open: boolean, animate: boolean) => {
+    wrap.setAttribute("data-open", String(open));
+    btn.setAttribute("aria-expanded", String(open));
+    if (!animate || reduce) {
+      panel.style.height = open ? "auto" : "0px";
+      return;
+    }
+    if (open) {
+      panel.style.height = panel.scrollHeight + "px";
+      const done = () => {
+        panel.style.height = "auto";
+        panel.removeEventListener("transitionend", done);
+      };
+      panel.addEventListener("transitionend", done);
+    } else {
+      panel.style.height = panel.scrollHeight + "px";
+      void panel.offsetHeight; // force reflow so the transition to 0 runs
+      panel.style.height = "0px";
+    }
+  };
+
+  setOpen(false, false);
+  btn.addEventListener("click", () => setOpen(wrap.getAttribute("data-open") !== "true", true));
+}
+
 function initTheme() {
   const btn = document.getElementById("themeBtn");
   btn?.addEventListener("click", () => {
@@ -283,18 +318,18 @@ function initMagnetic() {
   });
 }
 
-// Auto-advancing screen carousels inside the project mockups.
-function initCarousels() {
-  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => {
-    const slides = Array.from(el.querySelectorAll<HTMLElement>(".slide"));
-    if (slides.length < 2 || reduceMotion) return; // static first slide otherwise
-    const interval = Number(el.getAttribute("data-interval")) || 3000;
+// Auto-advancing app screens inside device mockups (prototype-flow feel).
+function initWalk() {
+  document.querySelectorAll<HTMLElement>("[data-walk]").forEach((el) => {
+    const screens = Array.from(el.querySelectorAll<HTMLElement>(".screen"));
+    if (screens.length < 2 || reduceMotion) return; // static first screen otherwise
+    const interval = Number(el.getAttribute("data-interval")) || 2600;
     let idx = 0;
     let timer = 0;
     const go = () => {
-      slides[idx].classList.remove("is-active");
-      idx = (idx + 1) % slides.length;
-      slides[idx].classList.add("is-active");
+      screens[idx].classList.remove("is-active");
+      idx = (idx + 1) % screens.length;
+      screens[idx].classList.add("is-active");
     };
     const play = () => {
       if (!timer) timer = window.setInterval(go, interval);
@@ -308,6 +343,141 @@ function initCarousels() {
     el.addEventListener("pointerenter", pause);
     el.addEventListener("pointerleave", play);
     new IntersectionObserver(([e]) => (e.isIntersecting ? play() : pause()), { threshold: 0 }).observe(el);
+  });
+}
+
+// Live terminal (Pandora): type commands char-by-char, reveal output lines, loop.
+// The static transcript in the markup is the no-JS / reduced-motion fallback.
+function initTerminal() {
+  if (reduceMotion) return;
+  const term = document.querySelector<HTMLElement>("[data-terminal]");
+  if (!term) return;
+
+  type Tok = [cls: string, text: string];
+  interface Block {
+    cmd: Tok[];
+    out: Tok[][];
+  }
+  const program: Block[] = [
+    {
+      cmd: [["t-prompt", "❯ "], ["t-cmd", "pandora ingest"], ["", " "], ["t-flag", "--session"]],
+      out: [
+        [["t-out", "↳ routing knowledge → wiki/ · brain/ · raw/"]],
+        [["t-out", "↳ 18 notes linked · 4 ADRs · 0 secrets leaked"], ["", "  "], ["t-ok", "✓"]],
+      ],
+    },
+    {
+      cmd: [["t-prompt", "❯ "], ["t-cmd", "qmd query"], ["", " "], ["t-str", '"auth session decisions"']],
+      out: [
+        [["t-out", "12 hits · 3 backlinks · 1 ADR · 0.91 match"]],
+        [["t-out", "› reference/engineering/auth-model.md"]],
+      ],
+    },
+    {
+      cmd: [["t-prompt", "❯ "], ["t-cmd", "pandora agents"], ["", " "], ["t-flag", "scout + verify"]],
+      out: [
+        [["t-out", "scout  ▸ 2 opportunities found"]],
+        [["t-out", "verify ▸ adversarial pass · 0 false claims"], ["", "  "], ["t-ok", "✓"]],
+      ],
+    },
+  ];
+
+  const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+  let visible = false;
+  const untilVisible = () =>
+    new Promise<void>((res) => {
+      if (visible) return res();
+      const t = window.setInterval(() => {
+        if (visible) {
+          window.clearInterval(t);
+          res();
+        }
+      }, 150);
+    });
+
+  const line = () => {
+    const p = document.createElement("p");
+    p.className = "line";
+    term.appendChild(p);
+    return p;
+  };
+  const span = (cls: string, text: string) => {
+    const s = document.createElement("span");
+    if (cls) s.className = cls;
+    s.textContent = text;
+    return s;
+  };
+
+  async function typeCmd(p: HTMLElement, toks: Tok[]) {
+    const caret = span("t-caret", "");
+    p.appendChild(caret);
+    for (const [cls, text] of toks) {
+      if (cls === "t-prompt") {
+        p.insertBefore(span(cls, text), caret);
+        continue;
+      }
+      const s = span(cls, "");
+      p.insertBefore(s, caret);
+      for (const ch of text) {
+        s.textContent += ch;
+        p.appendChild(caret); // keep caret at the tail while typing
+        await sleep(32 + Math.random() * 48);
+      }
+    }
+    caret.remove();
+  }
+
+  async function run() {
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      await untilVisible();
+      term.textContent = "";
+      for (const block of program) {
+        const p = line();
+        await typeCmd(p, block.cmd);
+        await sleep(260);
+        for (const out of block.out) {
+          const op = line();
+          out.forEach(([cls, text]) => op.appendChild(span(cls, text)));
+          await sleep(360);
+        }
+        await sleep(520);
+      }
+      const fp = line();
+      fp.appendChild(span("t-prompt", "❯ "));
+      fp.appendChild(span("t-caret", ""));
+      await sleep(2800);
+    }
+  }
+
+  let started = false;
+  new IntersectionObserver(
+    ([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !started) {
+        started = true;
+        run();
+      }
+    },
+    { threshold: 0.25 }
+  ).observe(term);
+}
+
+// Play muted showcase videos only while in view (never eager-download off-screen).
+function initVideoGate() {
+  document.querySelectorAll<HTMLVideoElement>("video[data-gate]").forEach((v) => {
+    if (reduceMotion) {
+      v.removeAttribute("autoplay");
+      v.pause();
+      return;
+    }
+    new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.2 }
+    ).observe(v);
   });
 }
 
@@ -345,8 +515,11 @@ initLang();
 initClock();
 initCopy();
 initExperience();
+initEducation();
 initTheme();
 initHeroRain();
 initMagnetic();
-initCarousels();
+initWalk();
+initTerminal();
+initVideoGate();
 initSmoothScroll();

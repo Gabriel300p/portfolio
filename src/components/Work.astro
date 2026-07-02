@@ -1,17 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import bbossDesktop from "../assets/img/projects/bboss-desktop.jpg";
 import bm1 from "../assets/img/projects/bboss-mobile-1.jpg";
 import bm2 from "../assets/img/projects/bboss-mobile-2.jpg";
 import bm3 from "../assets/img/projects/bboss-mobile-3.jpg";
 import bm4 from "../assets/img/projects/bboss-mobile-4.jpg";
-import mm1 from "../assets/img/projects/moviematch-1.jpg";
-import mm2 from "../assets/img/projects/moviematch-2.jpg";
-import mm3 from "../assets/img/projects/moviematch-3.jpg";
-import mm4 from "../assets/img/projects/moviematch-4.jpg";
+import mmHome from "../assets/img/projects/moviematch-home.png";
+import mmSearch from "../assets/img/projects/moviematch-search.png";
+import mmFilter from "../assets/img/projects/moviematch-filter.png";
+import mmDetail from "../assets/img/projects/moviematch-detail.png";
+import mmList from "../assets/img/projects/moviematch-list.png";
 
 const bbossPhones = [bm1, bm2, bm3, bm4];
-const moviePhones = [mm1, mm2, mm3, mm4];
+// Movie Match walkthrough: browse → search → refine → decide → save
+const moviePhones = [mmHome, mmSearch, mmFilter, mmDetail, mmList];
 
 const more = [
   {
@@ -101,21 +102,35 @@ const more = [
           </a>
         </div>
         <div class="proj-media">
-          <div class="panel">
+          <div class="panel stage-gold">
             <div class="stage stage-dual">
               <div class="browser tilt">
-                <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club</span></div>
-                <div class="browser-view">
-                  <Image src={bbossDesktop} alt="B-Boss Club web dashboard" widths={[400, 800, 1100]} sizes="(max-width: 900px) 88vw, 44vw" loading="lazy" />
+                <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club/home</span></div>
+                <div class="browser-view" data-shot>
+                  <video
+                    class="dash-video"
+                    data-gate
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    poster="/media/bboss-dashboard-poster.jpg"
+                    aria-label="B-Boss Club web dashboard, scrolling through metrics"
+                  >
+                    <source src="/media/bboss-dashboard.webm" type="video/webm" />
+                  </video>
                 </div>
               </div>
-              <div class="phone" data-carousel data-interval="3200">
-                <div class="carousel">
-                  {bbossPhones.map((img, i) => (
-                    <div class:list={["slide", { "is-active": i === 0 }]}>
-                      <Image src={img} alt={`B-Boss client app screen ${i + 1}`} widths={[200, 400]} sizes="150px" loading="lazy" />
-                    </div>
-                  ))}
+              <div class="device" aria-hidden="true">
+                <div class="device-screen">
+                  <span class="device-island"></span>
+                  <div class="screens" data-walk data-interval="2600">
+                    {bbossPhones.map((img, i) => (
+                      <div class:list={["screen", { "is-active": i === 0 }]}>
+                        <Image src={img} alt={`B-Boss client app screen ${i + 1}`} widths={[220, 440]} sizes="150px" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -145,15 +160,18 @@ const more = [
           <p class="pmetric mono i18n" data-en="React Native · TMDB API · watchlists + rich filters" data-pt="React Native · API TMDB · listas + filtros ricos">React Native · TMDB API · watchlists + rich filters</p>
         </div>
         <div class="proj-media">
-          <div class="panel">
+          <div class="panel stage-cinema">
             <div class="stage stage-phone">
-              <div class="phone big tilt" data-carousel data-interval="2800">
-                <div class="carousel">
-                  {moviePhones.map((img, i) => (
-                    <div class:list={["slide", { "is-active": i === 0 }]}>
-                      <Image src={img} alt={`Movie Match screen ${i + 1}`} widths={[240, 480]} sizes="200px" loading="lazy" />
-                    </div>
-                  ))}
+              <div class="device tilt">
+                <div class="device-screen">
+                  <span class="device-island"></span>
+                  <div class="screens" data-walk data-interval="2600">
+                    {moviePhones.map((img, i) => (
+                      <div class:list={["screen", { "is-active": i === 0 }]}>
+                        <Image src={img} alt={`Movie Match screen ${i + 1}`} widths={[260, 520]} sizes="220px" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -183,16 +201,23 @@ const more = [
           <p class="pmetric mono i18n" data-en="Multi-agent · semantic search · runs in my terminal daily" data-pt="Multi-agente · busca semântica · roda no meu terminal todo dia">Multi-agent · semantic search · runs in my terminal daily</p>
         </div>
         <div class="proj-media">
-          <div class="panel">
+          <div class="panel stage-terminal">
             <div class="stage stage-term">
-              <div class="term-body mono">
-                <p><span class="tp">$</span> claude · <span class="tg">ingest</span> session</p>
-                <p class="tdim">→ routing knowledge to wiki/ · brain/ · raw/</p>
-                <p><span class="tp">$</span> qmd <span class="tg">query</span> "auth decisions"</p>
-                <p class="tdim">→ 12 notes · 3 backlinks · 1 ADR</p>
-                <p><span class="tp">$</span> agents · <span class="tg">scout</span> + <span class="tg">verify</span></p>
-                <p class="tdim">→ 2 opportunities · 0 secrets leaked <span class="tok">ok</span></p>
-                <p class="tcursor"><span class="tp">$</span> <span class="blink">▍</span></p>
+              <div class="terminal tilt">
+                <div class="terminal-bar">
+                  <i></i><i></i><i></i>
+                  <span class="ttitle">pandora — zsh</span>
+                </div>
+                <div class="terminal-body" data-terminal>
+                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">pandora ingest</span> <span class="t-flag">--session</span></p>
+                  <p class="line"><span class="t-out">↳ routing knowledge → wiki/ · brain/ · raw/</span></p>
+                  <p class="line"><span class="t-out">↳ 18 notes linked · 4 ADRs · 0 secrets leaked</span> <span class="t-ok">✓</span></p>
+                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">qmd query</span> <span class="t-str">"auth session decisions"</span></p>
+                  <p class="line"><span class="t-out">12 hits · 3 backlinks · 1 ADR · 0.91 match</span></p>
+                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">pandora agents</span> <span class="t-flag">scout + verify</span></p>
+                  <p class="line"><span class="t-out">scout ▸ 2 opportunities · verify ▸ 0 false claims</span> <span class="t-ok">✓</span></p>
+                  <p class="line"><span class="t-prompt">❯</span> <span class="t-caret"></span></p>
+                </div>
               </div>
             </div>
             <span class="lightbands" aria-hidden="true"></span>

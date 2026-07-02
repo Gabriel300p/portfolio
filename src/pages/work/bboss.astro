@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import bbossDesktop from "../../assets/img/projects/bboss-desktop.jpg";
+import bbossDesktop from "../../assets/img/projects/bboss-dashboard.png";
 import bbossMobile1 from "../../assets/img/projects/bboss-mobile-1.jpg";
 import bbossMobile2 from "../../assets/img/projects/bboss-mobile-2.jpg";
 import bbossMobile3 from "../../assets/img/projects/bboss-mobile-3.jpg";
@@ -142,29 +142,50 @@ const ecosystem = [
           <h2>Dashboard and mobile product surfaces.</h2>
         </div>
 
-        <div class="gallery">
-          <figure class="shot case-shot desktop-shot">
-            <Image
-              src={bbossDesktop}
-              alt="B-Boss Club desktop dashboard with scheduling and shop management data"
-              widths={[720, 1100, 1440, 1800]}
-              sizes="(max-width: 900px) calc(100vw - 40px), 1100px"
-              loading="lazy"
-            />
-          </figure>
+        <div class="case-gallery">
+          <div class="panel stage-gold case-panel">
+            <div class="stage">
+              <div class="browser">
+                <div class="browser-bar">
+                  <i></i><i></i><i></i>
+                  <span class="url mono">app.bboss.club/home</span>
+                </div>
+                <div class="browser-view">
+                  <Image
+                    src={bbossDesktop}
+                    alt="B-Boss Club desktop dashboard with scheduling and shop management data"
+                    widths={[720, 1100, 1440, 1800]}
+                    sizes="(max-width: 900px) calc(100vw - 40px), 1040px"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+            <span class="lightbands" aria-hidden="true"></span>
+          </div>
 
-          <div class="mobile-grid">
-            {screens.map((screen) => (
-              <figure class="shot case-shot mobile-shot">
-                <Image
-                  src={screen.src}
-                  alt={screen.alt}
-                  widths={[220, 360, 520]}
-                  sizes="(max-width: 700px) calc((100vw - 56px) / 2), 240px"
-                  loading="lazy"
-                />
-              </figure>
-            ))}
+          <div class="panel stage-gold case-panel-phones">
+            <div class="case-phone-row">
+              {screens.map((screen) => (
+                <div class="device device-sm">
+                  <div class="device-screen">
+                    <span class="device-island"></span>
+                    <div class="screens">
+                      <div class="screen is-active">
+                        <Image
+                          src={screen.src}
+                          alt={screen.alt}
+                          widths={[220, 360, 520]}
+                          sizes="150px"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <span class="lightbands" aria-hidden="true"></span>
           </div>
         </div>
       </div>
@@ -343,30 +364,30 @@ const ecosystem = [
     font-size: clamp(1.35rem, 2vw, 1.7rem);
   }
 
-  .gallery {
+  .case-gallery {
     display: grid;
     gap: clamp(18px, 3vw, 32px);
   }
 
-  .case-shot {
-    margin: 0;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: var(--bg-elevated);
+  /* let the framed shots define their own height (no forced 16/10 crop here) */
+  .case-panel,
+  .case-panel-phones {
+    aspect-ratio: auto;
   }
 
-  .desktop-shot img {
+  .case-phone-row {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 28px);
     width: 100%;
   }
 
-  .mobile-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(14px, 2vw, 22px);
-  }
-
-  .mobile-shot {
-    align-self: start;
+  .device-sm {
+    width: clamp(122px, 15vw, 152px);
   }
 
   .decision-list {
@@ -455,8 +476,7 @@ const ecosystem = [
       margin-bottom: 34px;
     }
 
-    .ecosystem,
-    .mobile-grid {
+    .ecosystem {
       grid-template-columns: 1fr 1fr;
     }
 
@@ -470,8 +490,7 @@ const ecosystem = [
   }
 
   @media (max-width: 480px) {
-    .ecosystem,
-    .mobile-grid {
+    .ecosystem {
       grid-template-columns: 1fr;
     }
 
