@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import bbossDesktop from "../../assets/img/projects/bboss-dashboard.png";
 import bbossMobile1 from "../../assets/img/projects/bboss-mobile-1.jpg";
 import bbossMobile2 from "../../assets/img/projects/bboss-mobile-2.jpg";
 import bbossMobile3 from "../../assets/img/projects/bboss-mobile-3.jpg";
@@ -32,22 +31,58 @@ const ecosystem = [
   {
     name: "Barbershop Management",
     type: "Web",
-    detail: "Scheduling, team, and finances for the shop operation.",
+    detail: {
+      en: "Scheduling, team, and finances for the shop operation.",
+      pt: "Agenda, equipe e finanças para a operação da barbearia.",
+    },
   },
   {
     name: "Customer Hub",
     type: "PWA",
-    detail: "Booking, history, and loyalty for end customers.",
+    detail: {
+      en: "Booking, history, and loyalty for end customers.",
+      pt: "Agendamento, histórico e fidelidade para o cliente final.",
+    },
   },
   {
     name: "Barber App",
     type: "PWA",
-    detail: "Agenda and earnings for each professional.",
+    detail: {
+      en: "Agenda and earnings for each professional.",
+      pt: "Agenda e ganhos para cada profissional.",
+    },
   },
   {
     name: "Admin backoffice",
     type: "Web",
-    detail: "Marketplace and oversight for the business team.",
+    detail: {
+      en: "Marketplace and oversight for the business team.",
+      pt: "Marketplace e gestão para o time de negócio.",
+    },
+  },
+];
+
+const decisions = [
+  {
+    title: { en: "Single codebase", pt: "Uma base de código" },
+    body: {
+      en: "A shared architecture and design system kept four surfaces consistent — and shippable by a small team.",
+      pt: "Arquitetura e design system compartilhados mantiveram quatro superfícies consistentes — e entregáveis por um time pequeno.",
+    },
+  },
+  {
+    title: { en: "PWA over native", pt: "PWA em vez de nativo" },
+    body: {
+      en: "The mobile surfaces could ship faster across devices while keeping installable app behavior.",
+      pt: "As superfícies mobile saíram mais rápido em qualquer aparelho, mantendo comportamento de app instalável.",
+    },
+  },
+  {
+    title: { en: "Design QA in handoff", pt: "QA de design no handoff" },
+    body: {
+      en: "Components, spacing, states, and interaction details were checked as part of implementation, not after it.",
+      pt: "Componentes, espaçamento, estados e detalhes de interação eram checados como parte da implementação, não depois.",
+    },
   },
 ];
 ---
@@ -61,23 +96,27 @@ const ecosystem = [
   <main class="case">
     <section class="case-hero">
       <div class="wrap">
-        <a class="back-link mono" href="/#work">← Back to work</a>
+        <a class="back-link mono i18n" href="/#work" data-en="← Back to work" data-pt="← Voltar aos projetos">← Back to work</a>
 
         <div class="head case-head" data-reveal>
-          <div class="k">Case study</div>
-          <h2>B-Boss Club</h2>
-          <p>
+          <div class="k i18n" data-en="Case study" data-pt="Case study">Case study</div>
+          <h1>B-Boss Club</h1>
+          <p
+            class="i18n"
+            data-en="An ecosystem for barbershops: management, a customer hub, a barber app, and an admin backoffice, sharing one design system and one codebase. I led design and engineering end to end."
+            data-pt="Um ecossistema para barbearias: gestão, hub do cliente, app do barbeiro e backoffice admin, compartilhando um design system e uma base de código. Liderei design e engenharia de ponta a ponta."
+          >
             An ecosystem for barbershops: management, a customer hub, a barber app, and an admin backoffice,
             sharing one design system and one codebase. I led design and engineering end to end.
           </p>
           <div class="tags">
             <span class="tag">SaaS</span>
             <span class="tag">Marketplace</span>
-            <span class="tag">Design system</span>
+            <span class="tag i18n" data-en="Design system" data-pt="Design system">Design system</span>
             <span class="tag">PWA</span>
-            <span class="tag">Front to back</span>
+            <span class="tag i18n" data-en="Front to back" data-pt="Front to back">Front to back</span>
           </div>
-          <p class="metric mono">Ecosystem of 4 apps · one codebase · one design system</p>
+          <p class="metric mono i18n" data-en="Ecosystem of 4 apps · one codebase · one design system" data-pt="Ecossistema de 4 apps · uma base · um design system">Ecosystem of 4 apps · one codebase · one design system</p>
         </div>
       </div>
     </section>
@@ -85,15 +124,20 @@ const ecosystem = [
     <section class="case-section">
       <div class="wrap split" data-reveal>
         <div class="head section-head">
-          <div class="k">The problem</div>
-          <h2>Fragmented tools in a large market.</h2>
+          <div class="k i18n" data-en="The problem" data-pt="O problema">The problem</div>
+          <h2 class="i18n" data-en="Fragmented tools in a large market." data-pt="Ferramentas fragmentadas num mercado enorme.">Fragmented tools in a large market.</h2>
         </div>
         <div class="copy">
-          <p>
+          <p
+            class="i18n"
+            data-en="Brazil has 600k+ registered barbershops, but digitalization is fragmented. Shop management, the end customer, and the barber usually sit in separate tools with no consolidated hub. B-Boss is that hub."
+            data-pt="O Brasil tem 600 mil+ barbearias registradas, mas a digitalização é fragmentada. Gestão da barbearia, cliente final e barbeiro costumam viver em ferramentas separadas, sem um hub consolidado. O B-Boss é esse hub."
+          >
             Brazil has 600k+ registered barbershops, but digitalization is fragmented. Shop management,
             the end customer, and the barber usually sit in separate tools with no consolidated hub.
             B-Boss is that hub.
           </p>
+          <p class="stack mono i18n" data-en="600,000+ registered barbershops · zero consolidated hubs" data-pt="600 mil+ barbearias registradas · zero hubs consolidados">600,000+ registered barbershops · zero consolidated hubs</p>
         </div>
       </div>
     </section>
@@ -101,11 +145,15 @@ const ecosystem = [
     <section class="case-section">
       <div class="wrap split" data-reveal>
         <div class="head section-head">
-          <div class="k">What I did</div>
-          <h2>Design + engineering, end to end.</h2>
+          <div class="k i18n" data-en="The approach" data-pt="A abordagem">The approach</div>
+          <h2 class="i18n" data-en="Design + engineering, end to end." data-pt="Design + engenharia, de ponta a ponta.">Design + engineering, end to end.</h2>
         </div>
         <div class="copy">
-          <p>
+          <p
+            class="i18n"
+            data-en="I designed the system from scratch, then built the web management dashboard, the customer hub as a PWA, and the shared frontend architecture from Figma to production."
+            data-pt="Desenhei o design system do zero, depois construí o painel web de gestão, o hub do cliente como PWA e a arquitetura frontend compartilhada, do Figma à produção."
+          >
             I designed the system from scratch, then built the web management dashboard, the customer hub
             as a PWA, and the shared frontend architecture from Figma to production.
           </p>
@@ -117,20 +165,59 @@ const ecosystem = [
     <section class="case-section">
       <div class="wrap" data-reveal>
         <div class="head">
-          <div class="k">The ecosystem</div>
-          <h2>Four surfaces around one shared design system.</h2>
+          <div class="k i18n" data-en="Key decisions" data-pt="Decisões-chave">Key decisions</div>
+          <h2 class="i18n" data-en="Built for consistency and speed." data-pt="Construído para consistência e velocidade.">Built for consistency and speed.</h2>
         </div>
 
-        <div class="ecosystem">
+        <div class="decision-list" data-stagger>
+          {decisions.map((d) => (
+            <article>
+              <h3 class="pname i18n" data-en={d.title.en} data-pt={d.title.pt}>{d.title.en}</h3>
+              <p class="pdesc i18n" data-en={d.body.en} data-pt={d.body.pt}>{d.body.en}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap" data-reveal>
+        <div class="head">
+          <div class="k i18n" data-en="The solution" data-pt="A solução">The solution</div>
+          <h2 class="i18n" data-en="Four surfaces around one shared design system." data-pt="Quatro superfícies em torno de um design system compartilhado.">Four surfaces around one shared design system.</h2>
+        </div>
+
+        <div class="ecosystem" data-stagger>
           {ecosystem.map((item) => (
             <article class="eco-item">
               <div class="eco-top">
                 <h3 class="pname">{item.name}</h3>
                 <span class="tag">{item.type}</span>
               </div>
-              <p class="pdesc">{item.detail}</p>
+              <p class="pdesc i18n" data-en={item.detail.en} data-pt={item.detail.pt}>{item.detail.en}</p>
             </article>
           ))}
+        </div>
+        <p class="stack mono eco-metric i18n" data-en="4 surfaces · 2 web apps + 2 installable PWAs · one design system" data-pt="4 superfícies · 2 apps web + 2 PWAs instaláveis · um design system">4 surfaces · 2 web apps + 2 installable PWAs · one design system</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap split" data-reveal>
+        <div class="head section-head">
+          <div class="k i18n" data-en="The outcome" data-pt="O resultado">The outcome</div>
+          <h2 class="i18n" data-en="MVP shipped, ready to validate." data-pt="MVP entregue, pronto para validar.">MVP shipped, ready to validate.</h2>
+        </div>
+        <div class="copy">
+          <p
+            class="i18n"
+            data-en="The MVP is built: all four surfaces run on the shared codebase and design system, from scheduling to loyalty. The next business goal is validation with 100 paying barbershops."
+            data-pt="O MVP está construído: as quatro superfícies rodam na base e no design system compartilhados, da agenda à fidelidade. A próxima meta de negócio é a validação com 100 barbearias pagantes."
+          >
+            The MVP is built: all four surfaces run on the shared codebase and design system, from
+            scheduling to loyalty. The next business goal is validation with 100 paying barbershops.
+          </p>
+          <p class="stack mono i18n" data-en="MVP live on one codebase · next: 100 paying shops" data-pt="MVP rodando numa base única · próximo passo: 100 barbearias pagantes">MVP live on one codebase · next: 100 paying shops</p>
         </div>
       </div>
     </section>
@@ -138,8 +225,8 @@ const ecosystem = [
     <section class="case-section gallery-section">
       <div class="wrap" data-reveal>
         <div class="head">
-          <div class="k">Screen gallery</div>
-          <h2>Dashboard and mobile product surfaces.</h2>
+          <div class="k i18n" data-en="The product" data-pt="O produto">The product</div>
+          <h2 class="i18n" data-en="The real dashboard, running." data-pt="O painel real, rodando.">The real dashboard, running.</h2>
         </div>
 
         <div class="case-gallery">
@@ -151,13 +238,19 @@ const ecosystem = [
                   <span class="url mono">app.bboss.club/home</span>
                 </div>
                 <div class="browser-view">
-                  <Image
-                    src={bbossDesktop}
-                    alt="B-Boss Club desktop dashboard with scheduling and shop management data"
-                    widths={[720, 1100, 1440, 1800]}
-                    sizes="(max-width: 900px) calc(100vw - 40px), 1040px"
-                    loading="lazy"
-                  />
+                  <video
+                    class="dash-video"
+                    data-gate
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    poster="/media/bboss-dashboard-poster.jpg"
+                    aria-label="B-Boss Club web dashboard, scrolling through live metrics and scheduling"
+                  >
+                    <source src="/media/bboss-dashboard.webm" type="video/webm" />
+                    <source src="/media/bboss-dashboard.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>
@@ -191,61 +284,14 @@ const ecosystem = [
       </div>
     </section>
 
-    <section class="case-section">
-      <div class="wrap" data-reveal>
-        <div class="head">
-          <div class="k">Key decisions</div>
-          <h2>Built for consistency and speed.</h2>
-        </div>
-
-        <div class="decision-list">
-          <article>
-            <h3 class="pname">Single codebase</h3>
-            <p class="pdesc">
-              A shared architecture and design system kept four surfaces consistent and shippable by a small team.
-            </p>
-          </article>
-          <article>
-            <h3 class="pname">PWA over native</h3>
-            <p class="pdesc">
-              The mobile surfaces could ship faster across devices while keeping installable app behavior.
-            </p>
-          </article>
-          <article>
-            <h3 class="pname">Design QA in handoff</h3>
-            <p class="pdesc">
-              Components, spacing, states, and interaction details were checked as part of implementation, not after it.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <div class="wrap split" data-reveal>
-        <div class="head section-head">
-          <div class="k">Status</div>
-          <h2>MVP milestone reached.</h2>
-        </div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <span class="timeline-dot" aria-hidden="true"></span>
-            <p>
-              The MVP milestone has been reached. The next business validation goal is 100 paying barbershops.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="case-cta">
       <div class="wrap" data-reveal>
         <div class="head">
-          <div class="k">Next</div>
-          <h2>Keep exploring the work.</h2>
+          <div class="k i18n" data-en="Next" data-pt="Próximo">Next</div>
+          <h2 class="i18n" data-en="See the rest of the work." data-pt="Veja o resto dos projetos.">See the rest of the work.</h2>
         </div>
         <div class="cta-row">
-          <a class="btn primary" href="/#work">Back to work</a>
+          <a class="btn primary i18n" href="/#work" data-en="Back to work" data-pt="Voltar aos projetos">Back to work</a>
           <a class="btn" href="mailto:contact@gabrielandrade.com">contact@gabrielandrade.com</a>
         </div>
       </div>
@@ -364,6 +410,10 @@ const ecosystem = [
     font-size: clamp(1.35rem, 2vw, 1.7rem);
   }
 
+  .eco-metric {
+    margin-top: 22px;
+  }
+
   .case-gallery {
     display: grid;
     gap: clamp(18px, 3vw, 32px);
@@ -403,40 +453,10 @@ const ecosystem = [
     background: var(--bg);
   }
 
-  .timeline {
-    border-top: 1px solid var(--line);
-  }
 
-  .timeline-item {
-    position: relative;
-    padding: 22px 0 0 34px;
-    color: var(--text-muted);
-  }
 
-  .timeline-item p {
-    margin: 0;
-    max-width: 48ch;
-  }
 
-  .timeline-dot {
-    position: absolute;
-    left: 0;
-    top: 30px;
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: var(--accent);
-  }
 
-  .timeline-dot::after {
-    content: "";
-    position: absolute;
-    left: 4px;
-    top: 10px;
-    width: 1px;
-    height: 44px;
-    background: var(--line-strong);
-  }
 
   .case-cta {
     padding-block: clamp(72px, 10vw, 120px);
