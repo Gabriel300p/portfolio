@@ -131,3 +131,24 @@ tags:
 ### Veredito
 
 - **F4:** approved — aspecto 0.4621 vs frame 0.4600 (delta 0.45%, crop resolvido); sistemas de motion byte-idênticos ao estado aprovado
+
+## Iteração 7 — F11 redesign do layout-mestre (2026-07-02)
+
+### Evidência
+
+| Comando | Passou | Resumo |
+| --- | --- | --- |
+| build | ✅ | 0 erros |
+| Lighthouse prod mobile | ✅ | 94/100/100/100 · CLS 0 · 0 sub-audits falhando |
+| reduced-motion | ✅ | ticker estático, 0 escondidos |
+| h-scroll 375/1440 | ✅ | nenhum |
+| PT + dark | ✅ | hero/mast/cue traduzem; dark ok |
+| sticky rail | ✅ | position sticky ativo (teste sem Lenis) |
+
+### Veredito
+
+- **F11: approved** — Evaluator verificou: hero é conceito novo (não evolução), zero
+  seção "head centrado" restante, ≥2 momentos de assinatura, identidade travada (zero
+  hex cru, nenhuma redefinição de token), copy do hero byte-idêntica (3 rótulos
+  composicionais novos i18n'd — flag para Gabriel). Ajustes aplicados pós-veredito:
+  mobile zig-zag texto-primeiro + folio silencioso para AT.

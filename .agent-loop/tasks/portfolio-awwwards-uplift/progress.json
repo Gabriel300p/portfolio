@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
-  "state": "BLOCKED",
+  "state": "GATE_MERGE",
   "iteration": 6,
   "color": "yellow",
   "needsHuman": true,
@@ -92,6 +92,10 @@
     {
       "state": "BLOCKED",
       "at": "2026-07-02T03:20:00-03:00"
+    },
+    {
+      "state": "GATE_MERGE",
+      "at": "2026-07-02T04:05:00-03:00"
     }
   ],
   "stoppedReason": "budget — sessão bateu limite de tempo/contexto (reset ~3:20am) no meio da geração de F11; deltas não-commitados foram commitados depois (935cfe8) como checkpoint WIP, não avaliados. Retomada exige novo prompt (mandato ampliado, ver gateResolutions)."
