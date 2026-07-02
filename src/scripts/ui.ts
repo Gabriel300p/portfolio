@@ -1,5 +1,5 @@
 // Client-side behaviour: nav shadow, scroll reveal, language toggle,
-// live clock, copy-email, and theme toggle. Progressive enhancement only —
+// copy-email, and theme toggle. Progressive enhancement only —
 // the page is fully readable without any of this.
 
 type Lang = "en" | "pt";

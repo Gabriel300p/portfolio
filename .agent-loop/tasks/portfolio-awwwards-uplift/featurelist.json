@@ -259,11 +259,17 @@
         "sub 2-3 linhas (copy SV: product problems → shipped interfaces; Guarulhos; EN+PT), banda de métricas mono ancorada em ACESSO ENERGIA · 2021— entre hairlines (não é stat-card)",
         "checkpoint visual: screenshots desktop+mobile light+dark postados na conversa"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/8.json"
+      ],
+      "touchedFiles": [
+        "src/components/Hero.astro",
+        "src/styles/global.css",
+        "src/scripts/ui.ts"
+      ],
       "blockedReason": null
     },
     {

@@ -1,0 +1,21 @@
+{
+  "feature": "F13",
+  "iteration": 8,
+  "verdict": "approved",
+  "commit": "63991d0",
+  "evaluator": "change-verifier subagent (adversarial, read-only)",
+  "checks": [
+    "build green 2 pages",
+    "retirement grep src+dist zero (rain/clock/monogram/meta-strip/reg)",
+    "hero-eyebrow/band/band-src/Acesso Energia present in dist",
+    "remote/founder = 0 site-wide",
+    "h1 400 clamp + em italic accent in minified css",
+    "band hairline not card",
+    "entrance anim inside prefers-reduced-motion:no-preference with new selectors",
+    "i18n data-en/pt with embedded markup incl 1.000+ localization",
+    "__uiReady failsafe intact"
+  ],
+  "nonBlocking": [
+    "stale 'live clock' comment ui.ts:2 — fixed in follow-up commit"
+  ]
+}
