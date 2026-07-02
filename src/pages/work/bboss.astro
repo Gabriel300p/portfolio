@@ -29,7 +29,7 @@ const screens = [
 
 const ecosystem = [
   {
-    name: "Barbershop Management",
+    name: { en: "Barbershop Management", pt: "Gestão da Barbearia" },
     type: "Web",
     detail: {
       en: "Scheduling, team, and finances for the shop operation.",
@@ -37,7 +37,7 @@ const ecosystem = [
     },
   },
   {
-    name: "Customer Hub",
+    name: { en: "Customer Hub", pt: "Hub do Cliente" },
     type: "PWA",
     detail: {
       en: "Booking, history, and loyalty for end customers.",
@@ -45,7 +45,7 @@ const ecosystem = [
     },
   },
   {
-    name: "Barber App",
+    name: { en: "Barber App", pt: "App do Barbeiro" },
     type: "PWA",
     detail: {
       en: "Agenda and earnings for each professional.",
@@ -53,7 +53,7 @@ const ecosystem = [
     },
   },
   {
-    name: "Admin backoffice",
+    name: { en: "Admin backoffice", pt: "Backoffice Admin" },
     type: "Web",
     detail: {
       en: "Marketplace and oversight for the business team.",
@@ -191,7 +191,7 @@ const decisions = [
           {ecosystem.map((item) => (
             <article class="eco-item">
               <div class="eco-top">
-                <h3 class="pname">{item.name}</h3>
+                <h3 class="pname i18n" data-en={item.name.en} data-pt={item.name.pt}>{item.name.en}</h3>
                 <span class="tag">{item.type}</span>
               </div>
               <p class="pdesc i18n" data-en={item.detail.en} data-pt={item.detail.pt}>{item.detail.en}</p>
