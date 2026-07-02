@@ -1,12 +1,16 @@
 {
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
-  "state": "GENERATE",
-  "iteration": 4,
+  "state": "GATE_MERGE",
+  "iteration": 6,
   "color": "yellow",
-  "needsHuman": false,
-  "currentFeature": "F5",
-  "pendingGate": null,
+  "needsHuman": true,
+  "currentFeature": "F4",
+  "pendingGate": {
+    "type": "merge",
+    "createdAt": "2026-07-02T02:40:00-03:00",
+    "requires": "human"
+  },
   "gateResolutions": [
     {
       "type": "contract",
@@ -27,12 +31,12 @@
     }
   },
   "lastVerdict": {
-    "feature": "F3",
+    "feature": "F4",
     "verdict": "approved",
     "outOfScope": false,
     "blocked": false,
-    "evidenceRef": "evidence/3.json",
-    "reasonsRef": "evaluation.md"
+    "evidenceRef": "evidence/6.json",
+    "reasonsRef": "evaluation.md#iteracao-6"
   },
   "history": [
     {
@@ -62,6 +66,14 @@
     {
       "state": "GENERATE",
       "at": "2026-07-02T01:12:00-03:00"
+    },
+    {
+      "state": "EVALUATE",
+      "at": "2026-07-02T02:25:00-03:00"
+    },
+    {
+      "state": "GATE_MERGE",
+      "at": "2026-07-02T02:40:00-03:00"
     }
   ],
   "stoppedReason": null

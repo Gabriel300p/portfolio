@@ -45,7 +45,7 @@
       ],
       "status": "approved",
       "iterations": 1,
-      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "lastVerdict": "approved@iter1",
       "evidenceRefs": [
         "evidence/3.json"
       ],
@@ -65,7 +65,7 @@
       ],
       "status": "approved",
       "iterations": 1,
-      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "lastVerdict": "approved@iter1",
       "evidenceRefs": [
         "evidence/3.json"
       ],
@@ -84,11 +84,16 @@
         "Pandora: terminal WAAPI, cursor não-selecionável, 3 demos; reduced-motion → transcript",
         "zero layout shift na seção; legível claro+escuro × desktop+mobile"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (aspect math verified 0.4621 vs frame 0.4600; motion systems byte-identical)",
+      "evidenceRefs": [
+        "evidence/6.json"
+      ],
+      "touchedFiles": [
+        "src/assets/img/projects/bboss-mobile-1..4.jpg",
+        "src/pages/work/bboss.astro"
+      ],
       "blockedReason": null
     },
     {
@@ -121,10 +126,12 @@
         "prova em prosa mantém números reais legíveis em EN e PT",
         "reescrita de posicionamento só via gate amarelo"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (hero copy byte-identical to main; no stat-card residue)",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -136,10 +143,12 @@
         "linguagens/stack com destaque visual claro",
         "responsivo + ambos temas + reduced-motion com evidência"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (logos standardized, links verified, dims added)",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -150,9 +159,9 @@
         "DESIGN.md com padrões concretos (timings/easing/mecânica) dos 4 sites validados",
         "cada padrão anotado com aplicabilidade neste portfolio"
       ],
-      "status": "in_progress",
-      "iterations": 1,
-      "lastVerdict": "partial — eftakher done; 3 sites pending session-limit reset",
+      "status": "approved",
+      "iterations": 2,
+      "lastVerdict": "approved — all 4 reference sites extracted into DESIGN.md",
       "evidenceRefs": [],
       "touchedFiles": [
         "DESIGN.md"
@@ -167,10 +176,12 @@
         "fontes preload/font-display; vídeo fora do payload inicial; imagens sem CLS",
         "landmarks, heading order, meta/OG, sitemap"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved — Lighthouse 94/100/100/100 home, 98/100/100/100 case",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -182,10 +193,12 @@
         "teclado completo: foco visível, ordem lógica, skip link",
         "contraste AA nos dois temas"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved — skip link, inert, AA tokens, mobile menu, cross-page nav",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     }
