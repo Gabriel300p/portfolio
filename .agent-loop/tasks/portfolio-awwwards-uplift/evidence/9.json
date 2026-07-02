@@ -1,0 +1,13 @@
+{
+  "feature": "F14",
+  "iteration": 9,
+  "verdict": "approved",
+  "evaluator": "orchestrator + visual inspection of every money shot (harness-produced PNGs)",
+  "evidence": {
+    "captures": "13 screens / 3 apps under ~/projetos/bboss-monorepo/output/portfolio-screens/",
+    "chosen_assets": "9 PNGs in src/assets/img/projects/sv/ (DPR2 desktop 3200x2000, DPR3 mobile 1170x2532)",
+    "isolation": "all DB ops inline-env to 127.0.0.1:5433; Neon .env never loaded; bboss repo tracked files untouched",
+    "data_quality": "dashboard 313 validated passes +165.3% w/ charts; admin 432 passes 17 shops; client home pass banner + ratings; detail 4.9(14) Aberto"
+  },
+  "deviation": "premium compositions (frames/shadows) deferred to F15 build where captures get framed in CSS device/browser chrome — same as current site pattern; AI upscale unnecessary at DPR2/3"
+}

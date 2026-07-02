@@ -280,11 +280,15 @@
         "composições premium (frame limpo, sombra sutil; upscale/limpeza AI quando agregar) exportadas em webp + fallback",
         "vídeo dashboard mantém webm+mp4+poster webp"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/9.json"
+      ],
+      "touchedFiles": [
+        "src/assets/img/projects/sv/"
+      ],
       "blockedReason": null
     },
     {
