@@ -630,7 +630,7 @@ section {
 }
 /* outlined serif index numeral — the editorial folio mark of each section */
 .head[data-num]::before {
-  content: attr(data-num);
+  content: attr(data-num) / "";
   position: absolute;
   right: 0;
   top: 12px;
@@ -1178,6 +1178,15 @@ footer .wrap {
 }
 .work-list .proj:nth-of-type(even) .proj-text {
   order: 2;
+}
+@media (max-width: 840px) {
+  /* single column: text always leads for scannability */
+  .work-list .proj:nth-of-type(even) {
+    grid-template-columns: 1fr;
+  }
+  .work-list .proj:nth-of-type(even) .proj-text {
+    order: 0;
+  }
 }
 
 /* per-project brand accent — drives the glow */
