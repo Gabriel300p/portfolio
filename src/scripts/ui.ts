@@ -97,24 +97,6 @@ function initLang() {
   btn?.addEventListener("click", () => applyLang(currentLang === "en" ? "pt" : "en"));
 }
 
-function initClock() {
-  const clock = document.getElementById("clock");
-  if (!clock) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const tick = () => {
-    try {
-      clock.textContent = new Date().toLocaleTimeString("en-GB", {
-        timeZone: "America/Sao_Paulo",
-        hour12: false,
-      });
-    } catch {
-      clock.textContent = "";
-    }
-  };
-  tick();
-  if (!reduce) window.setInterval(tick, 1000);
-}
-
 function initCopy() {
   const toast = document.getElementById("toast");
   let t: number | undefined;
@@ -222,99 +204,6 @@ function initTheme() {
   });
 }
 
-// Green binary rain revealed only under the cursor (Matrix motif on hover).
-function initHeroRain() {
-  if (reduceMotion) return;
-  const hero = document.querySelector<HTMLElement>("[data-hero]");
-  const canvas = hero?.querySelector<HTMLCanvasElement>(".hero-rain");
-  const ctx = canvas?.getContext("2d");
-  if (!hero || !canvas || !ctx) return;
-
-  const fontSize = 16;
-  let cols = 0;
-  let drops: number[] = [];
-  let w = 0,
-    h = 0,
-    dpr = 1;
-
-  // Green per theme (vibrant, matches the accent).
-  const green = () => {
-    const dark = document.documentElement.getAttribute("data-theme") === "dark";
-    return dark
-      ? { head: "180, 255, 210", body: "69, 224, 138", fade: 0.09 }
-      : { head: "20, 150, 90", body: "11, 125, 69", fade: 0.1 };
-  };
-
-  const resize = () => {
-    const r = hero.getBoundingClientRect();
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = r.width;
-    h = r.height;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    canvas.style.width = w + "px";
-    canvas.style.height = h + "px";
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cols = Math.ceil(w / fontSize);
-    drops = Array.from({ length: cols }, () => Math.floor((Math.random() * h) / fontSize));
-    ctx.clearRect(0, 0, w, h);
-  };
-
-  let last = 0;
-  const frame = (t: number) => {
-    raf = requestAnimationFrame(frame);
-    if (t - last < 55) return; // ~18fps, calm
-    last = t;
-    const g = green();
-    // Fade the previous frame's pixels (transparent trail, no background color).
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.fillStyle = `rgba(0,0,0,${g.fade})`;
-    ctx.fillRect(0, 0, w, h);
-    ctx.globalCompositeOperation = "source-over";
-    ctx.font = `${fontSize}px "Geist Mono", ui-monospace, monospace`;
-    for (let i = 0; i < cols; i++) {
-      const x = i * fontSize;
-      const y = drops[i] * fontSize;
-      ctx.fillStyle = `rgba(${Math.random() < 0.12 ? g.head : g.body}, 0.95)`;
-      ctx.fillText(Math.random() < 0.5 ? "0" : "1", x, y);
-      if (y > h && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
-    }
-  };
-
-  let raf = 0;
-  let stopTimer: number | undefined;
-  const start = () => {
-    if (!raf) raf = requestAnimationFrame(frame);
-  };
-  const stop = () => {
-    if (raf) {
-      cancelAnimationFrame(raf);
-      raf = 0;
-    }
-    ctx.clearRect(0, 0, w, h);
-  };
-
-  resize();
-  window.addEventListener("resize", resize);
-  const place = (e: PointerEvent) => {
-    const r = hero.getBoundingClientRect();
-    hero.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    hero.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-  hero.addEventListener("pointerenter", (e: PointerEvent) => {
-    window.clearTimeout(stopTimer);
-    place(e);
-    hero.setAttribute("data-glow", "on");
-    start();
-  });
-  hero.addEventListener("pointermove", place);
-  hero.addEventListener("pointerleave", () => {
-    hero.setAttribute("data-glow", "off");
-    // let the mask fade out (0.45s) before stopping the loop
-    stopTimer = window.setTimeout(stop, 500);
-  });
-}
 
 // Buttons that lean toward the cursor.
 function initMagnetic() {
@@ -637,12 +526,10 @@ async function initSmoothScroll() {
 initNav();
 initReveal();
 initLang();
-initClock();
 initCopy();
 initExperience();
 initEducation();
 initTheme();
-initHeroRain();
 initMagnetic();
 initWalk();
 initTerminal();

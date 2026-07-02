@@ -1,0 +1,51 @@
+{
+  "feature": "F12",
+  "iteration": 7,
+  "verdict": "approved",
+  "evaluator": "change-verifier subagent (adversarial, read-only, evidence-first)",
+  "commit": "8a8f0ea",
+  "checks": [
+    {
+      "cmd": "pnpm build",
+      "passed": true,
+      "note": "exit 0, 2 pages"
+    },
+    {
+      "cmd": "grep -rn Playfair src/ public/ dist/",
+      "passed": true,
+      "note": "zero matches incl. built output"
+    },
+    {
+      "cmd": "4x Newsreader woff2 in public/fonts + referenced in dist css",
+      "passed": true
+    },
+    {
+      "cmd": "preloads Newsreader regular+italic, no Playfair",
+      "passed": true
+    },
+    {
+      "cmd": "lang pill markup + .on accent fill in dist",
+      "passed": true
+    },
+    {
+      "cmd": "footer f-place + bilingual left span in dist",
+      "passed": true
+    },
+    {
+      "cmd": "ui.ts: no langBtnLabel, applyLang toggles .lang-seg",
+      "passed": true
+    },
+    {
+      "cmd": "sr-only accessible name on lang button",
+      "passed": true
+    },
+    {
+      "cmd": "skip-link + __uiReady failsafe in dist/index.html",
+      "passed": true
+    },
+    {
+      "cmd": "F1-F10 regression sweep (cursor, VT, i18n, sr-only)",
+      "passed": true
+    }
+  ]
+}

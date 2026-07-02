@@ -201,6 +201,13 @@ img {
   margin-inline: auto;
   padding-inline: var(--pad);
 }
+/* Second Voice: hero and Work breathe wider than prose sections */
+.wrap-wide {
+  width: 100%;
+  max-width: 1380px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
 .mono {
   font-family: var(--mono);
   font-feature-settings: "ss01" on;
@@ -239,6 +246,12 @@ img {
   font-size: 21px;
   font-weight: 400;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+@media (max-width: 719px) {
+  .brand {
+    font-size: 18px;
+  }
 }
 .brand .gp {
   color: var(--accent);
@@ -389,44 +402,38 @@ img {
    ============================================================ */
 .hero {
   position: relative;
-  padding-top: clamp(48px, 9vh, 104px);
-  padding-bottom: clamp(40px, 6vh, 72px);
-  text-align: center;
-  isolation: isolate;
-  overflow: clip;
+  min-height: 68vh;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(88px, 14vh, 148px);
+  padding-bottom: clamp(48px, 7vh, 88px);
 }
-/* green binary rain, revealed only in a soft circle that follows the cursor */
-.hero-rain {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  -webkit-mask-image: radial-gradient(
-    circle var(--rain-r, 200px) at var(--mx, -999px) var(--my, -999px),
-    #000 0%,
-    #000 34%,
-    transparent 72%
-  );
-  mask-image: radial-gradient(
-    circle var(--rain-r, 200px) at var(--mx, -999px) var(--my, -999px),
-    #000 0%,
-    #000 34%,
-    transparent 72%
-  );
+/* bilingual wink: the eyebrow speaks the *other* language, marker shows the current one */
+.hero-eyebrow {
+  margin: 0 0 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
 }
-.hero[data-glow="on"] .hero-rain {
-  opacity: 1;
+.hero-eyebrow .cur {
+  color: var(--accent);
 }
-.hero .wrap {
-  position: relative;
-  z-index: 1;
+h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 7.2vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 1050px;
+  text-wrap: balance;
 }
-/* interactive headline: the italic word gets an accent underline-wipe on hover */
+/* interactive headline: the emerald italic gets an accent underline-wipe on hover */
 h1 em {
+  font-style: italic;
+  color: var(--accent);
   position: relative;
   display: inline-block;
 }
@@ -446,111 +453,36 @@ h1 em::after {
 h1:hover em::after {
   transform: scaleX(1);
 }
-.reg {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  pointer-events: none;
-  color: var(--line-strong);
-}
-.reg::before,
-.reg::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
-}
-.reg::before {
-  left: 50%;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  transform: translateX(-0.5px);
-}
-.reg::after {
-  top: 50%;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  transform: translateY(-0.5px);
-}
-.reg.tl {
-  left: var(--pad);
-  top: 14px;
-}
-.reg.tr {
-  right: var(--pad);
-  top: 14px;
-}
-.monogram {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 30px;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text);
-}
-h1 {
-  margin: 0 auto;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(2.7rem, 6.6vw, 5.15rem);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
-  max-width: 15ch;
-  text-wrap: balance;
-}
-h1 em {
-  font-style: italic;
-}
-.hero p {
-  margin: 26px auto 0;
-  max-width: 56ch;
+.hero-lede {
+  margin: 30px 0 0;
+  max-width: 58ch;
   color: var(--text-muted);
-  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
-  line-height: 1.62;
+  font-size: clamp(1.06rem, 1.5vw, 1.19rem);
+  line-height: 1.6;
 }
-.hero p b {
-  color: var(--text-soft);
-  font-weight: 560;
-}
-.meta-strip {
-  margin-top: 40px;
+/* metrics band — hairline-bounded, anchored to its source on the right */
+.hero-band {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 32px;
+  margin-top: clamp(40px, 6vh, 56px);
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 11.5px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-faint);
-}
-.meta-strip .sep {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-mid);
-  opacity: 0.75;
-}
-.meta-strip time {
   font-variant-numeric: tabular-nums;
-  color: var(--text-muted);
 }
-
-/* hero secondary line — how I work now, kept quieter than the lead */
-.hero-sub {
-  margin: 16px auto 0;
-  max-width: 54ch;
-  color: var(--text-faint);
-  font-size: clamp(0.94rem, 1.2vw, 1.02rem);
-  line-height: 1.6;
+.hero-band b {
+  color: var(--text);
+  font-weight: 500;
+}
+.hero-band .band-src {
+  margin-left: auto;
+  color: var(--accent);
 }
 
 /* ============================================================
@@ -2467,24 +2399,20 @@ html.reveal [data-stagger][data-reveal] {
    hero is the fold). Rise + soft blur clears, staggered top-down.
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  html.js .hero .monogram,
+  html.js .hero .hero-eyebrow,
   html.js .hero h1,
-  html.js .hero h1 + p,
-  html.js .hero .hero-sub,
-  html.js .hero .meta-strip {
+  html.js .hero .hero-lede,
+  html.js .hero .hero-band {
     animation: hero-rise 0.7s var(--ease-expo) backwards;
   }
   html.js .hero h1 {
     animation-delay: 0.06s;
   }
-  html.js .hero h1 + p {
+  html.js .hero .hero-lede {
     animation-delay: 0.14s;
   }
-  html.js .hero .hero-sub {
-    animation-delay: 0.2s;
-  }
-  html.js .hero .meta-strip {
-    animation-delay: 0.26s;
+  html.js .hero .hero-band {
+    animation-delay: 0.22s;
   }
 }
 @keyframes hero-rise {

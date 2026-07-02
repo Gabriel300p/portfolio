@@ -235,11 +235,20 @@
         "Footer single-line: © · designed and built by hand · GUARULHOS, BR · GMT-3",
         "não regride F1-F10 (motion, cursor, VT, a11y, SEO, Lighthouse ≥90/95/95, reduced-motion estático, i18n EN/PT)"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/7.json"
+      ],
+      "touchedFiles": [
+        "src/styles/global.css",
+        "src/components/Nav.astro",
+        "src/components/Footer.astro",
+        "src/scripts/ui.ts",
+        "src/layouts/Base.astro",
+        "public/fonts/"
+      ],
       "blockedReason": null
     },
     {

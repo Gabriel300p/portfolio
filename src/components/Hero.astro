@@ -1,43 +1,47 @@
 ---
-// Hero — centered editorial statement with registration marks, monogram,
-// and a live São Paulo clock.
+// Hero — Second Voice: bilingual mono eyebrow (the phrase in the *other*
+// language + current-lang marker), oversized Newsreader statement with the
+// accent words in emerald italic, and an employer-anchored metrics band.
 ---
 
 <header class="hero" id="top" data-hero>
-  <canvas class="hero-rain" aria-hidden="true"></canvas>
-  <span class="reg tl"></span>
-  <span class="reg tr"></span>
-  <div class="wrap">
-    <div class="monogram" aria-hidden="true">GA</div>
+  <div class="wrap-wide">
+    <p
+      class="hero-eyebrow i18n"
+      aria-hidden="true"
+      data-en="Desenhado e construído, de ponta a ponta — <span class='cur'>EN</span>"
+      data-pt="Designed and built, end to end — <span class='cur'>PT</span>"
+    >
+      Desenhado e construído, de ponta a ponta — <span class="cur">EN</span>
+    </p>
     <h1
       class="i18n"
-      data-en="I design and build <em>web products.</em>"
-      data-pt="Eu projeto e construo <em>produtos web.</em>"
+      data-en="Designed and built, <em>end to end.</em>"
+      data-pt="Desenhado e construído, <em>de ponta a ponta.</em>"
     >
-      I design and build <em>web products.</em>
+      Designed and built, <em>end to end.</em>
     </h1>
     <p
-      class="i18n"
-      data-en="I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>, and a <b>design system built from scratch</b> — caring in equal measure about how a product feels and how it's built."
-      data-pt="Sou Gabriel Andrade, <b>design engineer</b> de São Paulo. Há cinco anos levo interfaces do arquivo no Figma até a produção — <b>1.000+ telas</b>, <b>200+ fluxos de produto</b> e um <b>design system feito do zero</b> — me importando na mesma medida com como um produto se sente e como ele é feito."
+      class="hero-lede i18n"
+      data-en="Product designer and frontend developer — five years turning product problems into shipped interfaces. Based in Guarulhos, Brazil, working in English and Portuguese with teams anywhere."
+      data-pt="Designer de produto e desenvolvedor frontend — cinco anos transformando problemas de produto em interfaces entregues. Guarulhos, Brasil, trabalhando em inglês e português com equipes de qualquer lugar."
     >
-      I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried
-      interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>,
-      and a <b>design system built from scratch</b> — caring in equal measure about how a product
-      feels and how it's built.
+      Product designer and frontend developer — five years turning product problems into shipped
+      interfaces. Based in Guarulhos, Brazil, working in English and Portuguese with teams anywhere.
     </p>
-    <p
-      class="hero-sub i18n"
-      data-en="These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for research and planning, and document the decisions along the way."
-      data-pt="Hoje construo em React, TypeScript e Tailwind, me apoio em workflows com IA para pesquisa e planejamento, e documento as decisões pelo caminho."
-    >
-      These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for
-      research and planning, and document the decisions along the way.
-    </p>
-    <div class="meta-strip">
-      <span>SÃO PAULO, BR</span>
-      <span class="sep"></span>
-      <time id="clock" aria-label="Local time in São Paulo">--:--:--</time>
+    <div class="hero-band">
+      <span class="i18n" data-en="<b>1,000+</b> screens shipped" data-pt="<b>1.000+</b> telas entregues"
+        ><b>1,000+</b> screens shipped</span
+      >
+      <span class="i18n" data-en="<b>200+</b> product flows" data-pt="<b>200+</b> fluxos de produto"
+        ><b>200+</b> product flows</span
+      >
+      <span
+        class="i18n"
+        data-en="<b>1</b> design system, from zero"
+        data-pt="<b>1</b> design system, do zero"><b>1</b> design system, from zero</span
+      >
+      <span class="band-src">Acesso Energia · 2021—</span>
     </div>
   </div>
 </header>
