@@ -2,10 +2,10 @@
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
   "state": "GENERATE",
-  "iteration": 0,
+  "iteration": 2,
   "color": "yellow",
   "needsHuman": false,
-  "currentFeature": "F8",
+  "currentFeature": "F2",
   "pendingGate": null,
   "gateResolutions": [
     {
@@ -20,15 +20,49 @@
     "spentUsd": 0,
     "spentTokens": 0,
     "spentMinutes": 0,
-    "limits": { "usd": null, "tokens": null, "minutes": null }
+    "limits": {
+      "usd": null,
+      "tokens": null,
+      "minutes": null
+    }
   },
-  "lastVerdict": null,
+  "lastVerdict": {
+    "feature": "F1",
+    "verdict": "approved",
+    "outOfScope": false,
+    "blocked": false,
+    "evidenceRef": "evidence/2.json",
+    "reasonsRef": "evaluation.md#iteracao-2"
+  },
   "history": [
-    { "state": "INTAKE", "at": "2026-07-01T23:20:00-03:00" },
-    { "state": "PLAN", "at": "2026-07-01T23:25:00-03:00" },
-    { "state": "CLASSIFY", "at": "2026-07-01T23:28:00-03:00" },
-    { "state": "GATE_CONTRACT", "at": "2026-07-01T23:30:00-03:00" },
-    { "state": "GENERATE", "at": "2026-07-01T23:31:00-03:00" }
+    {
+      "state": "INTAKE",
+      "at": "2026-07-01T23:20:00-03:00"
+    },
+    {
+      "state": "PLAN",
+      "at": "2026-07-01T23:25:00-03:00"
+    },
+    {
+      "state": "CLASSIFY",
+      "at": "2026-07-01T23:28:00-03:00"
+    },
+    {
+      "state": "GATE_CONTRACT",
+      "at": "2026-07-01T23:30:00-03:00"
+    },
+    {
+      "state": "GENERATE",
+      "at": "2026-07-01T23:31:00-03:00"
+    },
+    {
+      "state": "EVALUATE",
+      "at": "2026-07-02T01:05:00-03:00"
+    },
+    {
+      "state": "GENERATE",
+      "at": "2026-07-02T01:12:00-03:00"
+    }
   ],
   "stoppedReason": null
 }

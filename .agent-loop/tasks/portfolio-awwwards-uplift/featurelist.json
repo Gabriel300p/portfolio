@@ -13,11 +13,25 @@
         "prefers-reduced-motion → estático e legível (evidência Playwright)",
         "página legível com JS desligado (reveal armado só com html.js)"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 2,
+      "lastVerdict": "approved@iter2 (evaluator a544432e1e3f6523b, all 5 criteria met)",
+      "evidenceRefs": [
+        "evidence/1.json",
+        "evidence/2.json"
+      ],
+      "touchedFiles": [
+        "src/styles/global.css",
+        "src/scripts/ui.ts",
+        "src/layouts/Base.astro",
+        "src/components/Stack.astro",
+        "src/components/Testimonials.astro",
+        "src/components/Contact.astro",
+        "src/components/Work.astro",
+        "src/components/Education.astro",
+        "src/components/Experience.astro",
+        "DESIGN.md"
+      ],
       "blockedReason": null
     },
     {
@@ -120,11 +134,13 @@
         "DESIGN.md com padrões concretos (timings/easing/mecânica) dos 4 sites validados",
         "cada padrão anotado com aplicabilidade neste portfolio"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
+      "status": "in_progress",
+      "iterations": 1,
+      "lastVerdict": "partial — eftakher done; 3 sites pending session-limit reset",
       "evidenceRefs": [],
-      "touchedFiles": [],
+      "touchedFiles": [
+        "DESIGN.md"
+      ],
       "blockedReason": null
     },
     {

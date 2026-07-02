@@ -27,7 +27,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
       </h2>
     </div>
 
-    <div class="edu-list" data-reveal>
+    <div class="edu-list" data-stagger>
       {
         featured.map((c) => (
           <article class="edu" data-kind={c.kind}>
@@ -82,7 +82,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
 
     {
       rest.length > 0 && (
-        <div class="edu-more" data-reveal>
+        <div class="edu-more" data-stagger>
           <button
             class="edu-more-btn"
             type="button"
@@ -146,7 +146,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
       )
     }
 
-    <div class="edu-langs" data-reveal>
+    <div class="edu-langs" data-stagger>
       <div class="edu-langs-head">
         <span class="edu-langs-label mono i18n" data-en="Languages" data-pt="Idiomas">Languages</span>
         <span class="edu-langs-tag mono i18n"

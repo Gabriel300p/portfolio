@@ -4,6 +4,9 @@
 
 type Lang = "en" | "pt";
 
+// Signal the head-script failsafe that the module executed — reveal stays armed.
+(window as unknown as { __uiReady: boolean }).__uiReady = true;
+
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function initNav() {

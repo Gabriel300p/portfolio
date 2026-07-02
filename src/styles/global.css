@@ -1005,7 +1005,7 @@ footer .wrap {
   transition: transform 0.9s var(--ease-out);
   transform-style: preserve-3d;
 }
-html.js .proj:not(.in) .tilt {
+html.reveal .proj:not(.in) .tilt {
   transform: perspective(1650px) rotateY(-8deg) rotateX(3deg) scale(0.965);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -1289,7 +1289,7 @@ html.js .proj:not(.in) .tilt {
     gap: 22px;
   }
   .tilt,
-  html.js .proj:not(.in) .tilt,
+  html.reveal .proj:not(.in) .tilt,
   .proj:hover .tilt {
     transform: none;
   }
@@ -2228,41 +2228,46 @@ a.edu-cert-row:hover .edu-cert-arrow {
    Unclips when the .head itself is revealed OR any revealed ancestor carries
    data-reveal (case-study pages put data-reveal on the section wrapper). */
 @media (prefers-reduced-motion: no-preference) {
-  html.js .head h2 {
+  html.reveal .head h2 {
     clip-path: inset(-0.12em 100% -0.18em 0);
     transition: clip-path 0.9s var(--ease-expo) 0.08s;
   }
-  html.js .head.in h2,
-  html.js [data-reveal].in .head h2 {
+  html.reveal .head.in h2,
+  html.reveal [data-reveal].in .head h2 {
     clip-path: inset(-0.12em -3% -0.18em 0);
   }
 }
 
 /* reveal on scroll — only hide when JS is present to reveal it again (fail-safe) */
-html.js [data-reveal] {
+html.reveal [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
 }
-html.js [data-reveal].in {
+html.reveal [data-reveal].in {
   opacity: 1;
   transform: none;
 }
 
+/* NOTE: no clip-path variant on observed elements — Chromium factors the
+   target's own clip-path into IntersectionObserver, so a fully-clipped block
+   reports ratio 0 forever and never reveals. Wipes stay on non-observed
+   descendants (.head h2 pattern) only. */
+
 /* staggered children — initReveal indexes direct children of [data-stagger]
    with --i, so grouped items cascade (60ms steps) instead of arriving as one slab */
-html.js [data-stagger] > * {
+html.reveal [data-stagger] > * {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo);
   transition-delay: calc(var(--i, 0) * 60ms);
 }
-html.js [data-stagger].in > * {
+html.reveal [data-stagger].in > * {
   opacity: 1;
   transform: none;
 }
 /* a staggered container must not double-hide via the base reveal recipe */
-html.js [data-stagger][data-reveal] {
+html.reveal [data-stagger][data-reveal] {
   opacity: 1;
   transform: none;
 }
@@ -2398,8 +2403,14 @@ html.js [data-stagger][data-reveal] {
     animation: none !important;
     transition: none !important;
   }
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
+  /* !important so this net beats the html.reveal hide rules regardless of
+     specificity — content must be visible even if initReveal never runs */
+  [data-reveal],
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .head h2 {
+    clip-path: none !important;
   }
 }
