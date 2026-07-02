@@ -1,0 +1,18 @@
+{
+  "feature": "F15",
+  "iteration": 10,
+  "verdict": "approved",
+  "commit": "5c1bd22",
+  "evaluator": "change-verifier subagent (adversarial, read-only)",
+  "checks": [
+    "build green 2 pages",
+    "rail complete (plus/meta/serif 400/story/apps/case link)",
+    "4 bb-panels with NN/ captions + astro:assets sv captures + video data-gate webm+mp4",
+    "old proj retired from Work.astro",
+    "wrap-wide grid + <900px collapse + pulse RM-guarded",
+    "MovieMatch/Pandora/accordion intact, i18n 121 attrs, remote/founder=0"
+  ],
+  "notes": [
+    "rail labels lowercase vs captions uppercase = faithful to SV, intentional"
+  ]
+}

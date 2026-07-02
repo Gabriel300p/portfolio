@@ -529,12 +529,18 @@ section {
   text-transform: uppercase;
   color: var(--text-faint);
 }
+/* Second Voice section kicker: emerald register-mark crosshair before the label */
+.head .k::before {
+  content: "+";
+  margin-right: 9px;
+  color: var(--accent);
+}
 .head :is(h1, h2) {
-  margin: 14px 0 0;
+  margin: 16px 0 0;
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(2rem, 4.4vw, 3.1rem);
-  line-height: 1.05;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 4.6vw, 3.3rem);
+  line-height: 1.06;
   letter-spacing: -0.012em;
 }
 .head :is(h1, h2) em {
@@ -584,7 +590,7 @@ a.shot:hover img,
 .pname {
   font-family: var(--serif);
   font-size: clamp(1.7rem, 3.2vw, 2.4rem);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.05;
 }
@@ -1051,6 +1057,22 @@ footer .f-place {
 /* ============================================================
    Work — featured projects (eftakher-style list)
    ============================================================ */
+/* Second Voice "also built" sub-label — a quieter index below the flagship */
+.work-sub {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.work-sub::before {
+  content: "+";
+  color: var(--accent);
+}
 .work-list {
   border-top: 1px solid var(--line);
 }
@@ -1063,23 +1085,22 @@ footer .f-place {
   border-bottom: 1px solid var(--line);
 }
 .proj-text {
-  max-width: 40ch;
+  max-width: 42ch;
 }
-.proj-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  border: 1px solid var(--line-strong);
-  background: var(--bg-elevated);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-soft);
+.proj-kicker {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.proj-kicker .n {
+  color: var(--accent);
+  margin-right: 8px;
 }
 .proj-text .pname {
-  margin-top: 16px;
+  margin-top: 14px;
 }
 .proj-text .pdesc {
   margin-top: 12px;
@@ -1537,28 +1558,22 @@ html.reveal .proj:not(.in) .tilt {
   display: none;
 }
 .acc-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: 1px solid var(--line-strong);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 600;
+  min-width: 2.4ch;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
   color: var(--text-faint);
-  background: var(--bg-elevated);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
 }
 .acc[open] .acc-mark,
 .acc summary:hover .acc-mark {
   color: var(--accent);
-  border-color: var(--accent-edge);
 }
 .acc-name {
   font-family: var(--serif);
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text);
 }
 .acc-tags {

@@ -240,11 +240,17 @@ const more = [
   </div>
 
   <div class="wrap">
+    <p class="work-sub i18n" data-en="Also designed and built" data-pt="Também projetei e construí">
+      Also designed and built
+    </p>
     <div class="work-list">
       {/* ---- Movie Match ---- */}
       <article class="proj" data-reveal>
         <div class="proj-text">
-          <span class="proj-mark serif" aria-hidden="true">M</span>
+          <span class="proj-kicker mono">
+            <span class="n" aria-hidden="true">01 /</span>
+            <span class="i18n" data-en="Mobile product" data-pt="Produto mobile">Mobile product</span>
+          </span>
           <h3 class="pname">Movie Match</h3>
           <p
             class="pdesc i18n"
@@ -285,7 +291,10 @@ const more = [
       {/* ---- Pandora ---- */}
       <article class="proj" data-reveal>
         <div class="proj-text">
-          <span class="proj-mark serif" aria-hidden="true">P</span>
+          <span class="proj-kicker mono">
+            <span class="n" aria-hidden="true">02 /</span>
+            <span class="i18n" data-en="AI-native system" data-pt="Sistema AI-native">AI-native system</span>
+          </span>
           <h3 class="pname">Pandora <span class="pname-sub">— Vault Harness</span></h3>
           <p
             class="pdesc i18n"
@@ -332,10 +341,10 @@ const more = [
     <div class="more" data-stagger>
       <div class="more-label i18n" data-en="More projects" data-pt="Mais projetos">More projects</div>
       {
-        more.map((p) => (
+        more.map((p, i) => (
           <details class="acc">
             <summary>
-              <span class="acc-mark serif" aria-hidden="true">{p.name.charAt(0)}</span>
+              <span class="acc-mark mono" aria-hidden="true">{String(i + 3).padStart(2, "0")}</span>
               <span class="acc-name">{p.name}</span>
               <span class="acc-tags mono">{p.tags.join(" · ")}</span>
               <span class="acc-chevron" aria-hidden="true">

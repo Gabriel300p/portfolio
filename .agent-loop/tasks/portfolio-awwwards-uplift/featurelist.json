@@ -299,11 +299,17 @@
         "hover/motion do kit da casa (dock-to-fill adaptado, play-when-visible no vídeo)",
         "checkpoint visual por seção postado"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/10.json"
+      ],
+      "touchedFiles": [
+        "src/components/Work.astro",
+        "src/styles/global.css",
+        "src/assets/img/projects/sv/"
+      ],
       "blockedReason": null
     },
     {
