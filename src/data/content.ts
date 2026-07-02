@@ -77,7 +77,7 @@ export const stackLogos: string[] = [
 export interface Job {
   company: string;
   role: Bilingual;
-  /** icon key resolved in Experience.astro: "code" | "server" */
+  /** icon key resolved in Background.astro: "code" | "server" */
   icon: "code" | "server";
   employment: Bilingual;
   period: string;
@@ -146,7 +146,7 @@ export interface Credential {
   /** degree = graduation with a diploma; certificate = course credential */
   kind: "degree" | "certificate";
   institution: string;
-  /** avatar letter(s) — matches the monogram treatment used in Experience */
+  /** avatar letter(s) — matches the monogram treatment used in Background */
   monogram: string;
   title: Bilingual;
   period: string;

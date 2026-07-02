@@ -1,0 +1,14 @@
+{
+  "feature": "F16",
+  "iteration": 11,
+  "verdict": "approved",
+  "commit": "b8cebe9",
+  "evaluator": "orchestrator + Playwright visual (dark, desktop 1440): work head, MM/Pandora rows, accordion",
+  "checks": [
+    "build green",
+    "section heads Newsreader 400 + emerald + kicker crosshair (global .head)",
+    "MM/Pandora mono NN/LABEL kickers replace letter marks, serif 400, +ALSO BUILT sub-label",
+    "accordion mono numerals 03-07 continuing index, names 400",
+    "bonus: Stack/Experience heads pick up SV kicker automatically"
+  ]
+}

@@ -320,11 +320,16 @@
         "assets re-staged/compostos para cada projeto listado",
         "checkpoint visual postado"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/11.json"
+      ],
+      "touchedFiles": [
+        "src/components/Work.astro",
+        "src/styles/global.css"
+      ],
       "blockedReason": null
     },
     {
