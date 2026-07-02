@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1",
+  "iteration": 1,
+  "feature": "F1",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": true },
+  "results": [
+    {
+      "name": "build",
+      "cmd": "pnpm build",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "Astro build complete, no errors/warnings"
+    },
+    {
+      "name": "grep-transition-all",
+      "cmd": "grep -rn 'transition: all' src/ | wc -l",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "0 occurrences"
+    },
+    {
+      "name": "scroll-linked-live",
+      "cmd": "playwright evaluate: getComputedStyle(.proj-media .panel) at entry vs center",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "animation-timeline: view() active; mid-flight matrix(0.9874,0,0,0.9874,0,15.29) → identity at center — scroll progress drives the timeline (not one-shot)"
+    },
+    {
+      "name": "case-study-wipe-blocker",
+      "cmd": "playwright evaluate: clip-path of all .head h2 on /work/bboss after scroll",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "8/8 h2 unclip (was 7 permanently invisible — audit blocker fixed via [data-reveal].in ancestor selector)"
+    },
+    {
+      "name": "reduced-motion",
+      "cmd": "playwright context reducedMotion:'reduce' — home + case study",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "heroAnim none, panelAnim none, 0 hidden reveals, 0 hidden stagger children, 0 clipped h2"
+    },
+    {
+      "name": "mobile-375-dark",
+      "cmd": "playwright 375px dark screenshot + scrollWidth check",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "no horizontal scroll; showcase legible (.playwright-mcp/f1-work-dark-375.jpeg)"
+    },
+    {
+      "name": "console-errors",
+      "cmd": "playwright console messages level=error",
+      "exitCode": 0,
+      "passed": true,
+      "required": true,
+      "summary": "0 errors"
+    },
+    {
+      "name": "stagger",
+      "cmd": "initReveal indexes [data-stagger] children with --i; CSS delay calc(var(--i)*60ms)",
+      "exitCode": 0,
+      "passed": true,
+      "required": false,
+      "summary": "stack-groups + quotes cascade; container exempted from double-hide"
+    }
+  ]
+}

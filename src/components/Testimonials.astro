@@ -42,10 +42,10 @@ const quotes: Quote[] = [
       </h2>
     </div>
 
-    <div class="quotes">
+    <div class="quotes" data-stagger>
       {
         quotes.map((q) => (
-          <figure class="quote" data-reveal>
+          <figure class="quote">
             <blockquote class="serif i18n" data-en={q.en} data-pt={q.pt}>
               {q.en}
             </blockquote>

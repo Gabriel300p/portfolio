@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1",
+  "task": "portfolio-awwwards-uplift",
+  "state": "GENERATE",
+  "iteration": 0,
+  "color": "yellow",
+  "needsHuman": false,
+  "currentFeature": "F8",
+  "pendingGate": null,
+  "gateResolutions": [
+    {
+      "type": "contract",
+      "decision": "approve",
+      "by": "user",
+      "at": "2026-07-01T23:30:00-03:00",
+      "note": "Contrato semeado e autorizado pelo prompt da missão do Gabriel (sessão autônoma de longa duração; gates amarelos pontuais permanecem)."
+    }
+  ],
+  "budget": {
+    "spentUsd": 0,
+    "spentTokens": 0,
+    "spentMinutes": 0,
+    "limits": { "usd": null, "tokens": null, "minutes": null }
+  },
+  "lastVerdict": null,
+  "history": [
+    { "state": "INTAKE", "at": "2026-07-01T23:20:00-03:00" },
+    { "state": "PLAN", "at": "2026-07-01T23:25:00-03:00" },
+    { "state": "CLASSIFY", "at": "2026-07-01T23:28:00-03:00" },
+    { "state": "GATE_CONTRACT", "at": "2026-07-01T23:30:00-03:00" },
+    { "state": "GENERATE", "at": "2026-07-01T23:31:00-03:00" }
+  ],
+  "stoppedReason": null
+}
