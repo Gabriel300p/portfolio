@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1",
+  "iteration": 4,
+  "feature": "F5",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": true },
+  "results": [
+    { "name": "build", "cmd": "pnpm build", "exitCode": 0, "passed": true, "required": true, "summary": "0 errors" },
+    {
+      "name": "structure",
+      "cmd": "playwright evaluate on /work/bboss",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "h1Count=1 ('B-Boss Club'); section order: problem → approach → key decisions → solution → outcome → product(gallery) → next; headingSkips=0"
+    },
+    {
+      "name": "i18n",
+      "cmd": "playwright: click #langBtn, read kickers + html lang",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "37 .i18n nodes; PT kickers: O problema/A abordagem/Decisões-chave/A solução/O resultado/O produto/Próximo; html.lang=pt-BR"
+    },
+    {
+      "name": "video",
+      "cmd": "playwright: .case-gallery video attrs + readyState after scroll",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "data-gate + preload=none + poster + webm/mp4 sources; readyState 4 after entering viewport (real dashboard footage, replaces static PNG)"
+    },
+    {
+      "name": "metrics-per-block",
+      "cmd": "visual (f5-case-dark-full.jpeg)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "each block carries a mono metric line: 600k+ shops / stack / 4 surfaces · 2 web + 2 PWA / MVP live · next 100 paying; outcome placed BEFORE gallery"
+    },
+    {
+      "name": "dark-theme-visual",
+      "cmd": "playwright fullPage after continuous scroll (dark, PT)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": ".playwright-mcp/f5-case-dark-full.jpeg — all sections legible, staggered cards, gold stage panels"
+    }
+  ]
+}

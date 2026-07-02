@@ -477,7 +477,7 @@ section {
   text-transform: uppercase;
   color: var(--text-faint);
 }
-.head h2 {
+.head :is(h1, h2) {
   margin: 14px 0 0;
   font-family: var(--serif);
   font-weight: 600;
@@ -485,7 +485,7 @@ section {
   line-height: 1.05;
   letter-spacing: -0.012em;
 }
-.head h2 em {
+.head :is(h1, h2) em {
   font-style: italic;
   color: var(--text-soft);
 }
@@ -2228,12 +2228,12 @@ a.edu-cert-row:hover .edu-cert-arrow {
    Unclips when the .head itself is revealed OR any revealed ancestor carries
    data-reveal (case-study pages put data-reveal on the section wrapper). */
 @media (prefers-reduced-motion: no-preference) {
-  html.reveal .head h2 {
+  html.reveal .head :is(h1, h2) {
     clip-path: inset(-0.12em 100% -0.18em 0);
     transition: clip-path 0.9s var(--ease-expo) 0.08s;
   }
-  html.reveal .head.in h2,
-  html.reveal [data-reveal].in .head h2 {
+  html.reveal .head.in :is(h1, h2),
+  html.reveal [data-reveal].in .head :is(h1, h2) {
     clip-path: inset(-0.12em -3% -0.18em 0);
   }
 }
@@ -2524,7 +2524,7 @@ html.cursor-on summary {
     opacity: 1 !important;
     transform: none !important;
   }
-  .head h2 {
+  .head :is(h1, h2) {
     clip-path: none !important;
   }
 }

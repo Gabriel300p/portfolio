@@ -62,3 +62,20 @@ tags:
 
 - Trap descoberto ao vivo: Chromium considera clip-path do próprio alvo no
   IntersectionObserver → variante [data-reveal="clip"] abandonada e documentada.
+
+## Iteração 3 — F2 + F3 (2026-07-02)
+
+### Evidência
+
+| Comando | Passou | Resumo |
+| --- | --- | --- |
+| build | ✅ | 0 erros |
+| cursor trail live | ✅ | dot (830,471) vs ring (699,409) mid-flight; RING_K 0.28 ≈ 117ms |
+| estados link/media/press | ✅ | 20px accent / 56px / 16px |
+| reduced-motion cursor | ✅ | 0 elementos, cursor nativo |
+| VT wiring | ✅ | regra ativa; bboss-stage 1 elemento/página; navegação real ok |
+
+### Veredito
+
+- **F2:** approved — Evaluator conferiu guards duplos (matchMedia + pointerType), settle do rAF, ausência de leak de cursor:none, z-index.
+- **F3:** approved — Evaluator conferiu o risco real (nome duplicado: #work .stage-gold vs .case-panel resolvem 1:1 por página), fallback puro-CSS, reduce completo.

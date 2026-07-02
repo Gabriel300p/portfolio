@@ -2,10 +2,10 @@
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
   "state": "GENERATE",
-  "iteration": 2,
+  "iteration": 4,
   "color": "yellow",
   "needsHuman": false,
-  "currentFeature": "F2",
+  "currentFeature": "F5",
   "pendingGate": null,
   "gateResolutions": [
     {
@@ -27,12 +27,12 @@
     }
   },
   "lastVerdict": {
-    "feature": "F1",
+    "feature": "F3",
     "verdict": "approved",
     "outOfScope": false,
     "blocked": false,
-    "evidenceRef": "evidence/2.json",
-    "reasonsRef": "evaluation.md#iteracao-2"
+    "evidenceRef": "evidence/3.json",
+    "reasonsRef": "evaluation.md"
   },
   "history": [
     {

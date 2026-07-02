@@ -43,11 +43,16 @@
         "reduced-motion → cursor nativo sem trail",
         "a11y intacta: foco por teclado, sem cursor invisível em área sem custom"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "evidenceRefs": [
+        "evidence/3.json"
+      ],
+      "touchedFiles": [
+        "src/scripts/ui.ts",
+        "src/styles/global.css"
+      ],
       "blockedReason": null
     },
     {
@@ -58,11 +63,16 @@
         "fallback limpo em browsers sem suporte (console sem erro)",
         "reduced-motion → crossfade mínimo ou corte"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "evidenceRefs": [
+        "evidence/3.json"
+      ],
+      "touchedFiles": [
+        "src/scripts/ui.ts",
+        "src/styles/global.css"
+      ],
       "blockedReason": null
     },
     {
@@ -90,7 +100,7 @@
         "assets do app real, nunca print cru de Figma",
         "mesma régua de motion/tema/responsivo"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "iterations": 0,
       "lastVerdict": null,
       "evidenceRefs": [],
