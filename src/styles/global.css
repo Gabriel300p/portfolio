@@ -2374,6 +2374,120 @@ html.reveal [data-stagger][data-reveal] {
   }
 }
 
+/* ============================================================
+   Page transitions — cross-document View Transitions (MPA).
+   Pure CSS: scripts keep their normal per-page lifecycle and
+   unsupported browsers simply navigate. The old page lifts away
+   while the new one rises — same vocabulary as the reveals.
+   ============================================================ */
+@view-transition {
+  navigation: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-leave 0.26s var(--ease-in-out) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-arrive 0.44s var(--ease-expo) both;
+  }
+  /* the nav is the fixed frame of the site — it must not lift with the page */
+  .nav {
+    view-transition-name: site-nav;
+  }
+  /* B-Boss showcase stage morphs into the case-study dashboard panel.
+     Exactly one element per page may carry this name (duplicates skip the
+     whole transition) — hence the scoping. */
+  #work .stage-gold,
+  .case-panel {
+    view-transition-name: bboss-stage;
+  }
+}
+@keyframes vt-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+@keyframes vt-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Custom cursor — emerald dot + trailing ring (echoes the
+   register-mark motif). JS-created; native cursor hidden only
+   after html.cursor-on confirms the custom one is rendering.
+   ============================================================ */
+.cur-dot,
+.cur-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.cur-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+}
+.cur-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line-strong);
+  transition:
+    opacity 0.25s ease,
+    width 0.3s var(--ease-expo),
+    height 0.3s var(--ease-expo),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+html.cursor-on .cur-dot,
+html.cursor-on .cur-ring {
+  opacity: 1;
+}
+/* interactive: ring tightens toward the dot and adopts the accent */
+.cur-ring[data-state="link"] {
+  width: 20px;
+  height: 20px;
+  border-color: var(--accent-edge);
+  background: var(--accent-wash);
+}
+/* project media: ring opens wide — "look closer" */
+.cur-ring[data-state="media"] {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent-edge);
+}
+.cur-ring[data-press] {
+  width: 16px;
+  height: 16px;
+}
+html.cursor-on body,
+html.cursor-on a,
+html.cursor-on button,
+html.cursor-on summary {
+  cursor: none;
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .cur-dot,
+  .cur-ring {
+    display: none;
+  }
+}
+
 /* toast */
 .toast {
   position: fixed;

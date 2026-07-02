@@ -494,6 +494,82 @@ function initVideoGate() {
   });
 }
 
+// Custom cursor — crosshair dot + trailing ring (spring-lerp, ~110ms trail).
+// Fine pointers only; reduced-motion keeps the native cursor untouched.
+function initCursor() {
+  if (reduceMotion) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const ring = document.createElement("div");
+  ring.className = "cur-ring";
+  const dot = document.createElement("div");
+  dot.className = "cur-dot";
+  ring.setAttribute("aria-hidden", "true");
+  dot.setAttribute("aria-hidden", "true");
+  document.body.append(ring, dot);
+
+  let tx = -100,
+    ty = -100;
+  let dx = tx,
+    dy = ty,
+    rx = tx,
+    ry = ty;
+  let raf = 0;
+  let armed = false;
+
+  // lerp factors: dot snaps (~40ms), ring trails (~110ms to close 90%)
+  const DOT_K = 0.55;
+  const RING_K = 0.28;
+
+  const loop = () => {
+    dx += (tx - dx) * DOT_K;
+    dy += (ty - dy) * DOT_K;
+    rx += (tx - rx) * RING_K;
+    ry += (ty - ry) * RING_K;
+    dot.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) translate(-50%, -50%)`;
+    ring.style.transform = `translate3d(${rx.toFixed(1)}px, ${ry.toFixed(1)}px, 0) translate(-50%, -50%)`;
+    if (Math.abs(tx - rx) < 0.1 && Math.abs(ty - ry) < 0.1) {
+      raf = 0;
+      return;
+    }
+    raf = requestAnimationFrame(loop);
+  };
+
+  document.addEventListener("pointermove", (e: PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    tx = e.clientX;
+    ty = e.clientY;
+    if (!armed) {
+      // hide the native cursor only once the custom one is provably rendering
+      armed = true;
+      dx = rx = tx;
+      dy = ry = ty;
+      document.documentElement.classList.add("cursor-on");
+    }
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+
+  // states: interactive controls tighten the ring, project media expands it
+  const INTERACTIVE = "a, button, summary, [role='button']";
+  const MEDIA = ".panel, .shot, .browser-view, .device-screen";
+  document.addEventListener("pointerover", (e: PointerEvent) => {
+    const t = e.target as Element | null;
+    if (!t || !(t instanceof Element)) return;
+    const state = t.closest(MEDIA) ? "media" : t.closest(INTERACTIVE) ? "link" : "";
+    if (state) ring.setAttribute("data-state", state);
+    else ring.removeAttribute("data-state");
+  });
+  document.addEventListener("pointerdown", () => ring.setAttribute("data-press", ""));
+  document.addEventListener("pointerup", () => ring.removeAttribute("data-press"));
+  document.addEventListener("pointercancel", () => ring.removeAttribute("data-press"));
+
+  // leaving the window hides the pair; re-entry re-shows it
+  document.documentElement.addEventListener("pointerleave", () => {
+    document.documentElement.classList.remove("cursor-on");
+    armed = false;
+  });
+}
+
 // Smooth scrolling (loaded only when motion is welcome).
 async function initSmoothScroll() {
   if (reduceMotion) return;
@@ -535,4 +611,5 @@ initMagnetic();
 initWalk();
 initTerminal();
 initVideoGate();
+initCursor();
 initSmoothScroll();

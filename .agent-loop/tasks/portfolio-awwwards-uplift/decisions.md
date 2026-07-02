@@ -96,3 +96,23 @@ tags:
 - **Decisão:** hides keyed em `html.reveal`; head script arma `js + reveal` e agenda
   failsafe de 2.5s que remove `reveal` se `window.__uiReady` não foi setado pelo módulo.
 - **Motivo:** conteúdo nunca pode depender de um módulo externo executar para existir.
+
+## 2026-07-02 — F3 via View Transitions cross-document (MPA), não ClientRouter
+
+- **Contexto:** transições de página coreografadas; Astro oferece ClientRouter (SPA-like).
+- **Decisão:** `@view-transition { navigation: auto }` (cross-document, CSS puro) +
+  old lifts / new rises + morph do palco B-Boss (`view-transition-name: bboss-stage`,
+  escopado para exatamente 1 elemento por página).
+- **Motivo:** ClientRouter muda o ciclo de vida de todos os scripts (re-init manual em
+  astro:page-load, tema/lang resetando no swap — minefield inteiro para um site MPA de
+  2 páginas). Cross-document VT dá a mesma coreografia com zero mudança de lifecycle
+  e fallback natural (browsers sem suporte navegam normal).
+- **Alternativas descartadas:** ClientRouter (custo de integração desproporcional);
+  cortar seco (critério da régua exige coreografia).
+
+## 2026-07-02 — F2: intenção do cursor
+
+- **Cursor dot+ring:** eco do motivo register-mark (crosshair editorial) — dot esmeralda
+  rápido (~40ms) + anel que persegue (~110ms); anel aperta em interativos ("mirou"),
+  abre em mídia de projeto ("olhe mais de perto"). Nativo escondido só depois de
+  html.cursor-on provar que o custom renderiza; touch/reduced-motion ficam nativos.

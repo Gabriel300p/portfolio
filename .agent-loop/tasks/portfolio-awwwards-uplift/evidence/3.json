@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1",
+  "iteration": 3,
+  "feature": "F2+F3",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": true },
+  "results": [
+    { "name": "build", "cmd": "pnpm build", "exitCode": 0, "passed": true, "required": true, "summary": "0 errors" },
+    {
+      "name": "cursor-trail",
+      "cmd": "playwright: mouse.move(400,300)→(900,500) steps:6, read transforms mid-flight",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "dot (830,471) vs ring (699,409) mid-flight → real lerp trail (~110ms, RING_K 0.28); cursor-on armed; body cursor:none only after arming"
+    },
+    {
+      "name": "cursor-states",
+      "cmd": "playwright: hover nav link / project panel",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "link → ring 20px accent; media → ring 56px; press → 16px (declared)"
+    },
+    {
+      "name": "cursor-reduced-motion",
+      "cmd": "playwright context reducedMotion=reduce + mouse move",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "0 cursor elements created, cursor-on absent, body cursor:auto (native)"
+    },
+    {
+      "name": "vt-wiring",
+      "cmd": "playwright: check startViewTransition API, @view-transition rule, name uniqueness, real click navigation",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "rule active; bboss-stage exactly 1 element on home and 1 on case study (duplicate would skip morph); home→case navigation clean"
+    },
+    { "name": "console-errors", "cmd": "playwright console level=error across flow", "exitCode": 0, "passed": true, "required": true, "summary": "0" }
+  ]
+}
