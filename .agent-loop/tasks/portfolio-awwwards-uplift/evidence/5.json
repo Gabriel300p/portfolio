@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1",
+  "iteration": 5,
+  "feature": "F6+F7+F9+F10",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": true },
+  "results": [
+    { "name": "build", "cmd": "pnpm build", "exitCode": 0, "passed": true, "required": true, "summary": "0 errors" },
+    {
+      "name": "lighthouse-home",
+      "cmd": "npx lighthouse http://localhost:4322/ (production preview, mobile emulation)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "Performance 94 · Accessibility 100 · Best Practices 100 · SEO 100 · CLS 0 · TBT 20ms (targets: ≥90/≥95/≥95)"
+    },
+    {
+      "name": "lighthouse-case",
+      "cmd": "npx lighthouse http://localhost:4322/work/bboss",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "Performance 98 · Accessibility 100 · Best Practices 100 · SEO 100 · CLS 0 · TBT 0ms"
+    },
+    {
+      "name": "a11y-subaudits",
+      "cmd": "lighthouse --only-categories=accessibility after lang-button fix",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "zero failing sub-audits (label-content-name-mismatch resolved via sr-only span)"
+    },
+    {
+      "name": "keyboard",
+      "cmd": "playwright: Tab → skip link focused (href #main); inert on collapsed panels (1 closed xp + edu-more)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "skip link works; hidden content untabbable"
+    },
+    {
+      "name": "mobile-menu",
+      "cmd": "playwright 375px: burger opens staggered menu, aria-expanded, closes on link click and navigates",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "open/close/navigate verified; screenshot .playwright-mcp/f10-mobile-menu.jpeg"
+    },
+    {
+      "name": "cross-page-nav",
+      "cmd": "playwright: click nav Experience from /work/bboss",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "lands on /#experience scrolled to section (nav links were dead on case study before)"
+    },
+    {
+      "name": "contrast-tokens",
+      "cmd": "WCAG relative-luminance calc (python)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "--text-faint 4.53:1 light / 4.98:1 dark (was 2.73/3.4)"
+    },
+    {
+      "name": "verify-links",
+      "cmd": "curl -L all external hrefs",
+      "exitCode": 0, "passed": true, "required": false,
+      "summary": "all 200 except bot-blocked (LinkedIn 999, Udemy 403 — fine in browsers); real 404 (landing-pages repo) removed"
+    }
+  ]
+}
