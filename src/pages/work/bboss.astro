@@ -3,16 +3,16 @@ import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import bbossMobile1 from "../../assets/img/projects/bboss-mobile-1.jpg";
-import bbossMobile2 from "../../assets/img/projects/bboss-mobile-2.jpg";
-import bbossMobile3 from "../../assets/img/projects/bboss-mobile-3.jpg";
-import bbossMobile4 from "../../assets/img/projects/bboss-mobile-4.jpg";
+import bbossMobile1 from "../../assets/img/projects/sv/client-home.png";
+import bbossMobile2 from "../../assets/img/projects/sv/client-search.png";
+import bbossMobile3 from "../../assets/img/projects/sv/client-barbershop-detail.png";
+import bbossMobile4 from "../../assets/img/projects/sv/client-pass.png";
 
-// Real captures from the client PWA running locally (Playwright, retina)
+// Real captures from the client PWA running locally (Playwright, DPR3 retina)
 const screens = [
   {
     src: bbossMobile1,
-    alt: "B-Boss Club customer hub home with plan banner and quick actions",
+    alt: "B-Boss Club customer hub home with active-pass banner and quick actions",
   },
   {
     src: bbossMobile2,
@@ -24,7 +24,7 @@ const screens = [
   },
   {
     src: bbossMobile4,
-    alt: "B-Boss Club customer profile with subscription and favorites",
+    alt: "B-Boss Club active pass, ready to validate at the shop",
   },
 ];
 
@@ -231,7 +231,7 @@ const decisions = [
         </div>
 
         <div class="case-gallery">
-          <div class="panel stage-gold case-panel">
+          <div class="panel stage-gold case-panel" data-morph="bboss">
             <div class="stage">
               <div class="browser">
                 <div class="browser-bar">
@@ -250,7 +250,6 @@ const decisions = [
                     aria-label="B-Boss Club web dashboard, scrolling through live metrics and scheduling"
                   >
                     <source src="/media/bboss-dashboard.webm" type="video/webm" />
-                    <source src="/media/bboss-dashboard.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>

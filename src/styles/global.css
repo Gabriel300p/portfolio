@@ -2681,8 +2681,7 @@ html.reveal [data-stagger][data-reveal] {
   /* B-Boss showcase stage morphs into the case-study dashboard panel.
      Exactly one element per page may carry this name (duplicates skip the
      whole transition) — hence the scoping. */
-  #work .stage-gold,
-  .case-panel {
+  [data-morph="bboss"] {
     view-transition-name: bboss-stage;
   }
 }
