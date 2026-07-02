@@ -10,6 +10,9 @@ const {
   title = "Gabriel Andrade · Design Engineer",
   description = "Gabriel Andrade — a design engineer from São Paulo. I design and build web products end to end, from Figma to production.",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
 ---
 
 <!doctype html>
@@ -22,12 +25,37 @@ const {
     <title>{title}</title>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
     <link rel="preload" href="/fonts/Playfair.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f4ef" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16150f" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Gabriel Andrade",
+        jobTitle: "Design Engineer",
+        url: "https://gabrielandrade.com",
+        sameAs: ["https://www.linkedin.com/in/gabrieltech/", "https://github.com/Gabriel300p"],
+        address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressCountry: "BR" },
+      })}
+    />
 
     {/* Set theme before first paint to avoid a flash of the wrong theme. */}
     <script is:inline>
@@ -52,12 +80,13 @@ const {
           // disarm the reveal-hiding so content is never stuck invisible.
           setTimeout(function () {
             if (!window.__uiReady) document.documentElement.classList.remove("reveal");
-          }, 2500);
+          }, 1200);
         } catch (e) {}
       })();
     </script>
   </head>
   <body>
+    <a class="skip-link i18n" href="#main" data-en="Skip to content" data-pt="Pular para o conteúdo">Skip to content</a>
     <slot />
     <script>
       import "../scripts/ui.ts";

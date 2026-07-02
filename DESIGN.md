@@ -90,8 +90,43 @@ animations at all** — the whole motion budget lives in hover. Fonts Inter/JetB
 - **Posture.** Static page + rich hover is inherently reduced-motion-friendly. *Here:* we
   keep scroll reveals (editorial identity) but they must stay cheap and interruptible.
 
-*(saddine.com, pixels.studio, colibrivision.it — study pending, session-limit interrupted;
-re-run the grounding workflow to fill these in.)*
+### saddine.com — Next+Tailwind; CSS transitions only, no scroll-reveals
+- **Experience accordion:** timeline via `::before` (absolute `left-3 w-px bg-border`),
+  icon chips ON the line, metadata `pl-9`, `last:before:bg-background` masks the tail.
+  Hover halo = offset `::before` layer so chip/line stay outside the tint —
+  background-color-only, **150ms ease-out**. Their panels snap; ours glide (better).
+- **Chevron path-morph:** real point flip `M6 9L12 15L18 9` ↔ `M6 15L12 9L18 15`, 0.3s
+  (CSS `d: path()`; Safari fallback rotate 180°).
+- **Page-level ease worth stealing:** `cubic-bezier(.76, 0, .24, 1)` at 0.7–0.8s.
+- **Restraint:** colors-only 150–200ms hovers, `active:scale(0.98)`, zero scroll-reveals.
+
+### pixels.studio — SvelteKit; zero libs, canvas + rAF + lerp
+- **Blur-rise reveal:** `opacity:0 + translate3d(0,40px,0) + blur(12px)` pre-state in
+  stylesheet (no FOUC), ease **`cubic-bezier(0.22, 1, 0.36, 1)`**, load 1100ms
+  (stagger 0/120/260ms), scroll 1300ms, IO `-10%` rootMargin, once, and **reveal
+  immediately if already above the fold at mount** (correctness detail). Blur caps at
+  ~6px on large serif (shimmers otherwise) — never on H1.
+- **Cursor-reactive hero canvas:** seeded glyph grid (14×18px, PRNG), elliptical
+  spotlight (110px/48px, aspect 1.6), position AND angle lerped **0.15/frame**, trail
+  points ≥16ms apart cap 80 decay ×0.96, idle sweep every 5–7s. They forgot the PRM
+  guard — we don't.
+- **Self-stopping rAF** (animate only while `|target−value| > 0.01`) = zero idle cost;
+  adopted in our cursor.
+
+### colibrivision.it — WP + GSAP 3.12 (curves extracted, reimplemented vanilla)
+- **Blade reveal:** lines in `overflow:hidden` wrappers, `translateY(100%)→0`, **600ms
+  `cubic-bezier(0.215, 0.61, 0.355, 1)`** (power3.out), stagger **50ms/line**, once at
+  viewport bottom. Flagship treatment for Playfair headings.
+- **Card-stack shrink:** sticky cards, per-frame `translateY(20px*i) scale((h−off*.05)/h)`
+  — already vanilla + PRM-gated in their source; liftable for stacked case cards.
+- **Theme-switch crossfade:** add `html.theme-transition` BEFORE flipping theme, force
+  reflow, remove after duration+200ms; transitions color/bg/border **~600ms
+  `cubic-bezier(0.16,1,0.3,1)`** (our --ease-expo). PRM: none.
+- **Swap-hover text roll:** duplicate label in `::after`, roll `translateY(-100%)`,
+  0.6s --ease-expo, `overflow:hidden` wrapper — build-time duplication, zero JS.
+
+**Shared philosophy across all four references: scroll stays mostly static; hover
+carries the personality.** Don't stack more scroll motion than the panel scrubs.
 
 ## Motion recipe (house rules, F1)
 

@@ -34,7 +34,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
             <div class="edu-side">
               <span class="edu-logo" data-inst={c.institution}>
                 {logoFor(c.institution) ? (
-                  <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" />
+                  <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" width="30" height="30" />
                 ) : (
                   <span class="edu-logo-fallback" aria-hidden="true">
                     {c.monogram}
@@ -113,7 +113,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
                       <Row class="edu-cert-row" data-link={c.url ? "true" : undefined} {...linkAttrs}>
                         <span class="edu-cert-logo" data-inst={c.institution}>
                           {logoFor(c.institution) ? (
-                            <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" />
+                            <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" width="30" height="30" />
                           ) : (
                             <span class="edu-logo-fallback" aria-hidden="true">
                               {c.monogram}

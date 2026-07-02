@@ -49,7 +49,7 @@
   --text: #1c1a17;
   --text-soft: #33302b;
   --text-muted: #6d685f;
-  --text-faint: #9a948a;
+  --text-faint: #756f63; /* AA 4.53:1 on paper (was #9a948a, 2.7:1) */
   --line: #e4e0d8;
   --line-strong: #d7d2c8;
   --accent: #0b7d45; /* vibrant emerald: links, dot, arrows, emphasis */
@@ -76,7 +76,7 @@
   --text: #f0ece1;
   --text-soft: #d8d3c6;
   --text-muted: #9c968a;
-  --text-faint: #6f6a5e;
+  --text-faint: #8b8577; /* AA 4.98:1 on dark (was #6f6a5e, 3.4:1) */
   --line: #2a2720;
   --line-strong: #39342b;
   --accent: #3ddc84; /* vibrant emerald for dark */
@@ -138,6 +138,26 @@ a {
 img {
   display: block;
   max-width: 100%;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 300;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 13px;
+  transform: translateY(-64px);
+  opacity: 0;
+  transition: transform 0.2s var(--ease-expo), opacity 0.2s ease;
+}
+.skip-link:focus-visible {
+  transform: none;
+  opacity: 1;
 }
 
 .wrap {
@@ -258,9 +278,63 @@ img {
 .lang b {
   color: var(--accent);
 }
+/* mobile menu — burger only exists below 720px; panel drops from the nav */
+.nav-burger {
+  display: none;
+}
+.nav-burger .i-close {
+  display: none;
+}
+.nav.menu-open .nav-burger .i-close {
+  display: block;
+}
+.nav.menu-open .nav-burger .i-burger {
+  display: none;
+}
+.nav-menu {
+  position: absolute;
+  top: 66px;
+  left: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  padding: 10px var(--pad) 22px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  border-bottom: 1px solid var(--line);
+}
+.nav-menu a {
+  padding: 13px 2px;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s var(--ease-expo), transform 0.35s var(--ease-expo);
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+.nav.menu-open .nav-menu a {
+  opacity: 1;
+  transform: none;
+}
 @media (max-width: 720px) {
   .nav-links {
     display: none;
+  }
+  .nav-burger {
+    display: inline-flex;
+  }
+  .nav.menu-open .nav-menu {
+    display: flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu a {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -2280,13 +2354,15 @@ html.reveal [data-stagger][data-reveal] {
   @media (prefers-reduced-motion: no-preference) {
     /* showcase media panels scrub up + settle as they cross the fold;
        the IO fade on the parent .proj stays for text — layered, not doubled */
-    .proj-media .panel {
+    .proj-media .panel,
+    .case-gallery .panel {
       animation: panel-scrub linear both;
       animation-timeline: view();
       animation-range: entry 5% entry 70%;
     }
     /* the branded glow breathes in with scroll progress (subordinate to the shot) */
-    .proj-media .panel::before {
+    .proj-media .panel::before,
+    .case-gallery .panel::before {
       animation: glow-scrub linear both;
       animation-timeline: view();
       animation-range: entry 10% cover 45%;
@@ -2346,19 +2422,19 @@ html.reveal [data-stagger][data-reveal] {
   html.js .hero h1 + p,
   html.js .hero .hero-sub,
   html.js .hero .meta-strip {
-    animation: hero-rise 0.9s var(--ease-expo) backwards;
+    animation: hero-rise 0.7s var(--ease-expo) backwards;
   }
   html.js .hero h1 {
-    animation-delay: 0.08s;
+    animation-delay: 0.06s;
   }
   html.js .hero h1 + p {
-    animation-delay: 0.18s;
+    animation-delay: 0.14s;
   }
   html.js .hero .hero-sub {
-    animation-delay: 0.26s;
+    animation-delay: 0.2s;
   }
   html.js .hero .meta-strip {
-    animation-delay: 0.34s;
+    animation-delay: 0.26s;
   }
 }
 @keyframes hero-rise {
