@@ -42,6 +42,23 @@ Max-width 1160px, fluid pad `clamp(20px,5vw,56px)`. Editorial asymmetry: narrow 
 large media. Fill the fold; avoid oceans of empty vertical space — vertical rhythm should feel
 intentional, not padded-out. Register-mark crosshairs are a quiet editorial motif.
 
+**Master composition (2026-07-02 redesign — F11):**
+- **Hero = editorial masthead.** Hairline metadata row (role / edition / place+clock, mono
+  uppercase), then oversized asymmetric Playfair display (`clamp(3.1rem, 10.5vw, 9.4rem)`,
+  lh 0.98, max-width 13ch, left), then an offset two-column base (proof prose 1.15fr /
+  context + cue 0.85fr, `align-items: end`). Fold-filling via flex + `margin-top: auto`.
+- **Section heads are folios, never centered.** Full-width top rule + mono kicker +
+  display-scale h2 left (`clamp(2.3rem, 5.4vw, 4.4rem)`) + outlined serif numeral
+  (`-webkit-text-stroke: 1px var(--line-strong)`, transparent fill) as the section's
+  folio mark. Numbering 01–05 via `data-num`.
+- **Rail sections** (`.rail`: stack, experience, education, words): head lives in a sticky
+  left column (0.36fr, `top: 92px`), content scrolls in the right column; one shared top
+  rule on the wrap. Collapses to single column ≤900px.
+- **Work rows zig-zag:** even rows mirror (media leads). One full-bleed slow ticker under
+  the hero (stack marquee, hover-pause, PRM static).
+- **The page closes at headline scale** — contact h2 up to 7rem, left-aligned; hierarchy
+  bookends (first and last impressions carry the same typographic weight).
+
 ## Motion (all gated on `prefers-reduced-motion`)
 
 Lenis smooth scroll; staggered `data-reveal` entrances (GPU transform+opacity); title wipe
