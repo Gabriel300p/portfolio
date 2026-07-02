@@ -2,9 +2,32 @@
    Fonts
    ============================================================ */
 @font-face {
-  font-family: "Playfair";
-  src: url("/fonts/Playfair.woff2") format("woff2");
-  font-weight: 400 800;
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+/* 500 files cover 500-800 so legacy 600 heads resolve here instead of synthesizing bold */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-500.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-500Italic.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -26,7 +49,7 @@
    ============================================================ */
 :root {
   /* type */
-  --serif: "Playfair", Georgia, "Times New Roman", serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: "Geist Mono", ui-monospace, "JetBrains Mono", "SF Mono", monospace;
 
@@ -213,8 +236,8 @@ img {
 }
 .brand {
   font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 400;
   letter-spacing: -0.01em;
 }
 .brand .gp {
@@ -227,9 +250,10 @@ img {
 }
 .nav-links a {
   font-family: var(--mono);
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
   transition: color 0.2s ease;
 }
 .nav-links a:hover {
@@ -271,24 +295,34 @@ img {
 [data-theme="dark"] .icon-btn .i-moon {
   display: none;
 }
-.lang {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-muted);
+/* EN/PT segmented pill (Second Voice) — active segment fills with accent */
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
   background: transparent;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
-  padding: 5px 11px;
   cursor: pointer;
-  letter-spacing: 0.04em;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease;
 }
-.lang:hover {
-  color: var(--text);
+.lang-pill:hover {
   border-color: var(--accent);
 }
-.lang b {
-  color: var(--accent);
+.lang-seg {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  padding: 6px 9px;
+  border-radius: 999px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.lang-seg.on {
+  background: var(--accent);
+  color: var(--bg);
 }
 /* mobile menu — burger only exists below 720px; panel drops from the nav */
 .nav-burger {
@@ -939,6 +973,10 @@ footer .wrap {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--text-faint);
+}
+footer .f-place {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 /* ============================================================

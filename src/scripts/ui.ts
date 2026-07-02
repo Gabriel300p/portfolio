@@ -73,8 +73,9 @@ function applyLang(lang: Lang) {
     const val = el.getAttribute(`data-${lang}`);
     if (val !== null) el.innerHTML = val;
   });
-  const btn = document.getElementById("langBtnLabel");
-  if (btn) btn.innerHTML = `${lang === "en" ? "PT" : "EN"}<b> / </b>${lang === "en" ? "EN" : "PT"}`;
+  document.querySelectorAll<HTMLElement>("#langBtn .lang-seg").forEach((seg) => {
+    seg.classList.toggle("on", seg.dataset.lang === lang);
+  });
   document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
   try {
     localStorage.setItem("lang", lang);
