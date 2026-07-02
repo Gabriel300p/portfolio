@@ -1,0 +1,30 @@
+{
+  "feature": "F20",
+  "iteration": 14,
+  "verdict": "approved",
+  "evaluator": "orchestrator — real Lighthouse (mobile) + Playwright reduced-motion + grep",
+  "lighthouse_mobile": {
+    "home": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "case_study": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    }
+  },
+  "checks": {
+    "transition_all": 0,
+    "i18n_balance": "108 data-en = 108 data-pt",
+    "remote_founder_in_copy": 0,
+    "reduced_motion_hidden": "0 of 39 reveal elements",
+    "horizontal_overflow_375": false,
+    "light_theme": "derives via semantic tokens across all SV sections",
+    "og_image": "regenerated from SV hero (1200x630, 35k)"
+  },
+  "gates": "home 94/100/100/100, case 98/100/100/100 — all >= 90 mobile / 95 a11y / 95 SEO"
+}

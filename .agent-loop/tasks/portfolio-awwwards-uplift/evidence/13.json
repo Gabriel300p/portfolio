@@ -1,0 +1,15 @@
+{
+  "feature": "F19",
+  "iteration": 13,
+  "verdict": "approved",
+  "commit": "4bd83af",
+  "evaluator": "orchestrator + Playwright visual (clean video frame, phone captures) + grep (morph 1:1, no mp4)",
+  "evidence": {
+    "case_study": "inherits SV tokens (Newsreader heads, + kickers, emerald metrics), F5 flow intact",
+    "phone_row": "F14 hi-res SV captures (home/search/detail/pass)",
+    "video": "re-recorded clean (no devtools) via Playwright ffmpeg VP8 324k + sharp poster 44k",
+    "morph": "single data-morph=bboss: index panel02 (1) <-> case dashboard panel (1), verified in built HTML",
+    "mp4": "dropped (no x264 in bundled ffmpeg); webm ~97% + poster fallback"
+  },
+  "tradeoff": "mp4 fallback removed — documented; poster covers pre-2022 Safari"
+}

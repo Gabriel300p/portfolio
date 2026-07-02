@@ -376,11 +376,18 @@
         "conteúdo F5 (problema→abordagem→decisões→solução→resultado, bilíngue, métricas por bloco) na linguagem SV; morph view-transition re-mapeado",
         "checkpoint visual postado"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/13.json"
+      ],
+      "touchedFiles": [
+        "src/pages/work/bboss.astro",
+        "src/components/Work.astro",
+        "src/styles/global.css",
+        "public/media/"
+      ],
       "blockedReason": null
     },
     {
@@ -391,11 +398,16 @@
         "Lighthouse ≥90 mobile/≥95 a11y/≥95 SEO nas 2 páginas; reduced-motion estático; 375px e 1440px nos 2 temas; i18n EN/PT auditado; OG image atualizada pra nova linguagem",
         "evidência real (Playwright + Lighthouse) anexada em evidence/"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/14.json"
+      ],
+      "touchedFiles": [
+        "public/og.png",
+        "src/styles/global.css"
+      ],
       "blockedReason": null
     }
   ]

@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
-  "state": "EVALUATE",
-  "iteration": 13,
-  "color": "green",
-  "needsHuman": false,
-  "currentFeature": "F19",
-  "pendingGate": null,
+  "state": "GATE_MERGE",
+  "iteration": 15,
+  "color": "yellow",
+  "needsHuman": true,
+  "currentFeature": "F20",
+  "pendingGate": "merge",
   "gateResolutions": [
     {
       "type": "contract",
@@ -48,12 +48,12 @@
     }
   },
   "lastVerdict": {
-    "feature": "F17",
+    "feature": "F20",
     "verdict": "approved",
     "outOfScope": false,
     "blocked": false,
-    "evidenceRef": "evidence/12.json",
-    "reasonsRef": "change-verifier session 3"
+    "evidenceRef": "evidence/14.json",
+    "reasonsRef": "orchestrator lighthouse+rm+grep"
   },
   "history": [
     {
