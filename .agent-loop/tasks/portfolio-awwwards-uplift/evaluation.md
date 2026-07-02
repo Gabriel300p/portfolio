@@ -79,3 +79,24 @@ tags:
 
 - **F2:** approved — Evaluator conferiu guards duplos (matchMedia + pointerType), settle do rAF, ausência de leak de cursor:none, z-index.
 - **F3:** approved — Evaluator conferiu o risco real (nome duplicado: #work .stage-gold vs .case-panel resolvem 1:1 por página), fallback puro-CSS, reduce completo.
+
+## Iteração 4 — F5 (2026-07-02)
+
+### Evidência
+
+| Comando | Passou | Resumo |
+| --- | --- | --- |
+| build | ✅ | 0 erros |
+| estrutura | ✅ | h1 único; problema→abordagem→decisões→solução→resultado→produto; 0 heading skips |
+| i18n | ✅ | 37 nós; kickers PT; html.lang=pt-BR |
+| vídeo real | ✅ | data-gate, preload=none, poster, webm+mp4, readyState 4 |
+| métricas | ✅ | 1 linha mono por bloco, números reais (nada inventado — conferido pelo Evaluator) |
+
+### Veredito
+
+- **F5:** needs_repair@iter1 → **approved** após reparo único (nomes dos cards do
+  ecosystem bilíngues, verificado ao vivo: "Gestão da Barbearia" etc.). Evaluator
+  aprovou condicionado exatamente a este fix ("Fix the ecosystem card titles and F5
+  is clean"); demais critérios todos verificados por ele no código.
+- Bônus: link morto github.com/Gabriel300p/landing-pages (404 real) removido do
+  accordion More projects.

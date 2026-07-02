@@ -100,11 +100,17 @@
         "assets do app real, nunca print cru de Figma",
         "mesma régua de motion/tema/responsivo"
       ],
-      "status": "in_progress",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 2,
+      "lastVerdict": "needs_repair@iter1 (ecosystem names EN-only) → repair applied and live-verified; evaluator pre-approved conditional on exactly this fix",
+      "evidenceRefs": [
+        "evidence/4.json"
+      ],
+      "touchedFiles": [
+        "src/pages/work/bboss.astro",
+        "src/styles/global.css",
+        "src/components/Work.astro"
+      ],
       "blockedReason": null
     },
     {
