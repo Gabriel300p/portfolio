@@ -821,31 +821,37 @@ a:hover .plink .arr,
 
 /* contact */
 .contact {
-  text-align: center;
   border-top: 1px solid var(--line);
 }
-.contact h2 {
+.contact-plus {
+  display: block;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 15px;
+  margin-bottom: 26px;
+}
+.contact-h {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
   letter-spacing: -0.015em;
   margin: 0;
   line-height: 1.02;
 }
-.contact h2 em {
-  font-style: italic;
+.contact-h .dot {
+  color: var(--accent);
 }
-.contact p {
-  margin: 22px auto 0;
+.contact-sub {
+  margin: 26px 0 0;
   max-width: 44ch;
   color: var(--text-muted);
+  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
 }
 .btn-row {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  justify-content: center;
-  margin-top: 36px;
+  margin-top: 40px;
 }
 .btn {
   display: inline-flex;
@@ -881,7 +887,6 @@ a:hover .plink .arr,
   display: flex;
   flex-wrap: wrap;
   gap: 8px 26px;
-  justify-content: center;
   margin-top: 40px;
   font-family: var(--mono);
   font-size: 13px;
@@ -889,14 +894,25 @@ a:hover .plink .arr,
 .links a {
   color: var(--text-muted);
   display: inline-flex;
+  align-items: center;
   gap: 8px;
   transition: color 0.2s ease;
 }
 .links a .k {
   color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.links a .ext {
+  color: var(--text-faint);
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 .links a:hover {
   color: var(--accent);
+}
+.links a:hover .ext {
+  color: var(--accent);
+  transform: translate(2px, -2px);
 }
 
 footer {

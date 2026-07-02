@@ -113,7 +113,7 @@ const logoFor = (inst: string): string | undefined => logoMap[inst];
         <div class="edu-rail" data-stagger>
           {
             featured.map((c) => (
-              <article class="edu-item" data-accent={c.kind === "degree" && c.featured ? undefined : undefined}>
+              <article class="edu-item">
                 <div class="edu-item-head">
                   <span class="edu-logo edu-logo-sm" data-inst={c.institution}>
                     {logoFor(c.institution) ? (

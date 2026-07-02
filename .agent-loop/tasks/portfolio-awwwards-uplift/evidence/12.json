@@ -1,0 +1,19 @@
+{
+  "feature": "F17",
+  "iteration": 12,
+  "verdict": "approved",
+  "commit": "2614ae6",
+  "evaluator": "change-verifier subagent (adversarial)",
+  "checks": [
+    "build green 2 pages",
+    "bg-cols 2-col grid, both #experience+#education anchors",
+    "2 col-kickers, 3 featured edu-items w/ real logos, edu-more-panel intact (17 certs)",
+    "xp-role-row aria-expanded/controls match 2 jobs; initExperience/initEducation selectors match",
+    "old Experience/Education removed, no dangling imports",
+    "<860px collapse, accent border-left first item",
+    "i18n 122/122, remote/founder=0"
+  ],
+  "nonBlocking": [
+    "dead ternary Background.astro:116 — cleaned in F18 commit"
+  ]
+}

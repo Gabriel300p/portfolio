@@ -339,11 +339,18 @@
         "esquerda: cards accordion de experiência (atual aberto, tags visíveis quando fechado); direita: rail de educação com destaque FIAP pós (borda accent) — conteúdo real da main (logos, 17 certs, idiomas) adaptado",
         "acessibilidade do accordion herdada (inert, foco), checkpoint visual postado"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved",
+      "evidenceRefs": [
+        "evidence/12.json"
+      ],
+      "touchedFiles": [
+        "src/components/Background.astro",
+        "src/pages/index.astro",
+        "src/styles/global.css",
+        "src/data/content.ts"
+      ],
       "blockedReason": null
     },
     {
