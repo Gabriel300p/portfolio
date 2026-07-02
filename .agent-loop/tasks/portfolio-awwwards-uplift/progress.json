@@ -1,16 +1,12 @@
 {
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
-  "state": "GATE_MERGE",
+  "state": "GENERATE",
   "iteration": 6,
   "color": "yellow",
-  "needsHuman": true,
-  "currentFeature": "F4",
-  "pendingGate": {
-    "type": "merge",
-    "createdAt": "2026-07-02T02:40:00-03:00",
-    "requires": "human"
-  },
+  "needsHuman": false,
+  "currentFeature": "F11",
+  "pendingGate": null,
   "gateResolutions": [
     {
       "type": "contract",
@@ -18,6 +14,13 @@
       "by": "user",
       "at": "2026-07-01T23:30:00-03:00",
       "note": "Contrato semeado e autorizado pelo prompt da missão do Gabriel (sessão autônoma de longa duração; gates amarelos pontuais permanecem)."
+    },
+    {
+      "type": "direction",
+      "decision": "approve",
+      "by": "user",
+      "at": "2026-07-02T03:05:00-03:00",
+      "note": "Gabriel: entrega anterior visualmente mínima; autoriza redesign do LAYOUT-MESTRE mantendo identidade (warm paper, Playfair+Geist, esmeralda) e hero repensado DO ZERO. Isto substitui a regra \"not re-theme\" da spec para composição/layout; paleta e tipografia continuam fixas."
     }
   ],
   "budget": {
@@ -74,6 +77,10 @@
     {
       "state": "GATE_MERGE",
       "at": "2026-07-02T02:40:00-03:00"
+    },
+    {
+      "state": "GENERATE",
+      "at": "2026-07-02T03:05:00-03:00"
     }
   ],
   "stoppedReason": null

@@ -201,6 +201,23 @@
       ],
       "touchedFiles": [],
       "blockedReason": null
+    },
+    {
+      "id": "F11",
+      "title": "Redesign do layout-mestre (composição nova, identidade mantida)",
+      "acceptance": [
+        "hero conceitual novo, repensado do zero (não evolução do statement centrado)",
+        "seções com composição assimétrica própria — nenhuma é \"head centrado + grid\" genérico",
+        "pelo menos 2 momentos de assinatura (pinned/sticky scene, tipografia oversized, interação própria)",
+        "paleta/tipografia do DESIGN.md intocadas; motion system F1-F3 reaproveitado",
+        "régua anterior não regride: Lighthouse ≥90/95/95, reduced-motion, JS-off, 375/1440 × claro/escuro"
+      ],
+      "status": "in_progress",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
     }
   ]
 }

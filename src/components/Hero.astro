@@ -1,6 +1,8 @@
 ---
-// Hero — centered editorial statement with registration marks, monogram,
-// and a live São Paulo clock.
+// Hero — editorial masthead: hairline metadata row, oversized asymmetric
+// display type, proof prose in an offset two-column base. The cursor-revealed
+// binary rain stays as the interactive signature, now behind giant glyphs.
+// Copy is Gabriel's approved text, verbatim (F6 gate) — only the composition changed.
 ---
 
 <header class="hero" id="top" data-hero>
@@ -8,7 +10,16 @@
   <span class="reg tl"></span>
   <span class="reg tr"></span>
   <div class="wrap">
-    <div class="monogram" aria-hidden="true">GA</div>
+    <div class="hero-mast mono">
+      <span class="i18n" data-en="Design engineer" data-pt="Design engineer">Design engineer</span>
+      <span class="hero-mast-mid i18n" data-en="Portfolio — 2026" data-pt="Portfólio — 2026">Portfolio — 2026</span>
+      <span class="hero-mast-right">
+        <span>SÃO PAULO, BR</span>
+        <span class="sep" aria-hidden="true"></span>
+        <time id="clock" aria-label="Local time in São Paulo">--:--:--</time>
+      </span>
+    </div>
+
     <h1
       class="i18n"
       data-en="I design and build <em>web products.</em>"
@@ -16,28 +27,32 @@
     >
       I design and build <em>web products.</em>
     </h1>
-    <p
-      class="i18n"
-      data-en="I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>, and a <b>design system built from scratch</b> — caring in equal measure about how a product feels and how it's built."
-      data-pt="Sou Gabriel Andrade, <b>design engineer</b> de São Paulo. Há cinco anos levo interfaces do arquivo no Figma até a produção — <b>1.000+ telas</b>, <b>200+ fluxos de produto</b> e um <b>design system feito do zero</b> — me importando na mesma medida com como um produto se sente e como ele é feito."
-    >
-      I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried
-      interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>,
-      and a <b>design system built from scratch</b> — caring in equal measure about how a product
-      feels and how it's built.
-    </p>
-    <p
-      class="hero-sub i18n"
-      data-en="These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for research and planning, and document the decisions along the way."
-      data-pt="Hoje construo em React, TypeScript e Tailwind, me apoio em workflows com IA para pesquisa e planejamento, e documento as decisões pelo caminho."
-    >
-      These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for
-      research and planning, and document the decisions along the way.
-    </p>
-    <div class="meta-strip">
-      <span>SÃO PAULO, BR</span>
-      <span class="sep"></span>
-      <time id="clock" aria-label="Local time in São Paulo">--:--:--</time>
+
+    <div class="hero-base">
+      <p
+        class="hero-lede i18n"
+        data-en="I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>, and a <b>design system built from scratch</b> — caring in equal measure about how a product feels and how it's built."
+        data-pt="Sou Gabriel Andrade, <b>design engineer</b> de São Paulo. Há cinco anos levo interfaces do arquivo no Figma até a produção — <b>1.000+ telas</b>, <b>200+ fluxos de produto</b> e um <b>design system feito do zero</b> — me importando na mesma medida com como um produto se sente e como ele é feito."
+      >
+        I'm Gabriel Andrade, a <b>design engineer</b> from São Paulo. For five years I've carried
+        interfaces from the Figma file to production — <b>1,000+ screens</b>, <b>200+ product flows</b>,
+        and a <b>design system built from scratch</b> — caring in equal measure about how a product
+        feels and how it's built.
+      </p>
+      <div class="hero-aside">
+        <p
+          class="hero-sub i18n"
+          data-en="These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for research and planning, and document the decisions along the way."
+          data-pt="Hoje construo em React, TypeScript e Tailwind, me apoio em workflows com IA para pesquisa e planejamento, e documento as decisões pelo caminho."
+        >
+          These days I build in React, TypeScript, and Tailwind, lean on AI-assisted workflows for
+          research and planning, and document the decisions along the way.
+        </p>
+        <a class="hero-cue mono" href="/#work">
+          <span class="i18n" data-en="Selected work" data-pt="Trabalhos selecionados">Selected work</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>

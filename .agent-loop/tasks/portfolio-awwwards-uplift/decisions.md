@@ -146,3 +146,13 @@ tags:
 - **Motivo:** 2.7:1/3.4:1 falhavam AA em ~28 usos incluindo texto corrido (.hero-sub);
   ajuste de VALOR na mesma família de matiz, não mudança de paleta (regra DESIGN.md
   intacta: temas trocam valores, não regras).
+
+## 2026-07-02 — Gate amarelo resolvido: redesign do layout-mestre autorizado (F11)
+
+- **Contexto:** Gabriel avaliou a entrega das F1-F10 como "mudanças mínimas" — esperava
+  redesign completo. A tensão spec ("not re-theme") vs missão ("candidato a SOTD") tinha
+  sido resolvida pro lado conservador; o dono do gate escolheu o outro lado.
+- **Decisão:** redesign do LAYOUT-MESTRE mantendo identidade (warm paper, Playfair+Geist,
+  esmeralda única) + hero repensado do zero. Re-theme total foi oferecido e rejeitado.
+- **Motivo:** a dimensão mais fraca da régua Awwwards é Creativity — composição, não
+  craft. O craft (motion/perf/a11y) aprovado nas F1-F10 é fundação, não concorrente.

@@ -351,15 +351,22 @@ img {
 }
 
 /* ============================================================
-   Hero
+   Hero — editorial masthead (oversized asymmetric display type)
    ============================================================ */
 .hero {
   position: relative;
-  padding-top: clamp(48px, 9vh, 104px);
-  padding-bottom: clamp(40px, 6vh, 72px);
-  text-align: center;
   isolation: isolate;
   overflow: clip;
+  padding-top: clamp(20px, 3vh, 40px);
+  padding-bottom: clamp(28px, 4vh, 48px);
+  min-height: calc(100dvh - 66px);
+  display: flex;
+}
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 /* green binary rain, revealed only in a soft circle that follows the cursor */
 .hero-rain {
@@ -387,9 +394,51 @@ img {
 .hero[data-glow="on"] .hero-rain {
   opacity: 1;
 }
-.hero .wrap {
-  position: relative;
-  z-index: 1;
+/* masthead metadata row — hairline-bound, quiet, sets the editorial register */
+.hero-mast {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.hero-mast-mid {
+  color: var(--text-faint);
+}
+.hero-mast-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-mast .sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-mid);
+  opacity: 0.75;
+}
+.hero-mast time {
+  font-variant-numeric: tabular-nums;
+}
+/* display headline — the loudest thing on the page after the work itself */
+.hero h1 {
+  margin: clamp(28px, 6vh, 64px) 0 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3.1rem, 10.5vw, 9.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+h1 em {
+  font-style: italic;
+  color: var(--text-soft);
 }
 /* interactive headline: the italic word gets an accent underline-wipe on hover */
 h1 em {
@@ -402,7 +451,8 @@ h1 em::after {
   left: 0;
   bottom: 0.06em;
   width: 100%;
-  height: 2px;
+  height: 0.045em;
+  min-height: 2px;
   background: var(--accent);
   border-radius: 2px;
   transform: scaleX(0);
@@ -411,6 +461,52 @@ h1 em::after {
 }
 h1:hover em::after {
   transform: scaleX(1);
+}
+/* offset base: proof prose left (wide measure), context + cue right */
+.hero-base {
+  margin-top: auto;
+  padding-top: clamp(32px, 7vh, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(28px, 6vw, 96px);
+  align-items: end;
+}
+.hero-lede {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--text-muted);
+  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+  line-height: 1.62;
+}
+.hero-lede b {
+  color: var(--text-soft);
+  font-weight: 560;
+}
+.hero-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.hero-sub {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--text-faint);
+  font-size: clamp(0.92rem, 1.15vw, 1rem);
+  line-height: 1.6;
+}
+.hero-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  transition: color 0.2s ease, gap 0.3s var(--ease-expo);
+}
+.hero-cue:hover {
+  color: var(--accent);
+  gap: 16px;
 }
 .reg {
   position: absolute;
@@ -447,92 +543,46 @@ h1:hover em::after {
   right: var(--pad);
   top: 14px;
 }
-.monogram {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 30px;
-  border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text);
-}
-h1 {
-  margin: 0 auto;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(2.7rem, 6.6vw, 5.15rem);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
-  max-width: 15ch;
-  text-wrap: balance;
-}
-h1 em {
-  font-style: italic;
-}
-.hero p {
-  margin: 26px auto 0;
-  max-width: 56ch;
-  color: var(--text-muted);
-  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
-  line-height: 1.62;
-}
-.hero p b {
-  color: var(--text-soft);
-  font-weight: 560;
-}
-.meta-strip {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-}
-.meta-strip .sep {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-mid);
-  opacity: 0.75;
-}
-.meta-strip time {
-  font-variant-numeric: tabular-nums;
-  color: var(--text-muted);
-}
-
-/* hero secondary line — how I work now, kept quieter than the lead */
-.hero-sub {
-  margin: 16px auto 0;
-  max-width: 54ch;
-  color: var(--text-faint);
-  font-size: clamp(0.94rem, 1.2vw, 1.02rem);
-  line-height: 1.6;
+@media (max-width: 840px) {
+  .hero {
+    min-height: auto;
+  }
+  .hero h1 {
+    margin-top: clamp(24px, 5vh, 40px);
+  }
+  .hero-base {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: clamp(28px, 6vh, 48px);
+  }
+  .hero-mast-mid {
+    display: none;
+  }
 }
 
 /* ============================================================
-   Tech strip
+   Tech strip — full-bleed slow ticker (hairline-bound)
    ============================================================ */
 .tech {
   border-block: 1px solid var(--line);
-  margin-top: clamp(40px, 6vh, 72px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.tech .wrap {
+.tech-track {
   display: flex;
-  flex-wrap: wrap;
+  width: max-content;
+  animation: sm-scroll 36s linear infinite;
+}
+.tech:hover .tech-track {
+  animation-play-state: paused;
+}
+.tech-run {
+  display: flex;
   align-items: center;
-  gap: 10px 26px;
-  padding-block: 22px;
-  justify-content: center;
+  gap: 34px;
+  padding-block: 20px;
+  padding-right: 34px;
 }
 .tech .lbl {
   font-family: var(--mono);
@@ -540,11 +590,30 @@ h1 em {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-faint);
+  white-space: nowrap;
 }
 .tech .item {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--text-soft);
+  white-space: nowrap;
+}
+.tech .tick {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-mid);
+  opacity: 0.55;
+  flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .tech-run[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 /* ============================================================
@@ -554,7 +623,25 @@ section {
   padding-block: clamp(56px, 7vw, 104px);
 }
 .head {
-  margin-bottom: 44px;
+  position: relative;
+  margin-bottom: clamp(38px, 5vw, 64px);
+  border-top: 1px solid var(--line-strong);
+  padding-top: 18px;
+}
+/* outlined serif index numeral — the editorial folio mark of each section */
+.head[data-num]::before {
+  content: attr(data-num);
+  position: absolute;
+  right: 0;
+  top: 12px;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+  line-height: 0.78;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  pointer-events: none;
+  user-select: none;
 }
 .head .k {
   font-family: var(--mono);
@@ -567,9 +654,11 @@ section {
   margin: 14px 0 0;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2rem, 4.4vw, 3.1rem);
-  line-height: 1.05;
-  letter-spacing: -0.012em;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 18ch;
+  text-wrap: balance;
 }
 .head :is(h1, h2) em {
   font-style: italic;
@@ -579,6 +668,50 @@ section {
   margin: 14px 0 0;
   color: var(--text-muted);
   max-width: 56ch;
+}
+
+
+/* rail sections — head lives in a sticky left column; content scrolls past it */
+.rail .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  column-gap: clamp(28px, 5vw, 76px);
+  align-items: start;
+}
+.rail .head {
+  grid-column: 1;
+  grid-row: 1 / span 24;
+  position: sticky;
+  top: 92px;
+  margin-bottom: 0;
+}
+.rail .head ~ * {
+  grid-column: 2;
+  min-width: 0;
+}
+.rail .head :is(h1, h2) {
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+}
+.rail .head[data-num]::before {
+  position: static;
+  display: block;
+  margin-bottom: 14px;
+  font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+}
+@media (max-width: 900px) {
+  .rail .wrap {
+    display: block;
+  }
+  .rail .head {
+    position: static;
+    margin-bottom: clamp(32px, 6vw, 44px);
+  }
+  .rail .head[data-num]::before {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    margin-bottom: 0;
+  }
 }
 
 /* project shots */
@@ -849,22 +982,23 @@ a:hover .plink .arr,
 
 /* contact */
 .contact {
-  text-align: center;
   border-top: 1px solid var(--line);
 }
 .contact h2 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2.4rem, 6vw, 4.4rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(2.9rem, 8.5vw, 7rem);
+  letter-spacing: -0.02em;
   margin: 0;
-  line-height: 1.02;
+  line-height: 0.98;
+  max-width: 14ch;
+  text-wrap: balance;
 }
 .contact h2 em {
   font-style: italic;
 }
 .contact p {
-  margin: 22px auto 0;
+  margin: 26px 0 0;
   max-width: 44ch;
   color: var(--text-muted);
 }
@@ -872,8 +1006,7 @@ a:hover .plink .arr,
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  justify-content: center;
-  margin-top: 36px;
+  margin-top: 38px;
 }
 .btn {
   display: inline-flex;
@@ -909,8 +1042,9 @@ a:hover .plink .arr,
   display: flex;
   flex-wrap: wrap;
   gap: 8px 26px;
-  justify-content: center;
-  margin-top: 40px;
+  margin-top: 56px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 13px;
 }
@@ -1033,6 +1167,15 @@ footer .wrap {
     0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 44px 90px -50px rgba(0, 0, 0, 0.7);
 }
+
+/* zig-zag: even rows mirror — media leads, text follows */
+.work-list .proj:nth-of-type(even) {
+  grid-template-columns: 0.64fr 0.36fr;
+}
+.work-list .proj:nth-of-type(even) .proj-text {
+  order: 2;
+}
+
 /* per-project brand accent — drives the glow */
 .panel.stage-gold {
   --proj-accent: #fac82b;
@@ -2429,23 +2572,23 @@ html.reveal [data-stagger][data-reveal] {
    hero is the fold). Rise + soft blur clears, staggered top-down.
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  html.js .hero .monogram,
+  html.js .hero-mast,
   html.js .hero h1,
-  html.js .hero h1 + p,
-  html.js .hero .hero-sub,
-  html.js .hero .meta-strip {
+  html.js .hero-lede,
+  html.js .hero-sub,
+  html.js .hero-cue {
     animation: hero-rise 0.7s var(--ease-expo) backwards;
   }
   html.js .hero h1 {
     animation-delay: 0.06s;
   }
-  html.js .hero h1 + p {
+  html.js .hero-lede {
     animation-delay: 0.14s;
   }
-  html.js .hero .hero-sub {
+  html.js .hero-sub {
     animation-delay: 0.2s;
   }
-  html.js .hero .meta-strip {
+  html.js .hero-cue {
     animation-delay: 0.26s;
   }
 }

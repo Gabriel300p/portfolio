@@ -1,10 +1,26 @@
 ---
-const stack = ["React", "TypeScript", "Tailwind", "Next.js", "Motion", "Node", "Prisma", "Figma"];
+// Full-bleed ticker under the hero — the stack as a slow editorial marquee.
+// Static row (no duplication, no motion) when reduced motion is preferred.
+const items = ["React", "TypeScript", "Tailwind", "Next.js", "Motion", "Node", "Prisma", "Figma"];
 ---
 
-<div class="tech">
-  <div class="wrap">
-    <span class="lbl i18n" data-en="Building with" data-pt="Construindo com">Building with</span>
-    {stack.map((item) => <span class="item">{item}</span>)}
+<div class="tech" aria-label="Technologies I build with">
+  <div class="tech-track" aria-hidden="true">
+    {
+      [0, 1].map((copy) => (
+        <div class="tech-run" aria-hidden={copy === 1 ? "true" : undefined}>
+          <span class="lbl i18n" data-en="Building with" data-pt="Construindo com">
+            Building with
+          </span>
+          {items.map((item) => (
+            <>
+              <span class="item mono">{item}</span>
+              <span class="tick" aria-hidden="true" />
+            </>
+          ))}
+        </div>
+      ))
+    }
   </div>
+  <span class="sr-only">{items.join(", ")}</span>
 </div>
