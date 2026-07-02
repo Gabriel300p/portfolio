@@ -1,4 +1,5 @@
 ---
+date: 2026-07-02
 created: 2026-07-02
 updated: 2026-07-02
 task: portfolio-awwwards-uplift
@@ -13,6 +14,16 @@ tags:
 
 > Checkpoint de comunicação (PR aberto), não parada. Outro agente/humano consegue
 > continuar daqui sem ler o chat.
+
+> **Atualizado 2026-07-02 (documentação arrumada):** este handoff descreve o checkpoint de
+> PR de F1-F10 (10/10 aprovadas — segue válido). Depois dele, a sessão entrou em F11
+> (redesign do layout-mestre) e bateu limite de sessão/contexto no meio, deixando deltas
+> não-commitados — commitados à parte como WIP (`935cfe8`), não avaliados. Gabriel reviu o
+> conjunto e considerou o resultado ainda conservador; o mandato foi ampliado (design,
+> copy e assets agora abertos — ver `decisions.md` e `contract.md`, ambos atualizados
+> 2026-07-02) e F11 foi substituída por **F12** num prompt novo em
+> `resources/portfolio/` (vault). `progress.json` está `state: BLOCKED`,
+> `pendingGate: direction` — a retomada é o novo prompt, não a continuação direta deste.
 
 ## Resumo
 

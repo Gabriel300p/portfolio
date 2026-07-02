@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
-  "state": "GENERATE",
+  "state": "BLOCKED",
   "iteration": 6,
   "color": "yellow",
-  "needsHuman": false,
+  "needsHuman": true,
   "currentFeature": "F11",
-  "pendingGate": null,
+  "pendingGate": "direction",
   "gateResolutions": [
     {
       "type": "contract",
@@ -21,6 +21,13 @@
       "by": "user",
       "at": "2026-07-02T03:05:00-03:00",
       "note": "Gabriel: entrega anterior visualmente mínima; autoriza redesign do LAYOUT-MESTRE mantendo identidade (warm paper, Playfair+Geist, esmeralda) e hero repensado DO ZERO. Isto substitui a regra \"not re-theme\" da spec para composição/layout; paleta e tipografia continuam fixas."
+    },
+    {
+      "type": "direction",
+      "decision": "superseded",
+      "by": "user",
+      "at": "2026-07-02T10:00:00-03:00",
+      "note": "Sessão anterior parou em F11 no meio (limite de sessão/contexto), com F1-F10 aprovados mas o resultado ainda pareceu 'quase nada mudou' pro Gabriel. Ele pediu documentação arrumada + um prompt novo, e ampliou o mandato: design (incl. paleta/tipografia/layout-mestre), textos e assets estão TODOS abertos a evoluir agora — a restrição anterior 'paleta e tipografia continuam fixas' está revogada. Ver decisions.md e o novo prompt em resources/portfolio/ (vault)."
     }
   ],
   "budget": {
@@ -81,7 +88,11 @@
     {
       "state": "GENERATE",
       "at": "2026-07-02T03:05:00-03:00"
+    },
+    {
+      "state": "BLOCKED",
+      "at": "2026-07-02T03:20:00-03:00"
     }
   ],
-  "stoppedReason": null
+  "stoppedReason": "budget — sessão bateu limite de tempo/contexto (reset ~3:20am) no meio da geração de F11; deltas não-commitados foram commitados depois (935cfe8) como checkpoint WIP, não avaliados. Retomada exige novo prompt (mandato ampliado, ver gateResolutions)."
 }

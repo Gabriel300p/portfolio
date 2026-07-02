@@ -677,6 +677,8 @@ section {
   grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
   column-gap: clamp(28px, 5vw, 76px);
   align-items: start;
+  border-top: 1px solid var(--line-strong);
+  padding-top: clamp(20px, 3vw, 32px);
 }
 .rail .head {
   grid-column: 1;
@@ -684,6 +686,8 @@ section {
   position: sticky;
   top: 92px;
   margin-bottom: 0;
+  border-top: none;
+  padding-top: 0;
 }
 .rail .head ~ * {
   grid-column: 2;

@@ -1,6 +1,7 @@
 ---
+date: 2026-07-02
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-02
 task: portfolio-awwwards-uplift
 status: active
 description: "Portfolio Awwwards uplift — log de decisões (agent-loop, ADR-lite)"
@@ -156,3 +157,51 @@ tags:
   esmeralda única) + hero repensado do zero. Re-theme total foi oferecido e rejeitado.
 - **Motivo:** a dimensão mais fraca da régua Awwwards é Creativity — composição, não
   craft. O craft (motion/perf/a11y) aprovado nas F1-F10 é fundação, não concorrente.
+
+## 2026-07-02 — F11 interrompida por limite de sessão; mandato ampliado (F12 substitui F11)
+
+- **Contexto:** a sessão bateu limite de tempo/contexto (~3:20am) no meio da geração de
+  F11 — deltas em Hero/Stack/Experience/Education/TechStrip/Testimonials/Work +
+  global.css ficaram não-commitados e não-avaliados. Commitados como checkpoint WIP
+  (`935cfe8`) numa sessão vault de arrumação de documentação, sem claim de conclusão.
+  Gabriel revisou o resultado geral (F1-F10 + o pedaço de F11) na manhã seguinte e achou
+  que ainda "quase nada mudou" — o veredito repetiu o mesmo padrão que motivou o gate de
+  F11 no dia anterior.
+- **Causa raiz identificada:** o `contract.md` original fixava
+  "Precedência de fontes: spec do repo > prompt da missão > DESIGN.md" — e a spec do
+  repo (`docs/superpowers/specs/2026-07-01-portfolio-showcases-redesign-design.md`)
+  trazia "re-theme (paleta, tipografia, layout-mestre são fixos)" como fora de escopo.
+  Essa regra de precedência fez o Generator resolver a tensão
+  "ambição Awwwards vs. conservadorismo da spec" **sempre a favor do lado seguro**,
+  silenciosamente, feature após feature — só surgiu como gate visível no fim (F11), e
+  mesmo aí só parcialmente (paleta/tipografia continuaram travadas).
+- **Decisão:** revogar "paleta, tipografia, layout-mestre são fixos" — Gabriel autoriza
+  evoluir **design (incl. paleta/tipografia/layout-mestre), textos/copy e assets**, não
+  só composição. F11 marcada `blocked` (superseded); **F12** a abre com escopo amplo.
+  Novo prompt autônomo gerado (vault, `resources/portfolio/`) supersede o anterior
+  (`prompt-loop-awwwards-uplift.md`) especificamente nessa restrição.
+- **O que NÃO muda:** F1-F10 continuam aprovadas e não devem regredir (motion
+  scroll-linked, cursor, view transitions, showcases reais, case study, hero sem
+  stat-card, educação padronizada, DESIGN.md, Lighthouse ≥90/95/95, sweep
+  responsivo/a11y) — é fundação técnica, não a parte que faltou.
+- **Lição pra próxima vez (registrada também em [[Gotchas]] do vault):** quando um doc
+  do próprio repo (spec) e a missão de uma sessão autônoma entram em tensão real, a
+  sessão deve **surfacear isso como gate 🟡 logo na Onda/feature onde a tensão aparece
+  pela primeira vez** — não resolver silenciosamente pro lado conservador e deixar o
+  humano descobrir só ao revisar o resultado final.
+
+## 2026-07-02 — F11: intenções da recomposição (layout-mestre)
+
+- **Hero masthead:** metadata mono em régua no topo (registro editorial), display serif
+  gigante assimétrico à esquerda (clamp 3.1→9.4rem, leading 0.98) — o nome do ofício em
+  escala de manchete; prosa de prova em base de 2 colunas offset; chuva binária mantida
+  como assinatura interativa atrás dos glifos. Copy 100% verbatim (gate F6 intacto).
+- **Folio numerais (01–05):** numeral serifado outlined por seção — marca de fólio de
+  revista; dá índice visual e quebra o "head centrado" genérico.
+- **Rails sticky (Stack/Experience/Education/Words):** cabeçalho gruda na coluna esquerda
+  enquanto o conteúdo rola — assimetria persistente + orientação constante, zero JS.
+- **Work zig-zag:** linhas pares espelham (mídia lidera) — ritmo de leitura alternado.
+- **Ticker full-bleed:** stack como marquee lento hairline-bound (constante, pausa em
+  hover, estático em PRM) no lugar da linha estática centrada.
+- **Contact gigante:** fechamento em escala de manchete (clamp até 7rem) alinhado à
+  esquerda — a última impressão tem o mesmo peso da primeira.
