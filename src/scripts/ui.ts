@@ -17,6 +17,25 @@ function initNav() {
     ([entry]) => nav.classList.toggle("scrolled", !entry.isIntersecting),
     { threshold: 0 }
   ).observe(sentinel);
+
+  // mobile menu (burger only rendered <720px via CSS)
+  const burger = document.getElementById("navBurger");
+  const menu = document.getElementById("navMenu");
+  if (!burger || !menu) return;
+  const setMenu = (open: boolean) => {
+    nav.classList.toggle("menu-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.toggleAttribute("inert", !open);
+  };
+  burger.addEventListener("click", () => setMenu(!nav.classList.contains("menu-open")));
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("menu-open")) {
+      setMenu(false);
+      burger.focus();
+    }
+  });
 }
 
 function initReveal() {
@@ -123,6 +142,7 @@ function initExperience() {
     const setOpen = (open: boolean, animate: boolean) => {
       xp.setAttribute("data-open", String(open));
       btn.setAttribute("aria-expanded", String(open));
+      panel.toggleAttribute("inert", !open); // collapsed content must not be tabbable
       if (!animate || reduce) {
         panel.style.height = open ? "auto" : "0px";
         return;
@@ -160,6 +180,7 @@ function initEducation() {
   const setOpen = (open: boolean, animate: boolean) => {
     wrap.setAttribute("data-open", String(open));
     btn.setAttribute("aria-expanded", String(open));
+    panel.toggleAttribute("inert", !open); // collapsed cert links must not be tabbable
     if (!animate || reduce) {
       panel.style.height = open ? "auto" : "0px";
       return;
@@ -184,6 +205,10 @@ function initEducation() {
 
 function initTheme() {
   const btn = document.getElementById("themeBtn");
+  btn?.setAttribute(
+    "aria-pressed",
+    String(document.documentElement.getAttribute("data-theme") === "dark")
+  );
   btn?.addEventListener("click", () => {
     const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
@@ -351,6 +376,8 @@ function initWalk() {
     };
     el.addEventListener("pointerenter", pause);
     el.addEventListener("pointerleave", play);
+    el.addEventListener("focusin", pause);
+    el.addEventListener("focusout", play);
     new IntersectionObserver(([e]) => (e.isIntersecting ? play() : pause()), { threshold: 0 }).observe(el);
   });
 }
@@ -582,14 +609,22 @@ async function initSmoothScroll() {
       requestAnimationFrame(raf);
     };
     requestAnimationFrame(raf);
-    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+    // Handles both "#work" and "/#work" (nav links are absolute so they also
+    // work from the case-study page, where they trigger a normal navigation).
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="/#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
-        const id = a.getAttribute("href");
-        if (!id || id === "#") return;
-        const target = document.querySelector<HTMLElement>(id);
+        const href = a.getAttribute("href") ?? "";
+        const hash = href.startsWith("/#") ? href.slice(1) : href;
+        if (href.startsWith("/#") && window.location.pathname !== "/") return; // cross-page: navigate
+        if (!hash || hash === "#") return;
+        const target = document.querySelector<HTMLElement>(hash);
         if (target) {
           e.preventDefault();
           lenis.scrollTo(target, { offset: -70 });
+          history.pushState(null, "", hash);
+          // keyboard/AT focus must follow the scroll, not stay in the nav
+          target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
         }
       });
     });
