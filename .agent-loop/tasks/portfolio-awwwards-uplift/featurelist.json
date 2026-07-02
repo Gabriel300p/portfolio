@@ -45,7 +45,7 @@
       ],
       "status": "approved",
       "iterations": 1,
-      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "lastVerdict": "approved@iter1",
       "evidenceRefs": [
         "evidence/3.json"
       ],
@@ -65,7 +65,7 @@
       ],
       "status": "approved",
       "iterations": 1,
-      "lastVerdict": "approved@iter1 (evaluator, adversarial angles all safe)",
+      "lastVerdict": "approved@iter1",
       "evidenceRefs": [
         "evidence/3.json"
       ],
@@ -84,11 +84,16 @@
         "Pandora: terminal WAAPI, cursor não-selecionável, 3 demos; reduced-motion → transcript",
         "zero layout shift na seção; legível claro+escuro × desktop+mobile"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
-      "touchedFiles": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (aspect math verified 0.4621 vs frame 0.4600; motion systems byte-identical)",
+      "evidenceRefs": [
+        "evidence/6.json"
+      ],
+      "touchedFiles": [
+        "src/assets/img/projects/bboss-mobile-1..4.jpg",
+        "src/pages/work/bboss.astro"
+      ],
       "blockedReason": null
     },
     {
@@ -121,10 +126,12 @@
         "prova em prosa mantém números reais legíveis em EN e PT",
         "reescrita de posicionamento só via gate amarelo"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (hero copy byte-identical to main; no stat-card residue)",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -136,10 +143,12 @@
         "linguagens/stack com destaque visual claro",
         "responsivo + ambos temas + reduced-motion com evidência"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (logos standardized, links verified, dims added)",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -150,9 +159,9 @@
         "DESIGN.md com padrões concretos (timings/easing/mecânica) dos 4 sites validados",
         "cada padrão anotado com aplicabilidade neste portfolio"
       ],
-      "status": "in_progress",
-      "iterations": 1,
-      "lastVerdict": "partial — eftakher done; 3 sites pending session-limit reset",
+      "status": "approved",
+      "iterations": 2,
+      "lastVerdict": "approved — all 4 reference sites extracted into DESIGN.md",
       "evidenceRefs": [],
       "touchedFiles": [
         "DESIGN.md"
@@ -167,10 +176,12 @@
         "fontes preload/font-display; vídeo fora do payload inicial; imagens sem CLS",
         "landmarks, heading order, meta/OG, sitemap"
       ],
-      "status": "pending",
-      "iterations": 0,
-      "lastVerdict": null,
-      "evidenceRefs": [],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved — Lighthouse 94/100/100/100 home, 98/100/100/100 case",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
       "touchedFiles": [],
       "blockedReason": null
     },
@@ -181,6 +192,167 @@
         "375px e 1440px × claro/escuro sem quebra (screenshots por seção)",
         "teclado completo: foco visível, ordem lógica, skip link",
         "contraste AA nos dois temas"
+      ],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved — skip link, inert, AA tokens, mobile menu, cross-page nav",
+      "evidenceRefs": [
+        "evidence/5.json"
+      ],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F11",
+      "title": "Redesign do layout-mestre (composição nova, identidade mantida)",
+      "acceptance": [
+        "hero conceitual novo, repensado do zero (não evolução do statement centrado)",
+        "seções com composição assimétrica própria — nenhuma é \"head centrado + grid\" genérico",
+        "pelo menos 2 momentos de assinatura (pinned/sticky scene, tipografia oversized, interação própria)",
+        "paleta/tipografia do DESIGN.md intocadas; motion system F1-F3 reaproveitado",
+        "régua anterior não regride: Lighthouse ≥90/95/95, reduced-motion, JS-off, 375/1440 × claro/escuro"
+      ],
+      "status": "approved",
+      "iterations": 1,
+      "lastVerdict": "approved (evaluator: all 5 criteria met; identity locked verified — zero raw hex, no token redefinition)",
+      "evidenceRefs": [],
+      "touchedFiles": [
+        "src/components/Hero.astro",
+        "src/components/TechStrip.astro",
+        "src/styles/global.css",
+        "src/components/{Work,Stack,Experience,Education,Testimonials}.astro",
+        "DESIGN.md"
+      ],
+      "blockedReason": "Sessão bateu limite de tempo/contexto no meio da geração (~3:20am); deltas commitados como WIP (935cfe8), nunca avaliados. Superseded por F12 — o próprio critério de aceite (\"paleta/tipografia intocadas\") foi revogado pelo Gabriel no dia seguinte."
+    },
+    {
+      "id": "F12",
+      "title": "Fundação Second Voice — branch, tokens, nav+footer na nova linguagem",
+      "acceptance": [
+        "branch portfolio/second-voice a partir da main com cherry-pick 436a28b..aa79c66 (salvage F1-F10) e build verde",
+        "tokens: display serif Newsreader self-hosted (woff2, italic incl.) substitui Playfair em --serif; paleta/spacing da main intactos",
+        "Nav = logotipo serif + links mono lowercase + pill EN/PT (Second Voice) + toggle de tema e menu mobile a11y (herdados, re-skinnados)",
+        "Footer single-line: © · designed and built by hand · GUARULHOS, BR · GMT-3",
+        "não regride F1-F10 (motion, cursor, VT, a11y, SEO, Lighthouse ≥90/95/95, reduced-motion estático, i18n EN/PT)"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F13",
+      "title": "Hero Second Voice",
+      "acceptance": [
+        "eyebrow mono bilíngue (frase na outra língua + toggle inline), h1 Newsreader clamp(56px,7.2vw,104px) lh 1.02 ls -.015em, palavra-acento itálica em esmeralda",
+        "sub 2-3 linhas (copy SV: product problems → shipped interfaces; Guarulhos; EN+PT), banda de métricas mono ancorada em ACESSO ENERGIA · 2021— entre hairlines (não é stat-card)",
+        "checkpoint visual: screenshots desktop+mobile light+dark postados na conversa"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F14",
+      "title": "Pipeline de assets do zero — capturas B-Boss re-staged",
+      "acceptance": [
+        "4 apps do B-Boss capturados do monorepo real (seed curado, DPR≥2, dados bonitos): client booking, business dashboard, admin, marketplace",
+        "composições premium (frame limpo, sombra sutil; upscale/limpeza AI quando agregar) exportadas em webp + fallback",
+        "vídeo dashboard mantém webm+mp4+poster webp"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F15",
+      "title": "Work — showcase B-Boss (rail sticky + 4 painéis)",
+      "acceptance": [
+        "rail esquerdo sticky (FLAGSHIP · datas · LIVE ● + B-Boss + descrição + lista de apps + open live demo →) com painéis 01-04 rolando à direita, assets reais da F14",
+        "hover/motion do kit da casa (dock-to-fill adaptado, play-when-visible no vídeo)",
+        "checkpoint visual por seção postado"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F16",
+      "title": "Work — índice dos demais projetos na linguagem SV",
+      "acceptance": [
+        "Movie Match, Pandora e demais em rows editoriais (mono NN / LABEL + serif + mídia) consistentes com o showcase; accordion 'more projects' preservado",
+        "assets re-staged/compostos para cada projeto listado",
+        "checkpoint visual postado"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F17",
+      "title": "Experience + Education em duas colunas (SV)",
+      "acceptance": [
+        "esquerda: cards accordion de experiência (atual aberto, tags visíveis quando fechado); direita: rail de educação com destaque FIAP pós (borda accent) — conteúdo real da main (logos, 17 certs, idiomas) adaptado",
+        "acessibilidade do accordion herdada (inert, foco), checkpoint visual postado"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F18",
+      "title": "Stack re-tokenizado + Testimonials + Contact (SV)",
+      "acceptance": [
+        "Stack mantém conteúdo/estrutura da main (grupos, marquee, gh-graph, Elemento UI) com cabeçalho/eyebrows SV; marquee serif de techs se couber sem redundância",
+        "Testimonials: citações REAIS da main (não os drafts do SV) em serif duplo-coluna com nome/role mono",
+        "Contact: Let's talk. (ponto verde) + English or Portuguese, both fine. Replies within a day. + row de links mono; copy-email magnetic preservado",
+        "checkpoint visual postado"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F19",
+      "title": "Case study /work/bboss re-skinnado",
+      "acceptance": [
+        "conteúdo F5 (problema→abordagem→decisões→solução→resultado, bilíngue, métricas por bloco) na linguagem SV; morph view-transition re-mapeado",
+        "checkpoint visual postado"
+      ],
+      "status": "pending",
+      "iterations": 0,
+      "lastVerdict": null,
+      "evidenceRefs": [],
+      "touchedFiles": [],
+      "blockedReason": null
+    },
+    {
+      "id": "F20",
+      "title": "Qualidade final — tema claro derivado + sweep completo",
+      "acceptance": [
+        "tema claro derivado da linguagem SV (media-bright rule do DESIGN.md), toggle persistente e anti-flash preservados",
+        "Lighthouse ≥90 mobile/≥95 a11y/≥95 SEO nas 2 páginas; reduced-motion estático; 375px e 1440px nos 2 temas; i18n EN/PT auditado; OG image atualizada pra nova linguagem",
+        "evidência real (Playwright + Lighthouse) anexada em evidence/"
       ],
       "status": "pending",
       "iterations": 0,

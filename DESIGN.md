@@ -18,8 +18,10 @@ No exclamation marks in UI copy. Bilingual EN-first with a PT-BR toggle (`data-e
 
 ## Type
 
-- **Display / serif:** Playfair (`--serif`) — headlines, project names, big statements. Italic
-  emphasis word is the signature (`<em>` inside h1/h2).
+- **Display / serif:** Newsreader (`--serif`, weight 400, self-hosted incl. italic) — headlines,
+  project names, big statements. Adopted 2026-07-02 from the "Second Voice" concept (D-SV2);
+  replaces Playfair. Tight display tracking (−.015em) and lh ≈1.02–1.08 at large sizes. Italic
+  emphasis word stays the signature (`<em>` inside h1/h2) — in the hero it is also emerald.
 - **Body / sans:** Geist (`--sans`) — 17px base, line-height ~1.62, tracking −0.006em.
 - **Metadata / mono:** Geist Mono (`--mono`) — labels, tags, stats, timestamps. `tabular-nums`
   for any numbers. Uppercase + wide tracking only for small kicker labels.
@@ -38,23 +40,33 @@ One accent only: emerald. Semantic tokens in `src/styles/global.css` (`:root` /
 
 ## Layout
 
-Max-width 1160px, fluid pad `clamp(20px,5vw,56px)`. Editorial asymmetry: narrow text column /
-large media. Fill the fold; avoid oceans of empty vertical space — vertical rhythm should feel
-intentional, not padded-out. Register-mark crosshairs are a quiet editorial motif.
+Max-width 1160px for prose sections, fluid pad `clamp(20px,5vw,56px)`; hero and Work may
+breathe wider (~1360px) per the Second Voice composition. Editorial asymmetry: narrow text
+column / large media. Fill the fold; avoid oceans of empty vertical space — vertical rhythm
+should feel intentional, not padded-out.
+
+**Second Voice motifs (2026-07-02):** small `+` crosshair before every section kicker (the
+register-mark heritage, now systematized); mono uppercase eyebrows — sections as `+ LABEL`,
+sub-items as `NN / LABEL` in accent; full-width hairline rules (`--line`) separating bands;
+serif logotype "Gabriel Andrade" in the nav with mono lowercase links and an EN/PT pill.
 
 ## Motion (all gated on `prefers-reduced-motion`)
 
 Lenis smooth scroll; staggered `data-reveal` entrances (GPU transform+opacity); title wipe
-reveal; magnetic buttons; cursor-revealed green binary rain in the hero; project carousels.
+reveal; magnetic buttons; project carousels. The hero binary rain is retired with the Second
+Voice hero (D-SV: the approved hero is clean; big type carries it) — code may return later as
+a hover easter egg if the hero ever feels static.
 **Progressive enhancement is mandatory:** the page must be fully readable with JS disabled —
 reveal starts visible and is only armed once `html.js` is set.
 
 ## Proof
 
-Surface real numbers as first-class UI, not buried in an accordion: 5 years · 1,000+ screens ·
-200+ flows · design system from scratch (Acesso Energia). Every featured project carries one
-concrete metric line (mono, tabular-nums). Testimonials come from real LinkedIn recommendations
-with named people and roles.
+Surface real numbers as first-class UI, not buried in an accordion — but never as a floating
+stat-card. The hero closes with a hairline-bounded mono band anchored to its source:
+`1,000+ SCREENS SHIPPED · 200+ PRODUCT FLOWS · 1 DESIGN SYSTEM, FROM ZERO` left,
+`ACESSO ENERGIA · 2021—` right. Every featured project carries one concrete metric line
+(mono, tabular-nums). Testimonials come from real LinkedIn recommendations with named people
+and roles — never draft/invented quotes.
 
 ## References
 
@@ -142,3 +154,47 @@ carries the personality.** Don't stack more scroll motion than the panel scrubs.
 - **Hover:** 200–450ms, `--ease-expo` or `ease`; tilt settle ≤ 450ms.
 - **Reduced motion:** blanket kill (`* { animation/transition: none }`) + static final
   frames; JS inits early-return (`reduceMotion`).
+
+## Second Voice composition (adopted 2026-07-02 — F12–F20)
+
+Source of record: `docs/design/second-voice.html` (self-contained Claude Design concept,
+EN+PT copy embedded; media panels are placeholders by design). It was authored on main's
+dark tokens (`#16150F` / cream / `#3ddc84` / Geist / Geist Mono) — dark theme adopts it
+verbatim; light theme is derived under the media-bright rule. Per-section source map
+(Gabriel's picks, 2026-07-02):
+
+- **Nav** *(SV)* — serif logotype "Gabriel Andrade", mono lowercase links (work · experience
+  · contact), EN/PT pill (active = accent). Carry from the old stack: theme toggle,
+  accessible mobile menu, cross-page `/#hash` links.
+- **Hero** *(SV, as approved)* — mono eyebrow showing the phrase in the *other* language +
+  inline lang hint; h1 Newsreader `clamp(56px, 7.2vw, 104px)` lh 1.02, accent word italic
+  emerald ("end to end." / "de ponta a ponta."); 3-line sub (product problems → shipped
+  interfaces; Guarulhos; EN+PT); hairline-bounded mono metrics band anchored to
+  `ACESSO ENERGIA · 2021—`. No binary rain.
+- **Work / B-Boss showcase** *(SV structure, assets from scratch)* — sticky left rail
+  (`+` · FLAGSHIP · SEP 2025–PRESENT · LIVE ● / serif "B-Boss" / one-paragraph story /
+  numbered app list / "Open live demo →") with four media panels scrolling on the right,
+  each labeled `NN / APP NAME` in mono accent. Panels get restaged real captures (F14),
+  video keeps webm+mp4+poster.
+- **Work / project index** *(new, in SV language)* — remaining projects (Movie Match,
+  Pandora, …) as editorial rows consistent with the showcase; "more projects" accordion
+  content preserved from main.
+- **Experience + Education** *(SV)* — two columns: left, experience accordion cards
+  (current role open with bullets + mono tags; earlier roles collapsed, tags visible);
+  right, education rail with FIAP pós highlighted by an accent left-border, then FIAP
+  degree, Alura DS, Google UX. Fold in main's richer content (institution logos, 17-cert
+  accordion, languages block) without breaking the two-column rhythm.
+- **Stack** *(main content, SV dress)* — keep main's structure (grouped skills, tech-logo
+  marquee, GitHub contribution graph card, Elemento UI / open-source block); restyle heads
+  to SV eyebrows; SV's 4-column grouping (Product Design / Frontend / AI-assisted
+  workflows / Tools) may inform the grouping labels.
+- **Testimonials** *(SV dress, main content)* — two serif quotes side by side, name +
+  mono role/context below; use the REAL LinkedIn quotes from main (SV's are drafts).
+- **Contact** *(SV)* — serif "Let's talk`.`" (accent period), sub "English or Portuguese,
+  both fine. Replies within a day.", mono links row (email underlined accent · LINKEDIN ↗
+  · GITHUB ↗ · RESUME ↗). Keep copy-email + magnetic interaction.
+- **Footer** *(SV)* — single hairline band: `© 2026 Gabriel Andrade · designed and built
+  by hand` left, `GUARULHOS, BR · GMT-3` right.
+- **Case study `/work/bboss`** — keep F5 content structure (problem → approach → decisions
+  → solution → outcome, bilingual, one metric per block); re-skin shells to this language;
+  re-map the `bboss-stage` view-transition morph.

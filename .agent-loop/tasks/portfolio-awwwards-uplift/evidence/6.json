@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1",
+  "iteration": 6,
+  "feature": "F4",
+  "git": { "branch": "portfolio/fable-polish-loop", "dirty": false },
+  "results": [
+    { "name": "build", "cmd": "pnpm build", "exitCode": 0, "passed": true, "required": true, "summary": "0 errors" },
+    {
+      "name": "real-app-boot",
+      "cmd": "docker run postgres:16 (bboss-capture-pg :5433) + prisma migrate deploy + seed.ts + pnpm dev:api/dev:client with local DATABASE_URL/DIRECT_URL",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "api /api/test/health 200; client :3001 200; 12 barbershops / 26 units seeded; shared Neon never touched (env override, run-seeds.sh avoided)"
+    },
+    {
+      "name": "capture",
+      "cmd": "playwright 390x844 @3x logged in as seeded client (marcelo.silva)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "4 screens 780x1688 (aspect 0.462 ≈ frame 1206/2622=0.460, no crop): home, search (13 real cards, distance sort), detail (gallery +4, Agendar/Gerar passe), profile; TanStack devtools FAB hidden"
+    },
+    {
+      "name": "asset-swap",
+      "cmd": "sharp resize 780 → src/assets/img/projects/bboss-mobile-{1..4}.jpg (same filenames, alts updated)",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "was 204x769 design exports cropped ~40% by object-fit:cover; visual check .playwright-mcp/f4-bboss-showcase-new.jpeg"
+    },
+    {
+      "name": "spec-gates-carryover",
+      "cmd": "verified in evidence 1-5",
+      "exitCode": 0, "passed": true, "required": true,
+      "summary": "video IO-gated threshold .5 preload=none poster webp; Movie Match walkthrough + reduced-motion static; Pandora WAAPI terminal aria-safe; CLS 0 (Lighthouse both pages)"
+    }
+  ],
+  "knownGaps": [
+    "repo SQL seeds stale vs schema → services/appointments/reviews empty; booking/history screens deferred until seeds fixed",
+    "captures show 'Fechado' (taken outside business hours); re-capture in daytime for green 'Aberto' badges if desired",
+    "search list shows 'unit' suffix duplication — real app bug worth fixing in bboss-monorepo"
+  ]
+}

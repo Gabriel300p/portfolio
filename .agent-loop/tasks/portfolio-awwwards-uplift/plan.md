@@ -58,3 +58,25 @@ gates 🟡 pendentes batched.
 GENERATE (design-pipeline ou dev-pipeline) → EVIDENCE (build + Playwright real) →
 EVALUATE (subagente read-only, veredito sobre EvidenceReport) → REPAIR (máx ~3
 iterações) → próxima feature. Nunca autoavaliação como aprovado.
+
+## Fase 6 — Second Voice (F12–F20, sessão 3, 2026-07-02)
+
+Direção travada pelo Gabriel: base = main + enxertos do conceito "Second Voice"
+(`docs/design/second-voice.html`). Branch de execução: `portfolio/second-voice`
+(main + cherry-pick 436a28b^..aa79c66; F11 descartada por construção).
+
+Ordem de execução (uma feature = uma seção = um checkpoint visual assíncrono):
+1. **F12** fundação — tokens (Newsreader), nav + footer SV, build verde
+2. **F13** hero SV
+3. **F14** pipeline de assets (capturas B-Boss re-staged + composições IA)
+4. **F15** showcase B-Boss (rail sticky + 4 painéis)
+5. **F16** índice dos demais projetos
+6. **F17** experience + education (2 colunas)
+7. **F18** stack re-tokenizado + testimonials reais + contact
+8. **F19** case study re-skin
+9. **F20** tema claro derivado + sweep de qualidade (Lighthouse/a11y/RM/i18n/OG)
+
+Método: Generator implementa (design skill invocada por seção) → Evaluator adversarial
+read-only julga com evidência real (Playwright/Lighthouse) → commit por seção →
+screenshots postados na conversa (veto do Gabriel reabre como repair). Regras vivas:
+tensão ambição×cautela vira anúncio 🟡 imediato; nunca acumular trabalho sem commit.

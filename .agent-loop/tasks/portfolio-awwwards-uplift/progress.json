@@ -2,10 +2,10 @@
   "schemaVersion": "1",
   "task": "portfolio-awwwards-uplift",
   "state": "GENERATE",
-  "iteration": 4,
-  "color": "yellow",
+  "iteration": 7,
+  "color": "green",
   "needsHuman": false,
-  "currentFeature": "F5",
+  "currentFeature": "F12",
   "pendingGate": null,
   "gateResolutions": [
     {
@@ -14,6 +14,27 @@
       "by": "user",
       "at": "2026-07-01T23:30:00-03:00",
       "note": "Contrato semeado e autorizado pelo prompt da missão do Gabriel (sessão autônoma de longa duração; gates amarelos pontuais permanecem)."
+    },
+    {
+      "type": "direction",
+      "decision": "approve",
+      "by": "user",
+      "at": "2026-07-02T03:05:00-03:00",
+      "note": "Gabriel: entrega anterior visualmente mínima; autoriza redesign do LAYOUT-MESTRE mantendo identidade (warm paper, Playfair+Geist, esmeralda) e hero repensado DO ZERO. Isto substitui a regra \"not re-theme\" da spec para composição/layout; paleta e tipografia continuam fixas."
+    },
+    {
+      "type": "direction",
+      "decision": "superseded",
+      "by": "user",
+      "at": "2026-07-02T10:00:00-03:00",
+      "note": "Sessão anterior parou em F11 no meio (limite de sessão/contexto), com F1-F10 aprovados mas o resultado ainda pareceu 'quase nada mudou' pro Gabriel. Ele pediu documentação arrumada + um prompt novo, e ampliou o mandato: design (incl. paleta/tipografia/layout-mestre), textos e assets estão TODOS abertos a evoluir agora — a restrição anterior 'paleta e tipografia continuam fixas' está revogada. Ver decisions.md e o novo prompt em resources/portfolio/ (vault)."
+    },
+    {
+      "type": "direction",
+      "decision": "approve",
+      "by": "user",
+      "at": "2026-07-02T15:05:00-03:00",
+      "note": "Gabriel escolheu (AskUserQuestion): base = main + enxertos do conceito 'Second Voice' (Claude Design) — hero, work e experience+education vêm do SV adaptados; Stack mantém a main; assets de projeto DO ZERO (capturas reais re-staged + composições com IA); checkpoints visuais por seção, ASSÍNCRONOS (postar e seguir, não bloquear — 'o loop é exatamente para trabalhar sozinho'). F12 expandida em F12-F20 (uma feature por seção/checkpoint)."
     }
   ],
   "budget": {
@@ -27,12 +48,12 @@
     }
   },
   "lastVerdict": {
-    "feature": "F3",
+    "feature": "F4",
     "verdict": "approved",
     "outOfScope": false,
     "blocked": false,
-    "evidenceRef": "evidence/3.json",
-    "reasonsRef": "evaluation.md"
+    "evidenceRef": "evidence/6.json",
+    "reasonsRef": "evaluation.md#iteracao-6"
   },
   "history": [
     {
@@ -62,7 +83,27 @@
     {
       "state": "GENERATE",
       "at": "2026-07-02T01:12:00-03:00"
+    },
+    {
+      "state": "EVALUATE",
+      "at": "2026-07-02T02:25:00-03:00"
+    },
+    {
+      "state": "GATE_MERGE",
+      "at": "2026-07-02T02:40:00-03:00"
+    },
+    {
+      "state": "GENERATE",
+      "at": "2026-07-02T03:05:00-03:00"
+    },
+    {
+      "state": "BLOCKED",
+      "at": "2026-07-02T03:20:00-03:00"
+    },
+    {
+      "state": "GATE_MERGE",
+      "at": "2026-07-02T04:05:00-03:00"
     }
   ],
-  "stoppedReason": null
+  "stoppedReason": "budget — sessão bateu limite de tempo/contexto (reset ~3:20am) no meio da geração de F11; deltas não-commitados foram commitados depois (935cfe8) como checkpoint WIP, não avaliados. Retomada exige novo prompt (mandato ampliado, ver gateResolutions)."
 }

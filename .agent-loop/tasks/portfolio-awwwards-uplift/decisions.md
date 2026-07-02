@@ -1,6 +1,7 @@
 ---
+date: 2026-07-02
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-02
 task: portfolio-awwwards-uplift
 status: active
 description: "Portfolio Awwwards uplift — log de decisões (agent-loop, ADR-lite)"
@@ -146,3 +147,86 @@ tags:
 - **Motivo:** 2.7:1/3.4:1 falhavam AA em ~28 usos incluindo texto corrido (.hero-sub);
   ajuste de VALOR na mesma família de matiz, não mudança de paleta (regra DESIGN.md
   intacta: temas trocam valores, não regras).
+
+## 2026-07-02 — Gate amarelo resolvido: redesign do layout-mestre autorizado (F11)
+
+- **Contexto:** Gabriel avaliou a entrega das F1-F10 como "mudanças mínimas" — esperava
+  redesign completo. A tensão spec ("not re-theme") vs missão ("candidato a SOTD") tinha
+  sido resolvida pro lado conservador; o dono do gate escolheu o outro lado.
+- **Decisão:** redesign do LAYOUT-MESTRE mantendo identidade (warm paper, Playfair+Geist,
+  esmeralda única) + hero repensado do zero. Re-theme total foi oferecido e rejeitado.
+- **Motivo:** a dimensão mais fraca da régua Awwwards é Creativity — composição, não
+  craft. O craft (motion/perf/a11y) aprovado nas F1-F10 é fundação, não concorrente.
+
+## 2026-07-02 — F11 interrompida por limite de sessão; mandato ampliado (F12 substitui F11)
+
+- **Contexto:** a sessão bateu limite de tempo/contexto (~3:20am) no meio da geração de
+  F11 — deltas em Hero/Stack/Experience/Education/TechStrip/Testimonials/Work +
+  global.css ficaram não-commitados e não-avaliados. Commitados como checkpoint WIP
+  (`935cfe8`) numa sessão vault de arrumação de documentação, sem claim de conclusão.
+  Gabriel revisou o resultado geral (F1-F10 + o pedaço de F11) na manhã seguinte e achou
+  que ainda "quase nada mudou" — o veredito repetiu o mesmo padrão que motivou o gate de
+  F11 no dia anterior.
+- **Causa raiz identificada:** o `contract.md` original fixava
+  "Precedência de fontes: spec do repo > prompt da missão > DESIGN.md" — e a spec do
+  repo (`docs/superpowers/specs/2026-07-01-portfolio-showcases-redesign-design.md`)
+  trazia "re-theme (paleta, tipografia, layout-mestre são fixos)" como fora de escopo.
+  Essa regra de precedência fez o Generator resolver a tensão
+  "ambição Awwwards vs. conservadorismo da spec" **sempre a favor do lado seguro**,
+  silenciosamente, feature após feature — só surgiu como gate visível no fim (F11), e
+  mesmo aí só parcialmente (paleta/tipografia continuaram travadas).
+- **Decisão:** revogar "paleta, tipografia, layout-mestre são fixos" — Gabriel autoriza
+  evoluir **design (incl. paleta/tipografia/layout-mestre), textos/copy e assets**, não
+  só composição. F11 marcada `blocked` (superseded); **F12** a abre com escopo amplo.
+  Novo prompt autônomo gerado (vault, `resources/portfolio/`) supersede o anterior
+  (`prompt-loop-awwwards-uplift.md`) especificamente nessa restrição.
+- **O que NÃO muda:** F1-F10 continuam aprovadas e não devem regredir (motion
+  scroll-linked, cursor, view transitions, showcases reais, case study, hero sem
+  stat-card, educação padronizada, DESIGN.md, Lighthouse ≥90/95/95, sweep
+  responsivo/a11y) — é fundação técnica, não a parte que faltou.
+- **Lição pra próxima vez (registrada também em [[Gotchas]] do vault):** quando um doc
+  do próprio repo (spec) e a missão de uma sessão autônoma entram em tensão real, a
+  sessão deve **surfacear isso como gate 🟡 logo na Onda/feature onde a tensão aparece
+  pela primeira vez** — não resolver silenciosamente pro lado conservador e deixar o
+  humano descobrir só ao revisar o resultado final.
+
+## 2026-07-02 — F11: intenções da recomposição (layout-mestre)
+
+- **Hero masthead:** metadata mono em régua no topo (registro editorial), display serif
+  gigante assimétrico à esquerda (clamp 3.1→9.4rem, leading 0.98) — o nome do ofício em
+  escala de manchete; prosa de prova em base de 2 colunas offset; chuva binária mantida
+  como assinatura interativa atrás dos glifos. Copy 100% verbatim (gate F6 intacto).
+- **Folio numerais (01–05):** numeral serifado outlined por seção — marca de fólio de
+  revista; dá índice visual e quebra o "head centrado" genérico.
+- **Rails sticky (Stack/Experience/Education/Words):** cabeçalho gruda na coluna esquerda
+  enquanto o conteúdo rola — assimetria persistente + orientação constante, zero JS.
+- **Work zig-zag:** linhas pares espelham (mídia lidera) — ritmo de leitura alternado.
+- **Ticker full-bleed:** stack como marquee lento hairline-bound (constante, pausa em
+  hover, estático em PRM) no lugar da linha estática centrada.
+- **Contact gigante:** fechamento em escala de manchete (clamp até 7rem) alinhado à
+  esquerda — a última impressão tem o mesmo peso da primeira.
+
+---
+
+## Sessão 3 (2026-07-02, tarde) — direção "Second Voice" travada
+
+### D-2026-07-02-SV1 — Conceito Second Voice (Claude Design) vira a linguagem-alvo, enxertado na base da main
+Gabriel avaliou 3 fontes: main (gosta do Stack), branch `portfolio/fable-polish-loop` (rejeitou TODO o visual F11), e o conceito "Second Voice" gerado pelo Claude Design a partir do brief do vault (gostou do hero, do work e de experience+education). Decisão dele (AskUserQuestion): **base = tokens da main + enxertos SV adaptados**. Análise técnica confirmou atrito baixo: o SV usa literalmente os tokens dark da main (`#16150F`, texto cream, esmeralda `#3DDC84`, Geist body, Geist Mono labels). Referência arquivada em `docs/design/second-voice.html` (auto-contido, com copy EN+PT embutida).
+
+### D-2026-07-02-SV2 — 🟡 anunciado: display serif Playfair → Newsreader
+A voz tipográfica do hero que o Gabriel aprovou É o Newsreader 400 com tracking apertado (clamp 56→104px, lh 1.02) — mais leve e editorial que o Playfair. Trocar a display é mudança de temperatura de marca (gate 🟡 do v2): decidido ADOTAR Newsreader site-wide, mantendo a assinatura do itálico de ênfase (agora em esmeralda no h1). Playfair sai; Geist/Geist Mono ficam. Self-host via woff2 (Google Fonts, licença OFL). Anunciado na conversa, não bloqueante — Gabriel pode vetar no checkpoint da F13.
+
+### D-2026-07-02-SV3 — 🟡 anunciado: SV é dark-only; mantemos dual-theme
+O SV foi desenhado só no dark. Mantemos o sistema de temas da main: dark adota o SV verbatim (mesmos tokens), light é DERIVADO na F20 seguindo a media-bright rule do DESIGN.md (papel quente `#f5f4ef`, esmeralda `#0b7d45`). Toggle, persistência e anti-flash preservados.
+
+### D-2026-07-02-SV4 — Estratégia de branch: `portfolio/second-voice` a partir da main
+Em vez de reverter F11 na branch antiga: branch nova da main + cherry-pick do range contíguo `436a28b^..aa79c66` (todo o salvage F1-F10: reveal system+failsafe, cursor, VT, mp4+poster, case study F5, a11y/SEO F9-F10, capturas hi-res, cross-page nav). Replay limpo, build verde. F11 (masthead/rails/folios/zig-zag) fica para trás por construção. Estado `.agent-loop` trazido do tip da branch antiga. `portfolio/fable-polish-loop` preservada como histórico.
+
+### D-2026-07-02-SV5 — Assets de projeto nascem do zero (pipeline híbrido)
+Os painéis de mídia do SV são placeholders explícitos ("DROP REAL SCREENSHOT"). Pipeline: capturas reais re-staged do monorepo B-Boss (seed curado via Docker + Playwright, DPR≥2 — processo já documentado na F4) + composições premium com IA quando agregar acabamento (upscale/limpeza; nunca inventar UI que não existe). Formato final webp + fallbacks.
+
+### D-2026-07-02-SV6 — Checkpoints por seção, assíncronos
+Gabriel: "Não precisa pausar a sessão... O loop é exatamente para trabalhar sozinho." Cada feature F13+ posta screenshots (desktop+mobile, temas) na conversa como checkpoint e o loop SEGUE; veto dele reabre a feature como repair. Isso substitui o gate bloqueante, mantendo a lição do v1 (tensão anunciada cedo, nunca silêncio).
+
+### D-2026-07-02-SV7 — Testimonials do SV são drafts; usar as citações reais
+O SV traz quotes marcadas "draft quotes — replace with each author's real words". As citações reais (Alexandre Dutra, Matheus Moraes — LinkedIn) já existem na main e são as únicas permitidas. Copy do SV para hero/contact é aproveitável (foi escrita sobre fatos reais do brief); qualquer copy nova segue a voz do DESIGN.md.

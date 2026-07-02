@@ -1,6 +1,7 @@
 ---
+date: 2026-07-02
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-02
 task: portfolio-awwwards-uplift
 status: active
 description: "Portfolio Awwwards/Pafolios uplift — contrato de execução (agent-loop)"
@@ -8,6 +9,13 @@ tags:
   - agent-loop
   - contract
 ---
+
+> **Atualizado 2026-07-02 (F12):** a regra de precedência abaixo ("spec do repo > prompt
+> da missão") e a exclusão de re-theme foram a causa raiz de F1-F10 saírem
+> visualmente conservadoras — a spec do repo (mais antiga, mais cautelosa) sempre
+> venceu silenciosamente contra a ambição da missão. **Revogado por Gabriel:** ver
+> `## Escopo` e `## Fora de escopo` atualizados abaixo, e a entrada de 2026-07-02 em
+> `decisions.md`. F1-F10 continuam válidas e não devem regredir.
 
 # Contract — Portfolio Awwwards/Pafolios uplift
 
@@ -22,9 +30,13 @@ contra as 6 dimensões do Awwwards Developer Award: Animations/Transitions, Acce
 Responsive, Performance/WPO, Semantics/SEO, Creativity técnica. A régua é concreta
 (critérios testáveis por feature), não adjetivo.
 
-Precedência de fontes: spec do repo
-(`docs/superpowers/specs/2026-07-01-portfolio-showcases-redesign-design.md`) >
-prompt da missão > DESIGN.md (SSOT vivo, atualizado durante o trabalho).
+Precedência de fontes (revisada 2026-07-02): **prompt da missão vigente > DESIGN.md
+(SSOT vivo) > spec do repo**. A spec original
+(`docs/superpowers/specs/2026-07-01-portfolio-showcases-redesign-design.md`) foi escrita
+antes da régua Awwwards/Pafolios existir e é conservadora por padrão ("not re-theme") —
+ela deixou de ter precedência sobre a missão porque essa precedência é o que causou F1-F10
+saírem visualmente mínimas (ver `decisions.md`, 2026-07-02). Trate a spec como referência
+histórica de intenção, não como teto de escopo.
 
 ## Escopo
 
@@ -38,9 +50,15 @@ prompt da missão > DESIGN.md (SSOT vivo, atualizado durante o trabalho).
 ## Fora de escopo
 
 - Página/seção nova não pedida (blog, newsletter) → `scope_creep`.
-- Troca de framework/stack; re-theme (paleta, tipografia, layout-mestre são fixos).
+- Troca de framework/stack (Astro estático continua).
 - `git push`/merge em `main`, deploy → 🔴 sempre bloqueado.
 - Refatorar áreas fora da feature atual "só porque".
+- ~~Re-theme (paleta, tipografia, layout-mestre são fixos)~~ — **revogado 2026-07-02.**
+  Paleta, tipografia, layout-mestre, copy e assets estão todos abertos a evoluir na F12
+  se servirem a régua Awwwards/Pafolios. O único invariante de marca é: ainda parece
+  Gabriel (voz editorial, não vira SaaS genérico), nunca usa "remote"/"founder", nunca
+  cai em clichê de AI-slop. Ver F12 em `featurelist.json` e o prompt em
+  `resources/portfolio/` no vault.
 
 ## Features
 

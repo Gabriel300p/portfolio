@@ -100,3 +100,55 @@ tags:
   is clean"); demais critérios todos verificados por ele no código.
 - Bônus: link morto github.com/Gabriel300p/landing-pages (404 real) removido do
   accordion More projects.
+
+## Iteração 5 — F6+F7+F9+F10 (2026-07-02)
+
+### Evidência
+
+| Comando | Passou | Resumo |
+| --- | --- | --- |
+| Lighthouse home (prod, mobile) | ✅ | Perf 94 · A11y 100 · BP 100 · SEO 100 · CLS 0 |
+| Lighthouse case study | ✅ | Perf 98 · A11y 100 · BP 100 · SEO 100 |
+| sub-audits a11y | ✅ | zero falhando após fix do lang button |
+| teclado/skip/inert | ✅ | Playwright real |
+| menu mobile 375px | ✅ | abre/fecha/navega, aria, stagger |
+| contraste AA | ✅ | 4.53:1 / 4.98:1 (Evaluator recomputou independente) |
+
+### Veredito
+
+- **F6/F7/F9/F10: approved** (Evaluator verificou cada alavanca no código; hero
+  byte-idêntico ao main — gate amarelo de copy nunca foi acionado).
+- Gap conhecido não-bloqueante: sem JS em <720px não há menu (não é regressão;
+  conteúdo alcançável por scroll).
+
+## Iteração 6 — F4 (2026-07-02)
+
+### Evidência
+
+- Boot real do bboss-monorepo (Docker PG descartável) + 4 capturas retina do client
+  PWA logado; assets 780×1688 substituem exports 204×769. evidence/6.json.
+
+### Veredito
+
+- **F4:** approved — aspecto 0.4621 vs frame 0.4600 (delta 0.45%, crop resolvido); sistemas de motion byte-idênticos ao estado aprovado
+
+## Iteração 7 — F11 redesign do layout-mestre (2026-07-02)
+
+### Evidência
+
+| Comando | Passou | Resumo |
+| --- | --- | --- |
+| build | ✅ | 0 erros |
+| Lighthouse prod mobile | ✅ | 94/100/100/100 · CLS 0 · 0 sub-audits falhando |
+| reduced-motion | ✅ | ticker estático, 0 escondidos |
+| h-scroll 375/1440 | ✅ | nenhum |
+| PT + dark | ✅ | hero/mast/cue traduzem; dark ok |
+| sticky rail | ✅ | position sticky ativo (teste sem Lenis) |
+
+### Veredito
+
+- **F11: approved** — Evaluator verificou: hero é conceito novo (não evolução), zero
+  seção "head centrado" restante, ≥2 momentos de assinatura, identidade travada (zero
+  hex cru, nenhuma redefinição de token), copy do hero byte-idêntica (3 rótulos
+  composicionais novos i18n'd — flag para Gabriel). Ajustes aplicados pós-veredito:
+  mobile zig-zag texto-primeiro + folio silencioso para AT.
