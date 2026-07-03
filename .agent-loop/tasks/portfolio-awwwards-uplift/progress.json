@@ -35,6 +35,13 @@
       "by": "user",
       "at": "2026-07-02T15:05:00-03:00",
       "note": "Gabriel escolheu (AskUserQuestion): base = main + enxertos do conceito 'Second Voice' (Claude Design) — hero, work e experience+education vêm do SV adaptados; Stack mantém a main; assets de projeto DO ZERO (capturas reais re-staged + composições com IA); checkpoints visuais por seção, ASSÍNCRONOS (postar e seguir, não bloquear — 'o loop é exatamente para trabalhar sozinho'). F12 expandida em F12-F20 (uma feature por seção/checkpoint)."
+    },
+    {
+      "type": "merge",
+      "decision": "pending",
+      "by": "user",
+      "at": "2026-07-02T22:16:00-03:00",
+      "note": "Gabriel autorizou ABRIR PR (portfolio/second-voice -> main) para revisão; forneceu URLs de demo (stage-app / stage-painel). Link 'Open live demo' adicionado ao rail apontando pro app cliente. PR aberto pelo orquestrador; merge fica com Gabriel."
     }
   ],
   "budget": {

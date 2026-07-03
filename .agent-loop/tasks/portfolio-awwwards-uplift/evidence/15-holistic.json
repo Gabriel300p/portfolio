@@ -1,0 +1,17 @@
+{
+  "scope": "holistic cross-feature (main...portfolio/second-voice)",
+  "iteration": 15,
+  "verdict": "approved",
+  "evaluator": "change-verifier subagent (adversarial, read-only, 9-check sweep)",
+  "checks_passed": [
+    "build 2 pages",
+    "0 orphan/dead refs (Playfair/mp4/mobile-jpg/removed components/hero-rain/clock)",
+    "transition:all=0, F11 selectors absent",
+    "i18n index 119/119 case 54/54",
+    "VT bboss-stage 1:1 per page, no dup names",
+    "a11y: skip-link, 1 h1, all img alt, video aria-label, accordions aria",
+    "remote/founder=0 both pages, real testimonials",
+    "nav anchors #work/#stack/#experience/#education/#contact all exist",
+    "all 29 HTML + 6 CSS assets resolve"
+  ]
+}
