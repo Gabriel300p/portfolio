@@ -1,376 +1,189 @@
 ---
 import { Image } from "astro:assets";
-import svClientHome from "../assets/img/projects/sv/client-home.png";
-import svClientDetail from "../assets/img/projects/sv/client-barbershop-detail.png";
-import svClientSearch from "../assets/img/projects/sv/client-search.png";
-import svClientPass from "../assets/img/projects/sv/client-pass.png";
-import svAdmin from "../assets/img/projects/sv/admin-dashboard.png";
-import mmHome from "../assets/img/projects/moviematch-home.png";
-import mmSearch from "../assets/img/projects/moviematch-search.png";
-import mmFilter from "../assets/img/projects/moviematch-filter.png";
-import mmDetail from "../assets/img/projects/moviematch-detail.png";
-import mmList from "../assets/img/projects/moviematch-list.png";
+import pandoraBox from "../assets/img/work/pandora-box.webp";
+import bbossShot from "../assets/img/work/bboss.webp";
+import allumoveShot from "../assets/img/work/allumove.webp";
 
-// B-Boss panels: real captures from the running product (F14 pipeline)
-const bookingPhones = [svClientHome, svClientDetail];
-const marketPhones = [svClientSearch, svClientPass];
-// Movie Match walkthrough: browse → search → refine → decide → save
-const moviePhones = [mmHome, mmSearch, mmFilter, mmDetail, mmList];
-
-const bbApps = [
-  { n: "01", en: "client booking", pt: "agendamento" },
-  { n: "02", en: "business dashboard", pt: "painel do negócio" },
-  { n: "03", en: "admin", pt: "admin" },
-  { n: "04", en: "marketplace", pt: "marketplace" },
+// Pandora flow: the delivery loop, as a diagram. Public-safe, no vault content.
+const steps = [
+  { n: "01", title: "Intake", body: "Notes, specs and sessions land in a Markdown-first vault." },
+  { n: "02", title: "Plan", body: "A task is scoped with acceptance criteria before any code." },
+  { n: "03", title: "Agents", body: "Claude Code, Codex and Hermes execute bounded work in parallel." },
+  { n: "04", title: "Evidence", body: "The harness collects test and build proof. Agents never self-approve." },
+  { n: "05", title: "Delivery", body: "Reviewed, merged and verified in the real destination." },
 ];
 
-const more = [
+const stats = [
+  { v: "3,000+", l: "commits" },
+  { v: "~4 mo", l: "of daily use" },
+  { v: "24", l: "skills" },
+  { v: "28", l: "subagents" },
+  { v: "1,000+", l: "documented tasks" },
+];
+
+const decisions = [
   {
-    name: "Landing kernel",
-    blurb: {
-      en: "One codebase syncing many client landing pages, config-validated in TypeScript with tooling to spin up and export each client.",
-      pt: "Uma base sincronizando várias landing pages de clientes, config validada em TypeScript, com tooling para criar e exportar cada cliente.",
-    },
-    tags: ["System", "TypeScript", "Nx"],
+    t: "Evidence over claims.",
+    b: "A worker's \"done\" is not verification. The harness runs the checks and an independent reviewer judges the result.",
   },
   {
-    name: "Check Mídia",
-    blurb: {
-      en: "A marketing agency site designed and built from scratch: hero, services, FAQ, and a clear path to contact.",
-      pt: "Site de agência de marketing projetado e construído do zero: hero, serviços, FAQ e um caminho claro até o contato.",
-    },
-    tags: ["Website", "Next.js", "Design + build"],
-    href: "https://www.checkmidia.com/",
+    t: "One source of truth.",
+    b: "Every rule has one canonical owner; each agent's entry file is a thin adapter that points to it.",
   },
   {
-    name: "Safira",
-    blurb: {
-      en: "An MVP management platform for an animal-welfare NGO, shipped in about a month.",
-      pt: "Plataforma de gestão MVP para uma ONG de proteção animal, entregue em cerca de um mês.",
-    },
-    tags: ["App", "Prisma", "Auth"],
-    href: "https://safira-two.vercel.app/",
-  },
-  {
-    name: "Controle Financeiro",
-    blurb: {
-      en: "A finance-tracking product for barbershops: dashboards, reports, and clear money flows.",
-      pt: "Produto de controle financeiro para barbearias: dashboards, relatórios e fluxos de dinheiro claros.",
-    },
-    tags: ["Product design", "Mobile"],
-  },
-  {
-    name: "Metaverso",
-    blurb: {
-      en: "An early study landing page exploring layout, motion, and 3D-flavored composition.",
-      pt: "Uma landing de estudo explorando layout, movimento e composição com pegada 3D.",
-    },
-    tags: ["Study", "Frontend"],
-    href: "https://metaverso-green.vercel.app/",
+    t: "Delivery means observed in production.",
+    b: "A merged PR is a milestone, not the end. The task closes when the behavior is seen where it runs.",
   },
 ];
 ---
 
 <section id="work">
   <div class="wrap">
-    <div class="head" data-reveal>
-      <div class="k i18n" data-en="Selected work" data-pt="Trabalhos selecionados">Selected work</div>
-      <h2
-        class="i18n"
-        data-en="Products I designed <em>and built.</em>"
-        data-pt="Produtos que projetei <em>e construí.</em>"
-      >
-        Products I designed <em>and built.</em>
-      </h2>
+    <div class="head">
+      <div class="k">Selected work</div>
+      <h2>Systems and products I've built.</h2>
     </div>
 
-  </div>
-
-  {/* ---- B-Boss — flagship showcase: sticky rail + four real-product panels ---- */}
-  <div class="wrap-wide">
-    <div class="bb-show">
-      <aside class="bb-rail" data-reveal>
-        <span class="bb-plus" aria-hidden="true">+</span>
-        <p class="bb-meta mono">
-          <span class="i18n" data-en="Flagship" data-pt="Projeto principal">Flagship</span>
-          <span class="bb-sep" aria-hidden="true">·</span>
-          <span>Sep 2025—</span>
-          <span class="bb-sep" aria-hidden="true">·</span>
-          <span class="bb-live"
-            ><span class="i18n" data-en="Live" data-pt="No ar">Live</span>
-            <span class="bb-dot" aria-hidden="true"></span></span
-          >
-        </p>
-        <h3 class="bb-name">B-Boss</h3>
-        <p
-          class="bb-story i18n"
-          data-en="Barbershops in Brazil run on WhatsApp threads and paper books. B-Boss is one ecosystem of four apps — client booking, business dashboard, admin, and a marketplace — on a single design system. Built and shipped; every screen here is the real product."
-          data-pt="Barbearias no Brasil funcionam em threads de WhatsApp e caderno de papel. O B-Boss é um ecossistema de quatro apps — agendamento, painel do negócio, admin e um marketplace — sobre um único design system. Construído e entregue; cada tela aqui é o produto real."
-        >
-          Barbershops in Brazil run on WhatsApp threads and paper books. B-Boss is one ecosystem of
-          four apps — client booking, business dashboard, admin, and a marketplace — on a single
-          design system. Built and shipped; every screen here is the real product.
-        </p>
-        <ol class="bb-apps mono">
-          {
-            bbApps.map((a) => (
-              <li>
-                <span class="bb-n">{a.n}</span>
-                <span class="i18n" data-en={a.en} data-pt={a.pt}>
-                  {a.en}
-                </span>
-              </li>
-            ))
-          }
-        </ol>
-        <div class="bb-links">
-          <a class="plink bb-demo" href="https://stage-app.bbossclub.com.br" target="_blank" rel="noopener">
-            <span class="i18n" data-en="Open live demo" data-pt="Abrir a demo">Open live demo</span>
-            <span class="ext" aria-hidden="true">&#8599;</span>
-          </a>
-          <a class="plink case-link" href="/work/bboss">
-            <span class="i18n" data-en="Read the case study" data-pt="Ler o case study">Read the case study</span>
-            <span class="arr" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-      </aside>
-
-      <div class="bb-panels">
-        <figure class="bb-panel" data-reveal>
-          <figcaption class="mono">
-            <span class="bb-n">01 /</span>
-            <span class="i18n" data-en="Client booking" data-pt="Agendamento">Client booking</span>
-          </figcaption>
-          <div class="bb-media bb-media-phone">
-            <div class="device">
-              <div class="device-screen">
-                <span class="device-island"></span>
-                <div class="screens" data-walk data-interval="3200">
-                  {
-                    bookingPhones.map((img, i) => (
-                      <div class:list={["screen", { "is-active": i === 0 }]}>
-                        <Image
-                          src={img}
-                          alt={`B-Boss client app, booking flow screen ${i + 1}`}
-                          widths={[280, 560, 840]}
-                          sizes="(min-width: 900px) 300px, 62vw"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="work-stack">
+      <!-- Pandora: featured -->
+      <article class="proj proj-feature">
+        <figure class="shot">
+          <Image
+            src={pandoraBox}
+            alt="Pandora Box console: an overview of active agents, sessions by model and spec drift, shown with synthetic demo data."
+            widths={[800, 1200, 1600]}
+            sizes="(max-width: 1120px) 100vw, 1080px"
+            loading="lazy"
+          />
         </figure>
-
-        <figure class="bb-panel" data-reveal>
-          <figcaption class="mono">
-            <span class="bb-n">02 /</span>
-            <span class="i18n" data-en="Business dashboard" data-pt="Painel do negócio">Business dashboard</span>
-          </figcaption>
-          <div class="bb-media" data-morph="bboss">
-            <div class="browser">
-              <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">app.bboss.club/home</span></div>
-              <div class="browser-view" data-shot>
-                <video
-                  class="dash-video"
-                  data-gate
-                  muted
-                  loop
-                  playsinline
-                  preload="none"
-                  poster="/media/bboss-dashboard-poster.webp"
-                  aria-label="B-Boss Club web dashboard, scrolling through metrics"
-                >
-                  <source src="/media/bboss-dashboard.webm" type="video/webm" />
-                </video>
-              </div>
-            </div>
-          </div>
-        </figure>
-
-        <figure class="bb-panel" data-reveal>
-          <figcaption class="mono">
-            <span class="bb-n">03 /</span>
-            <span>Admin</span>
-          </figcaption>
-          <div class="bb-media">
-            <div class="browser">
-              <div class="browser-bar"><i></i><i></i><i></i><span class="url mono">admin.bboss.club/home</span></div>
-              <div class="browser-view" data-shot>
-                <Image
-                  src={svAdmin}
-                  alt="B-Boss admin, platform operations dashboard with live charts"
-                  widths={[800, 1200, 1600]}
-                  sizes="(min-width: 900px) 62vw, 92vw"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </figure>
-
-        <figure class="bb-panel" data-reveal>
-          <figcaption class="mono">
-            <span class="bb-n">04 /</span>
-            <span>Marketplace</span>
-          </figcaption>
-          <div class="bb-media bb-media-phone">
-            <div class="device">
-              <div class="device-screen">
-                <span class="device-island"></span>
-                <div class="screens" data-walk data-interval="3200">
-                  {
-                    marketPhones.map((img, i) => (
-                      <div class:list={["screen", { "is-active": i === 0 }]}>
-                        <Image
-                          src={img}
-                          alt={`B-Boss marketplace screen ${i + 1}`}
-                          widths={[280, 560, 840]}
-                          sizes="(min-width: 900px) 300px, 62vw"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
-          </div>
-        </figure>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <p class="work-sub i18n" data-en="Also designed and built" data-pt="Também projetei e construí">
-      Also designed and built
-    </p>
-    <div class="work-list">
-      {/* ---- Movie Match ---- */}
-      <article class="proj" data-reveal>
-        <div class="proj-text">
-          <span class="proj-kicker mono">
-            <span class="n" aria-hidden="true">01 /</span>
-            <span class="i18n" data-en="Mobile product" data-pt="Produto mobile">Mobile product</span>
-          </span>
-          <h3 class="pname">Movie Match</h3>
-          <p
-            class="pdesc i18n"
-            data-en="A native app for movie recommendation and tracking. Search, <b>rich streaming filters</b>, watchlists, and a detail view that makes deciding what to watch easy."
-            data-pt="Um app nativo de recomendação e acompanhamento de filmes. Busca, <b>filtros ricos por streaming</b>, listas, e uma tela de detalhe que facilita decidir o que assistir."
-          >
-            A native app for movie recommendation and tracking. Search, <b>rich streaming filters</b>,
-            watchlists, and a detail view that makes deciding what to watch easy.
+        <div class="proj-body">
+          <div class="proj-meta">PERSONAL SYSTEM · 2026 · IN DAILY USE</div>
+          <h3>Pandora, an agent operating system</h3>
+          <p class="proj-desc">
+            The workflow I use to build software with AI agents: shared memory, governance, skills and runners so
+            Claude Code, Codex and the Hermes agent work from one source of truth. Pandora Box is its observability
+            console (shown with demo data).
           </p>
-          <div class="tags">
-            <span class="tag i18n" data-en="Mobile" data-pt="Mobile">Mobile</span>
-            <span class="tag i18n" data-en="Product design" data-pt="Product design">Product design</span>
-            <span class="tag">UI</span>
-          </div>
-          <p class="pmetric mono i18n" data-en="React Native · TMDB API · watchlists + rich filters" data-pt="React Native · API TMDB · listas + filtros ricos">React Native · TMDB API · watchlists + rich filters</p>
-        </div>
-        <div class="proj-media">
-          <div class="panel stage-cinema">
-            <div class="stage stage-phone">
-              <div class="device tilt">
-                <div class="device-screen">
-                  <span class="device-island"></span>
-                  <div class="screens" data-walk data-interval="2600">
-                    {moviePhones.map((img, i) => (
-                      <div class:list={["screen", { "is-active": i === 0 }]}>
-                        <Image src={img} alt={`Movie Match screen ${i + 1}`} widths={[260, 520]} sizes="220px" loading="lazy" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <span class="lightbands" aria-hidden="true"></span>
-          </div>
-        </div>
-      </article>
 
-      {/* ---- Pandora ---- */}
-      <article class="proj" data-reveal>
-        <div class="proj-text">
-          <span class="proj-kicker mono">
-            <span class="n" aria-hidden="true">02 /</span>
-            <span class="i18n" data-en="AI-native system" data-pt="Sistema AI-native">AI-native system</span>
-          </span>
-          <h3 class="pname">Pandora <span class="pname-sub">— Vault Harness</span></h3>
-          <p
-            class="pdesc i18n"
-            data-en="A self-improving, <b>AI-native</b> knowledge system: a multi-agent workflow with shared memory, semantic search, and safety guards that researches, plans, and reviews alongside me."
-            data-pt="Um sistema de conhecimento <b>AI-native</b> que se aprimora sozinho: um workflow multi-agente com memória compartilhada, busca semântica e guardas de segurança que pesquisa, planeja e revisa comigo."
-          >
-            A self-improving, <b>AI-native</b> knowledge system: a multi-agent workflow with shared
-            memory, semantic search, and safety guards that researches, plans, and reviews alongside me.
-          </p>
-          <div class="tags">
-            <span class="tag i18n" data-en="AI-native" data-pt="AI-native">AI-native</span>
-            <span class="tag i18n" data-en="Systems" data-pt="Sistemas">Systems</span>
-            <span class="tag i18n" data-en="Personal R&amp;D" data-pt="P&amp;D pessoal">Personal R&D</span>
-          </div>
-          <p class="pmetric mono i18n" data-en="Multi-agent · semantic search · runs in my terminal daily" data-pt="Multi-agente · busca semântica · roda no meu terminal todo dia">Multi-agent · semantic search · runs in my terminal daily</p>
-        </div>
-        <div class="proj-media">
-          <div class="panel stage-terminal">
-            <div class="stage stage-term">
-              <div class="terminal tilt" role="img" aria-label="Terminal demo: Pandora ingesting a session, running semantic search, and dispatching scout and verify agents">
-                <div class="terminal-bar">
-                  <i></i><i></i><i></i>
-                  <span class="ttitle">pandora — zsh</span>
+          <div class="stats">
+            {
+              stats.map((s) => (
+                <div class="stat">
+                  <b>{s.v}</b>
+                  <span>{s.l}</span>
                 </div>
-                <div class="terminal-body" data-terminal aria-hidden="true">
-                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">pandora ingest</span> <span class="t-flag">--session</span></p>
-                  <p class="line"><span class="t-out">↳ routing knowledge → wiki/ · brain/ · raw/</span></p>
-                  <p class="line"><span class="t-out">↳ 18 notes linked · 4 ADRs · 0 secrets leaked</span> <span class="t-ok">✓</span></p>
-                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">qmd query</span> <span class="t-str">"auth session decisions"</span></p>
-                  <p class="line"><span class="t-out">12 hits · 3 backlinks · 1 ADR · 0.91 match</span></p>
-                  <p class="line"><span class="t-prompt">❯</span> <span class="t-cmd">pandora agents</span> <span class="t-flag">scout + verify</span></p>
-                  <p class="line"><span class="t-out">scout ▸ 2 opportunities · verify ▸ 0 false claims</span> <span class="t-ok">✓</span></p>
-                  <p class="line"><span class="t-prompt">❯</span> <span class="t-caret"></span></p>
-                </div>
-              </div>
-            </div>
-            <span class="lightbands" aria-hidden="true"></span>
+              ))
+            }
           </div>
-        </div>
-      </article>
-    </div>
 
-    {/* ---- More projects (accordion) ---- */}
-    <div class="more" data-stagger>
-      <div class="more-label i18n" data-en="More projects" data-pt="Mais projetos">More projects</div>
-      {
-        more.map((p, i) => (
-          <details class="acc">
-            <summary>
-              <span class="acc-mark mono" aria-hidden="true">{String(i + 3).padStart(2, "0")}</span>
-              <span class="acc-name">{p.name}</span>
-              <span class="acc-tags mono">{p.tags.join(" · ")}</span>
-              <span class="acc-chevron" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
-            </summary>
-            <div class="acc-body">
-              <p class="acc-blurb i18n" data-en={p.blurb.en} data-pt={p.blurb.pt}>{p.blurb.en}</p>
-              {p.href && (
-                <a class="acc-link" href={p.href} target="_blank" rel="noopener">
-                  <span class="plink">
-                    {p.href.replace("https://", "").replace(/\/$/, "")} <span class="arr">&rarr;</span>
+          <figure class="flow" aria-label="Pandora delivery loop: intake, plan, agents, evidence, delivery">
+            <div class="flow-bar">
+              <b>Governance</b> one contract, many agents · scoped authorization · protected environments
+            </div>
+            <ol class="flow-steps">
+              {
+                steps.map((s, i) => (
+                  <li class="flow-step" style={`--i:${i}`}>
+                    <span class="n">{s.n}</span>
+                    <b>{s.title}</b>
+                    <small>{s.body}</small>
+                  </li>
+                ))
+              }
+            </ol>
+            <div class="flow-bar bottom">
+              <b>Observability</b> Pandora Box · live agent state, spec drift, delegation runs
+            </div>
+          </figure>
+
+          <ul class="decisions">
+            {
+              decisions.map((d) => (
+                <li>
+                  <span>
+                    <strong>{d.t}</strong> {d.b}
                   </span>
-                </a>
-              )}
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Rust</span>
+            <span class="tag">Astro</span>
+            <span class="tag">Python</span>
+            <span class="tag">MCP</span>
+          </div>
+          <p class="proj-meta">Private repository. Architecture and numbers only.</p>
+        </div>
+      </article>
+
+      <div class="proj-grid">
+        <!-- B-Boss -->
+        <article class="proj">
+          <figure class="shot">
+            <Image
+              src={bbossShot}
+              alt="B-Boss Club barbershop dashboard, shown with demo data."
+              widths={[600, 900, 1200]}
+              sizes="(max-width: 760px) 100vw, 540px"
+              loading="lazy"
+            />
+          </figure>
+          <div class="proj-body">
+            <div class="proj-meta">PRODUCT · 2026</div>
+            <h3>B-Boss Club</h3>
+            <p class="proj-desc">
+              A SaaS and marketplace for barbershops: client booking, a business dashboard, barber and admin apps on
+              one Nx monorepo with shared packages.
+            </p>
+            <div class="tags">
+              <span class="tag">React 19</span>
+              <span class="tag">TanStack</span>
+              <span class="tag">Fastify</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">PostgreSQL</span>
             </div>
-          </details>
-        ))
-      }
+            <div class="proj-links">
+              <a class="link" href="https://stage-app.bbossclub.com.br" target="_blank" rel="noopener"
+                >Open live demo ↗</a
+              >
+              <a class="link" href="https://github.com/Gabriel300p/bboss-template" target="_blank" rel="noopener"
+                >Starter template ↗</a
+              >
+            </div>
+          </div>
+        </article>
+
+        <!-- Allumove -->
+        <article class="proj">
+          <figure class="shot">
+            <Image
+              src={allumoveShot}
+              alt="Allumove rental platform, shown with demo data."
+              widths={[600, 900, 1200]}
+              sizes="(max-width: 760px) 100vw, 540px"
+              loading="lazy"
+            />
+          </figure>
+          <div class="proj-body">
+            <div class="proj-meta">PRODUCT · IN DEVELOPMENT</div>
+            <h3>Allumove</h3>
+            <p class="proj-desc">
+              A residential rental platform: a resident app for finding and managing a home, and a CRM for brokers
+              and landlords. Built by reusing B-Boss packages, with an agent-operated workflow.
+            </p>
+            <div class="tags">
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Fastify</span>
+            </div>
+            <p class="proj-meta">Private. In development.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>

@@ -1,266 +1,56 @@
 ---
-// Second Voice: experience + education as one two-column CV band. Left column
-// is the role accordion; right column is the education rail (featured pós
-// highlighted by an accent border) + the certificates accordion. Languages
-// close the section full-width. Reuses the .xp / .edu-more classes so the
-// existing accordion JS (initExperience / initEducation) keeps working.
 import { experience, credentials, languages } from "../data/content";
-
-const featured = credentials.filter((c) => c.featured);
-const rest = credentials.filter((c) => !c.featured);
-
-const icons: Record<string, string> = {
-  code: '<path d="M8 6l-5 6 5 6M16 6l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/>',
-  server:
-    '<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01" stroke-linecap="round"/>',
-};
-
-// Real institution logos (public/logos); falls back to the monogram.
-const logoMap: Record<string, string> = {
-  FIAP: "/logos/fiap.svg",
-  Google: "/logos/google.png",
-  Alura: "/logos/alura.png",
-  Rocketseat: "/logos/rocketseat.png",
-  "FIA Business School": "/logos/fia.png",
-  Udemy: "/logos/udemy.png",
-  "Curso em Vídeo": "/logos/cursoemvideo.png",
-};
-const logoFor = (inst: string): string | undefined => logoMap[inst];
 ---
 
 <section id="experience">
   <div class="wrap">
     <div class="bg-cols">
-      {/* ---- LEFT: experience ---- */}
       <div class="bg-col">
-        <p class="col-kicker mono i18n" data-en="Experience" data-pt="Experiência">Experience</p>
-
-        <div class="xp-list" data-stagger>
-          {
-            experience.map((job, i) => (
-              <article class="xp" data-current={job.current ? "true" : undefined}>
-                <div class="xp-company-row">
-                  <span class="xp-avatar" aria-hidden="true">
-                    {job.company.charAt(0)}
-                  </span>
-                  <span class="xp-company">{job.company}</span>
-                  {job.current && (
-                    <span class="xp-current-badge">
-                      <span class="xp-dot" />
-                      <span class="i18n" data-en="Current" data-pt="Atual">
-                        Current
-                      </span>
-                    </span>
-                  )}
-                </div>
-
-                <button
-                  class="xp-role-row"
-                  type="button"
-                  aria-expanded={job.current ? "true" : "false"}
-                  aria-controls={`xp-panel-${i}`}
-                >
-                  <span class="xp-role-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" set:html={icons[job.icon]} />
-                  </span>
-                  <span class="xp-role i18n" data-en={job.role.en} data-pt={job.role.pt}>
-                    {job.role.en}
-                  </span>
-                  <span class="xp-chevron" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                      <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
-                </button>
-
-                <div class="xp-meta mono">
-                  <span class="i18n" data-en={job.employment.en} data-pt={job.employment.pt}>
-                    {job.employment.en}
-                  </span>
-                  <span class="xp-meta-sep">|</span>
-                  <span class="xp-period i18n" data-en={job.period} data-pt={job.period.replace("Present", "Presente")}>
-                    {job.period}
-                  </span>
-                </div>
-
-                <div class="xp-panel" id={`xp-panel-${i}`}>
-                  <ul class="xp-bullets">
-                    {job.bullets.map((b) => (
-                      <li class="i18n" data-en={b.en} data-pt={b.pt}>
-                        {b.en}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div class="xp-tags">
-                  {job.stack.map((t) => (
-                    <span class="xp-tag">{t}</span>
-                  ))}
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-
-      {/* ---- RIGHT: education ---- */}
-      <div class="bg-col" id="education">
-        <p class="col-kicker mono i18n" data-en="Education & certificates" data-pt="Formação & certificados">
-          Education &amp; certificates
-        </p>
-
-        <div class="edu-rail" data-stagger>
-          {
-            featured.map((c) => (
-              <article class="edu-item">
-                <div class="edu-item-head">
-                  <span class="edu-logo edu-logo-sm" data-inst={c.institution}>
-                    {logoFor(c.institution) ? (
-                      <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" width="26" height="26" />
-                    ) : (
-                      <span class="edu-logo-fallback" aria-hidden="true">
-                        {c.monogram}
-                      </span>
-                    )}
-                  </span>
-                  <h3 class="edu-title i18n" data-en={c.title.en} data-pt={c.title.pt}>
-                    {c.title.en}
-                  </h3>
-                </div>
-                <div class="edu-meta mono">
-                  <span class="edu-period">{c.period}</span>
-                  {c.proof && (
-                    <>
-                      <span class="edu-meta-sep">·</span>
-                      <span class="edu-proof i18n" data-en={c.proof.en} data-pt={c.proof.pt}>
-                        {c.proof.en}
-                      </span>
-                    </>
-                  )}
-                  {c.url && (
-                    <a class="edu-verify" href={c.url} target="_blank" rel="noopener noreferrer">
-                      <span class="i18n" data-en="Verify" data-pt="Verificar">Verify</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-                        <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-                {c.topics && (
-                  <div class="edu-tags">
-                    {c.topics.map((t) => (
-                      <span class="edu-tag">{t}</span>
-                    ))}
-                  </div>
-                )}
-              </article>
-            ))
-          }
-
-          {
-            rest.length > 0 && (
-              <div class="edu-more" data-stagger>
-                <button class="edu-more-btn" type="button" aria-expanded="false" aria-controls="edu-more-panel">
-                  <span class="i18n" data-en="More certificates" data-pt="Mais certificados">
-                    More certificates
-                  </span>
-                  <span class="edu-more-count mono">({rest.length})</span>
-                  <span class="edu-more-chevron" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                      <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
-                </button>
-
-                <div class="edu-more-panel" id="edu-more-panel">
-                  <ul class="edu-cert-list">
-                    {rest.map((c) => {
-                      const Row = c.url ? "a" : "div";
-                      const linkAttrs = c.url
-                        ? { href: c.url, target: "_blank", rel: "noopener noreferrer" }
-                        : {};
-                      return (
-                        <li class="edu-cert">
-                          <Row class="edu-cert-row" data-link={c.url ? "true" : undefined} {...linkAttrs}>
-                            <span class="edu-cert-logo" data-inst={c.institution}>
-                              {logoFor(c.institution) ? (
-                                <img src={logoFor(c.institution)} alt={c.institution} loading="lazy" width="26" height="26" />
-                              ) : (
-                                <span class="edu-logo-fallback" aria-hidden="true">
-                                  {c.monogram}
-                                </span>
-                              )}
-                            </span>
-                            <span class="edu-cert-text">
-                              <span class="edu-cert-title i18n" data-en={c.title.en} data-pt={c.title.pt}>
-                                {c.title.en}
-                              </span>
-                              <span class="edu-cert-sub mono">
-                                {c.institution} · {c.period}
-                              </span>
-                            </span>
-                            {c.url && (
-                              <span class="edu-cert-arrow" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                                  <path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                              </span>
-                            )}
-                          </Row>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            )
-          }
-        </div>
-      </div>
-    </div>
-
-    {/* ---- Languages: full-width closing band ---- */}
-    <div class="edu-langs" data-stagger>
-      <div class="edu-langs-head">
-        <span class="edu-langs-label mono i18n" data-en="Languages" data-pt="Idiomas">Languages</span>
-        <span class="edu-langs-tag mono i18n"
-          data-en="Ready for international teams"
-          data-pt="Pronto para times internacionais"
-        >
-          Ready for international teams
-        </span>
-      </div>
-
-      <div class="edu-lang-grid">
+        <span class="k">Experience</span>
         {
-          languages.map((l) => (
-            <article class="lang" data-accent={l.accent ? "true" : undefined}>
-              <span class="lang-flag">
-                <img src={`/flags/${l.flag}.svg`} alt="" loading="lazy" width="48" height="48" />
-              </span>
-              <div class="lang-body">
-                <div class="lang-top">
-                  <h3 class="lang-name i18n" data-en={l.name.en} data-pt={l.name.pt}>
-                    {l.name.en}
-                  </h3>
-                  {l.cefr && <span class="lang-cefr mono">{l.cefr}</span>}
-                </div>
-                <div class="lang-level i18n" data-en={l.level.en} data-pt={l.level.pt}>
-                  {l.level.en}
-                </div>
-                <div class="lang-meter" aria-hidden="true">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span class="lang-pip" data-on={i < l.proficiency ? "true" : "false"} />
-                  ))}
-                </div>
-                <p class="lang-note i18n" data-en={l.note.en} data-pt={l.note.pt}>
-                  {l.note.en}
-                </p>
+          experience.map((job) => (
+            <article class="xp">
+              <div class="xp-head">
+                <span class="xp-company">{job.company}</span>
+                <span class="xp-period">{job.period}</span>
               </div>
+              <p class="xp-role">
+                {job.role} · {job.employment}
+              </p>
+              <ul class="xp-bullets">
+                {job.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
             </article>
           ))
         }
+      </div>
+
+      <div class="bg-col" id="education">
+        <span class="k">Education</span>
+        {
+          credentials.map((c) => (
+            <article class="edu">
+              <div class="edu-head">
+                <span class="edu-title">{c.title}</span>
+                <span class="edu-meta">{c.period}</span>
+              </div>
+              <p class="edu-inst">
+                {c.institution} · {c.proof}
+              </p>
+            </article>
+          ))
+        }
+        <div class="langs">
+          {
+            languages.map((l) => (
+              <p>
+                {l.name} <span>· {l.level}</span>
+              </p>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>

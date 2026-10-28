@@ -1,59 +1,22 @@
 ---
-// Social proof — real LinkedIn recommendations. Quote wall, no carousel/avatars.
-interface Quote {
-  en: string;
-  pt: string;
-  name: string;
-  role: { en: string; pt: string };
-}
-
-const quotes: Quote[] = [
-  {
-    en: "What really stands out about Gabriel is how well he collaborates and communicates. His exemplary work ethic, creativity, and meticulous attention to detail make him someone you can fully trust to deliver exceptional results.",
-    pt: "O que realmente se destaca no Gabriel é sua capacidade de colaborar e comunicar. Sua ética de trabalho exemplar, criatividade e atenção meticulosa aos detalhes fazem dele alguém em quem se pode confiar plenamente para entregar resultados excepcionais.",
-    name: "Alexandre Dutra",
-    role: {
-      en: "Data Scientist, Fraud & Risk Analytics · Bradesco",
-      pt: "Data Scientist, Fraude & Risk Analytics · Bradesco",
-    },
-  },
-  {
-    en: "I've worked with Gabriel for over two years and watched him grow as a person and a professional. Problem-solving is his defining trait, and he's always after new knowledge and better ways to work.",
-    pt: "Trabalho há mais de 2 anos com o Gabriel e acompanhei seu crescimento como pessoa e profissional. Resolver problemas é sua principal característica, e ele está sempre em busca de novos conhecimentos e de melhorar os processos do seu trabalho.",
-    name: "Matheus Moraes",
-    role: {
-      en: "Fullstack Developer · Node.js · React · Go",
-      pt: "Fullstack Developer · Node.js · React · Go",
-    },
-  },
-];
+import { quotes } from "../data/content";
 ---
 
 <section id="words">
   <div class="wrap">
-    <div class="head" data-reveal>
-      <div class="k i18n" data-en="In their words" data-pt="Nas palavras deles">In their words</div>
-      <h2
-        class="i18n"
-        data-en="People I've <em>worked with.</em>"
-        data-pt="Gente com quem <em>trabalhei.</em>"
-      >
-        People I've <em>worked with.</em>
-      </h2>
+    <div class="head">
+      <div class="k">In their words</div>
+      <h2>People I've worked with.</h2>
     </div>
 
-    <div class="quotes" data-stagger>
+    <div class="quotes">
       {
         quotes.map((q) => (
           <figure class="quote">
-            <blockquote class="serif i18n" data-en={q.en} data-pt={q.pt}>
-              {q.en}
-            </blockquote>
+            <blockquote>{q.text}</blockquote>
             <figcaption>
-              <span class="qname">{q.name}</span>
-              <span class="qrole mono i18n" data-en={q.role.en} data-pt={q.role.pt}>
-                {q.role.en}
-              </span>
+              <b>{q.name}</b>
+              <span>{q.role}</span>
             </figcaption>
           </figure>
         ))

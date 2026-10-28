@@ -1,49 +1,43 @@
 # Portfolio — Gabriel Andrade
 
 Personal portfolio of Gabriel Andrade, a design engineer from São Paulo.
-Built with [Astro](https://astro.build/) as a static site.
+Built with [Astro](https://astro.build/) as a static, single-page site. See `DESIGN.md` for the design rules.
 
 ## Design
 
-- **Direction:** warm editorial (light paper base), inspired by the reference set the
-  work was grounded in. High-contrast serif display (**Playfair**), **Geist** for body,
-  **Geist Mono** for metadata. A single, restrained **green** accent.
-- **Dark mode:** a warm editorial dark theme (not a cold tech dark). Same green accent,
-  brightened for legibility. Toggle in the nav; the choice persists in `localStorage` and
-  defaults to the OS `prefers-color-scheme`. An inline script in `<head>` sets the theme
-  before first paint to avoid a flash.
-- **Language:** English first, with a PT toggle in the nav (persisted). Copy lives inline
-  on each element via `data-en` / `data-pt` attributes; a small client script swaps them.
-- **Motion:** restrained — scroll-reveal, hover-lift, a live São Paulo clock. Everything
-  respects `prefers-reduced-motion`.
+- **Direction:** simple and clean. One dark theme, neutral black background, off-white text, no accent hue.
+  The work is the only thing with color.
+- **Type:** **Geist** for everything, **Geist Mono** for labels and numbers. Both self-hosted.
+- **Language:** English only.
+- **Motion:** one signature moment (the Pandora flow diagram draws in once when it scrolls into view),
+  plus subtle hover states. Everything respects `prefers-reduced-motion` and stays visible without JavaScript.
 
 ## Structure
 
 ```
 src/
-  assets/img/     project screenshots (optimized via astro:assets)
-  components/     Nav, Hero, TechStrip, Work, Systems, About, Contact, Footer
-  layouts/        Base.astro (head, theme no-flash script, global styles)
-  pages/          index.astro
-  scripts/        ui.ts (nav, reveal, lang, clock, copy, theme toggle)
-  styles/         global.css (semantic design tokens, light + dark)
+  assets/img/work/   project screenshots (WebP, optimized via astro:assets)
+  components/        Nav, Hero, Work, Stack, Background, Testimonials, Contact, Footer
+  data/content.ts    skills, experience, education, languages, quotes
+  layouts/           Base.astro (head, meta, reveal failsafe)
+  pages/             index.astro
+  scripts/           ui.ts (copy email, flow draw-in)
+  styles/            global.css (tokens + all styles)
 public/
-  fonts/          Geist, Geist Mono, Playfair (woff2, self-hosted)
-  favicon.svg
+  fonts/             Geist, Geist Mono (woff2)
 ```
 
 ## Commands
 
-| Command           | Action                                       |
-| ----------------- | -------------------------------------------- |
-| `pnpm install`    | Install dependencies                         |
-| `pnpm dev`        | Start the dev server at `localhost:4321`     |
-| `pnpm build`      | Build the static site to `./dist/`           |
-| `pnpm preview`    | Preview the production build locally         |
+| Command        | Action                                   |
+| -------------- | ---------------------------------------- |
+| `pnpm install` | Install dependencies                     |
+| `pnpm dev`     | Start the dev server at `localhost:4321` |
+| `pnpm build`   | Build the static site to `./dist/`       |
+| `pnpm preview` | Preview the production build locally     |
 
 ## Notes
 
-- Project screenshots are exports from Figma / live sites; replace `src/assets/img/*`
-  to update them.
-- The theme and language toggles are progressive enhancement — the page is fully
-  readable and navigable without JavaScript.
+- Project screenshots are captures of the running apps with fictitious data. Replace the files in
+  `src/assets/img/work/` to update them, and check each one for real names, emails or customer data first.
+- Pandora is a private system: the site shows architecture and numbers only, never vault content or a link.

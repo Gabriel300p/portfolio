@@ -16,7 +16,7 @@ const ogImage = new URL("/og.png", Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,12 +27,10 @@ const ogImage = new URL("/og.png", Astro.site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
-    <link rel="preload" href="/fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Newsreader-Italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f4ef" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16150f" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -58,27 +56,12 @@ const ogImage = new URL("/og.png", Astro.site);
       })}
     />
 
-    {/* Set theme before first paint to avoid a flash of the wrong theme. */}
+    {/* The Pandora diagram hides only while JS is running (html.reveal) so it can draw in.
+        Without this class, or if the UI module never executes, everything stays visible. */}
     <script is:inline>
       (function () {
         try {
-          var param = new URLSearchParams(window.location.search).get("theme");
-          var stored = localStorage.getItem("theme");
-          var theme =
-            param === "dark" || param === "light"
-              ? param
-              : stored === "dark" || stored === "light"
-                ? stored
-                : window.matchMedia("(prefers-color-scheme: dark)").matches
-                  ? "dark"
-                  : "light";
-          document.documentElement.setAttribute("data-theme", theme);
-          if (param === "dark" || param === "light") localStorage.setItem("theme", param);
-          // Mark that JS is running so scroll-reveal can arm itself. Without this
-          // class, revealed content stays visible (fail-safe, no blank page).
           document.documentElement.classList.add("js", "reveal");
-          // Failsafe: if the UI module never executes (network/CSP/extension),
-          // disarm the reveal-hiding so content is never stuck invisible.
           setTimeout(function () {
             if (!window.__uiReady) document.documentElement.classList.remove("reveal");
           }, 1200);
@@ -87,7 +70,7 @@ const ogImage = new URL("/og.png", Astro.site);
     </script>
   </head>
   <body>
-    <a class="skip-link i18n" href="#main" data-en="Skip to content" data-pt="Pular para o conteúdo">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
     <slot />
     <script>
       import "../scripts/ui.ts";

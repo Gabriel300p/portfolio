@@ -3,41 +3,19 @@ const email = "contact@gabrielandrade.com";
 ---
 
 <section id="contact" class="contact">
-  <div class="wrap" data-stagger>
-    <span class="contact-plus" aria-hidden="true">+</span>
-    <h2
-      class="contact-h i18n"
-      data-en="Let's talk<span class='dot'>.</span>"
-      data-pt="Vamos conversar<span class='dot'>.</span>"
-    >
-      Let's talk<span class="dot">.</span>
-    </h2>
-    <p
-      class="contact-sub i18n"
-      data-en="English or Portuguese, both fine. Replies within a day."
-      data-pt="Inglês ou português, tanto faz. Respondo em até um dia."
-    >
-      English or Portuguese, both fine. Replies within a day.
-    </p>
+  <div class="wrap">
+    <h2>Let's talk.</h2>
+    <p class="contact-sub">English or Portuguese, both fine. Replies within a day.</p>
 
-    <div class="btn-row">
-      <button class="btn primary copy-email" type="button" data-email={email} data-magnetic>
-        <span class="i18n" data-en="Copy email" data-pt="Copiar email">Copy email</span>
-      </button>
-      <a class="btn" href={`mailto:${email}`} data-magnetic>{email}</a>
+    <div class="hero-actions">
+      <button class="btn primary copy-email" type="button" data-email={email}>Copy email</button>
+      <a class="btn" href={`mailto:${email}`}>{email}</a>
     </div>
 
     <div class="links">
-      <a href="https://www.linkedin.com/in/gabrieltech/" target="_blank" rel="noopener">
-        <span class="k">in</span> LinkedIn <span class="ext" aria-hidden="true">&#8599;</span>
-      </a>
-      <a href="https://github.com/Gabriel300p" target="_blank" rel="noopener">
-        <span class="k">gh</span> GitHub <span class="ext" aria-hidden="true">&#8599;</span>
-      </a>
-      <a href="https://coverletter.gabrielandrade.com/" target="_blank" rel="noopener">
-        <span class="k">cv</span> <span class="i18n" data-en="Résumé" data-pt="Currículo">Résumé</span>
-        <span class="ext" aria-hidden="true">&#8599;</span>
-      </a>
+      <a class="link" href="https://www.linkedin.com/in/gabrieltech/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="link" href="https://github.com/Gabriel300p" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="link" href="https://coverletter.gabrielandrade.com/" target="_blank" rel="noopener">Résumé ↗</a>
     </div>
   </div>
 </section>
