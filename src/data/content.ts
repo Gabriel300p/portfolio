@@ -54,19 +54,19 @@ export interface Job {
 export const experience: Job[] = [
   {
     company: "Acesso Energia",
-    role: "Frontend Developer & UI Designer",
+    role: "Frontend Development & UI Design",
     employment: "Full-time",
     period: "10.2021 — Present",
     current: true,
     bullets: [
-      "Designed and maintained interfaces across internal platforms, client portals, mobile flows, and landing pages, covering 1,000+ screens and 200+ complete product flows.",
-      "Created and maintained the main product design system from scratch: reusable patterns, responsive behavior, accessibility, and scalable evolution.",
-      "Led the migration from vanilla CSS to Tailwind, cutting the time to build and iterate on screens.",
+      "Built React interfaces and reusable frontend components with API integrations; led the migration from vanilla CSS to Tailwind.",
+      "Created and maintained the main product design system, establishing shared patterns, responsive behavior and accessibility across interfaces.",
+      "Designed and maintained 1,000+ screens and 200+ product flows across internal platforms, client portals, mobile flows and landing pages.",
     ],
   },
   {
     company: "Ômega Digital Center",
-    role: "Network & Infrastructure Analyst",
+    role: "Technical Support & Infrastructure (across roles)",
     employment: "Full-time",
     period: "03.2019 — 10.2021",
     bullets: [
@@ -93,7 +93,7 @@ export const credentials: Credential[] = [
   {
     institution: "FIAP",
     title: "Associate, Systems Analysis and Development",
-    period: "2020 — 2022",
+    period: "2021 — 2022",
     proof: "Diploma",
   },
   {
@@ -105,7 +105,7 @@ export const credentials: Credential[] = [
 ];
 
 export const languages = [
-  { name: "English", level: "Advanced (C1)" },
+  { name: "English", level: "Advanced" },
   { name: "Portuguese", level: "Native" },
 ];
 

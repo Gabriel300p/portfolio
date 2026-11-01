@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Gabriel Andrade · Design Engineer",
-  description = "Gabriel Andrade — a design engineer from São Paulo. I design and build web products end to end, from Figma to production.",
+  title = "Gabriel Andrade · AI Product Builder — Design & Engineering",
+  description = "AI product builder connecting product design, frontend engineering and agent workflows through evidence-based case studies.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -49,31 +49,17 @@ const ogImage = new URL("/og.png", Astro.site);
         "@context": "https://schema.org",
         "@type": "Person",
         name: "Gabriel Andrade",
-        jobTitle: "Design Engineer",
+        jobTitle: "AI Product Builder, Product Designer and Software Engineer",
         url: "https://gabrielandrade.com",
         sameAs: ["https://www.linkedin.com/in/gabrieltech/", "https://github.com/Gabriel300p"],
-        address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressCountry: "BR" },
+        address: { "@type": "PostalAddress", addressLocality: "Guarulhos", addressCountry: "BR" },
       })}
     />
 
-    {/* The Pandora diagram hides only while JS is running (html.reveal) so it can draw in.
-        Without this class, or if the UI module never executes, everything stays visible. */}
-    <script is:inline>
-      (function () {
-        try {
-          document.documentElement.classList.add("js", "reveal");
-          setTimeout(function () {
-            if (!window.__uiReady) document.documentElement.classList.remove("reveal");
-          }, 1200);
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
-    <script>
-      import "../scripts/ui.ts";
-    </script>
+
   </body>
 </html>

@@ -1,21 +1,10 @@
 ---
-const email = "contact@gabrielandrade.com";
+interface Props { track?: 'home' | 'design' | 'engineering' }
+const { track='home' }=Astro.props;
+const data={
+ home:{label:'AI, product and engineering opportunities',text:'I’m interested in roles where product thinking, design and implementation improve how people use complex systems.',resume:'/resume-operational-ai.pdf'},
+ design:{label:'Product design opportunities',text:'I’m interested in product design, design systems and AI experience roles that value close collaboration with engineering.',resume:'/resume.pdf'},
+ engineering:{label:'Product engineering opportunities',text:'I’m interested in applied AI, agent workflows, frontend platforms and developer tooling roles.',resume:'/resume-operational-ai.pdf'}
+}[track];
 ---
-
-<section id="contact" class="contact">
-  <div class="wrap">
-    <h2>Let's talk.</h2>
-    <p class="contact-sub">English or Portuguese, both fine. Replies within a day.</p>
-
-    <div class="hero-actions">
-      <button class="btn primary copy-email" type="button" data-email={email}>Copy email</button>
-      <a class="btn" href={`mailto:${email}`}>{email}</a>
-    </div>
-
-    <div class="links">
-      <a class="link" href="https://www.linkedin.com/in/gabrieltech/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="link" href="https://github.com/Gabriel300p" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="link" href="https://coverletter.gabrielandrade.com/" target="_blank" rel="noopener">Résumé ↗</a>
-    </div>
-  </div>
-</section>
+<section id="contact" class="contact"><div class="wrap contact-grid"><div><p class="k">{data.label}</p><h2>Let’s build<br/>what comes next.</h2></div><div class="contact-details"><p>{data.text} Based in Guarulhos, Brazil; comfortable working in English.</p><a class="text-link email" href="mailto:gabriel.andrade200p@gmail.com">gabriel.andrade200p@gmail.com ↗</a><div class="links"><a class="link" href="https://www.linkedin.com/in/gabrieltech/">LinkedIn ↗</a><a class="link" href="https://github.com/Gabriel300p">GitHub ↗</a><a class="link" href={data.resume}>Download résumé ↗</a></div></div></div></section>

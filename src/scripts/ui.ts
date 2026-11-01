@@ -2,17 +2,23 @@
 
 function initCopy() {
   const toast = document.getElementById("toast");
+  let timer: number | undefined;
+  const show = (msg: string) => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(timer);
+    timer = window.setTimeout(() => toast.classList.remove("show"), 1600);
+  };
   document.querySelectorAll<HTMLButtonElement>(".copy-email").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const email = btn.dataset.email ?? "";
       try {
         await navigator.clipboard.writeText(email);
+        show("Copied");
       } catch {
-        return;
+        show("Copy failed. Use the email link.");
       }
-      if (!toast) return;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1600);
     });
   });
 }

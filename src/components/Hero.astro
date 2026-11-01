@@ -1,23 +1,16 @@
 ---
-// Hero: one statement, one paragraph, two actions, one line of facts.
+interface Props { track?: 'home' | 'design' | 'engineering' }
+const { track = 'home' } = Astro.props;
+const copy = {
+  home: { label:'AI Product Builder', title:'Product thinking.<br/><span>Design and engineering.</span>', lede:'I turn ambiguous product problems into understandable interfaces and working systems. My work spans product design, React delivery and agent workflows through Acesso Energia, Pandora, B-Boss and Allumove.', facts:'Product design · Frontend · Agent workflows', open:'Open to AI, product and engineering roles' },
+  design: { label:'AI-Native Product Designer', title:'Complex systems.<br/><span>Clear product experiences.</span>', lede:'I connect research, Figma design systems and working React prototypes. My cases show how I frame decisions, make operational states understandable and collaborate with engineering through delivery.', facts:'Product design · Design systems · AI experiences', open:'Open to product design roles' },
+  engineering: { label:'AI Product / Agent Engineer', title:'Agent workflows.<br/><span>Reviewable product systems.</span>', lede:'I specify, integrate and verify agent-assisted workflows while building interfaces and APIs with TypeScript, React, Python tooling, Rust and SQLite. Pandora is the clearest evidence of that transition.', facts:'Agent orchestration · React · Developer tooling', open:'Open to product engineering roles' }
+}[track];
 ---
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <p class="k">Design engineer · Guarulhos, Brazil</p>
-    <h1>Designed and built, end to end.</h1>
-    <p class="hero-lede">
-      I design interfaces in Figma and ship them in React. Five years turning product problems into
-      working software, and now building an agent-operated engineering workflow of my own.
-    </p>
-    <div class="hero-actions">
-      <a class="btn primary" href="#work">See my work</a>
-      <a class="btn" href="#contact">Get in touch</a>
-    </div>
-    <p class="hero-facts">
-      <span><b>1,000+</b> screens shipped</span>
-      <span><b>200+</b> product flows</span>
-      <span><b>1</b> design system, from zero</span>
-    </p>
-  </div>
-</header>
+<header class="hero" id="top"><div class="wrap">
+<p class="k">Gabriel Andrade <span class="hero-divider">/</span> {copy.label}</p>
+<h1 set:html={copy.title}></h1>
+<div class="hero-bottom"><p class="hero-lede">{copy.lede}</p>
+<a class="text-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a></div>
+<div class="hero-facts"><span>Based in Guarulhos, Brazil</span><span>{copy.facts}</span><a href="#contact">{copy.open} ↗</a></div>
+</div></header>

@@ -1,0 +1,42 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Contact from '../components/Contact.astro';
+import { projects } from '../data/projects';
+interface Props {
+  slug: string;
+  chapters: { id: string; label: string }[];
+}
+const { slug, chapters } = Astro.props;
+const p = projects.find(p => p.slug === slug)!;
+const next = projects[(projects.findIndex(n => n.slug === slug) + 1) % projects.length];
+---
+<Base title={`${p.name} — Gabriel Andrade`} description={p.summary}>
+  <Nav />
+  <main id="main" tabindex="-1" class={`case-page case-${slug}`}>
+    <header class="case-header wrap">
+      <a class="text-link" href="/#work">← Selected work</a>
+      <p class="k">Case study {p.number} / {p.category}</p>
+      <h1>{p.name}<span>{p.title}</span></h1>
+      <p class="case-intro">{p.summary}</p>
+      <dl class="case-facts">
+        <div><dt>My role</dt><dd>{p.role}</dd></div>
+        <div><dt>Status</dt><dd>{p.status}</dd></div>
+        <div><dt>Tools</dt><dd>{p.stack.join(' · ')}</dd></div>
+      </dl>
+    </header>
+    <div class="case-reading wrap">
+      <aside class="case-sidebar">
+        <nav aria-label="Case study sections">
+          <p class="k">In this case</p>
+          <ol>{chapters.map((c, i) => <li><a href={`#${c.id}`}><span>{String(i + 1).padStart(2, '0')}</span>{c.label}</a></li>)}</ol>
+        </nav>
+      </aside>
+      <article class="case-story"><slot /></article>
+    </div>
+    <div class="wrap next-project"><p class="k">Next case study</p><a href={`/work/${next.slug}/`}>{next.name} ↗</a></div>
+    <Contact />
+  </main>
+  <Footer />
+</Base>

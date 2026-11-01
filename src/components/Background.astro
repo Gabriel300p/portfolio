@@ -6,12 +6,12 @@ import { experience, credentials, languages } from "../data/content";
   <div class="wrap">
     <div class="bg-cols">
       <div class="bg-col">
-        <span class="k">Experience</span>
+        <h2 class="k">Experience</h2>
         {
           experience.map((job) => (
             <article class="xp">
               <div class="xp-head">
-                <span class="xp-company">{job.company}</span>
+                <h3 class="xp-company">{job.company}</h3>
                 <span class="xp-period">{job.period}</span>
               </div>
               <p class="xp-role">
@@ -28,12 +28,12 @@ import { experience, credentials, languages } from "../data/content";
       </div>
 
       <div class="bg-col" id="education">
-        <span class="k">Education</span>
+        <h2 class="k">Education</h2>
         {
           credentials.map((c) => (
             <article class="edu">
               <div class="edu-head">
-                <span class="edu-title">{c.title}</span>
+                <h3 class="edu-title">{c.title}</h3>
                 <span class="edu-meta">{c.period}</span>
               </div>
               <p class="edu-inst">

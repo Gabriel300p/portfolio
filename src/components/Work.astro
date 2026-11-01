@@ -1,189 +1,29 @@
 ---
-import { Image } from "astro:assets";
-import pandoraBox from "../assets/img/work/pandora-box.webp";
-import bbossShot from "../assets/img/work/bboss.webp";
-import allumoveShot from "../assets/img/work/allumove.webp";
-
-// Pandora flow: the delivery loop, as a diagram. Public-safe, no vault content.
-const steps = [
-  { n: "01", title: "Intake", body: "Notes, specs and sessions land in a Markdown-first vault." },
-  { n: "02", title: "Plan", body: "A task is scoped with acceptance criteria before any code." },
-  { n: "03", title: "Agents", body: "Claude Code, Codex and Hermes execute bounded work in parallel." },
-  { n: "04", title: "Evidence", body: "The harness collects test and build proof. Agents never self-approve." },
-  { n: "05", title: "Delivery", body: "Reviewed, merged and verified in the real destination." },
-];
-
-const stats = [
-  { v: "3,000+", l: "commits" },
-  { v: "~4 mo", l: "of daily use" },
-  { v: "24", l: "skills" },
-  { v: "28", l: "subagents" },
-  { v: "1,000+", l: "documented tasks" },
-];
-
-const decisions = [
-  {
-    t: "Evidence over claims.",
-    b: "A worker's \"done\" is not verification. The harness runs the checks and an independent reviewer judges the result.",
-  },
-  {
-    t: "One source of truth.",
-    b: "Every rule has one canonical owner; each agent's entry file is a thin adapter that points to it.",
-  },
-  {
-    t: "Delivery means observed in production.",
-    b: "A merged PR is a milestone, not the end. The task closes when the behavior is seen where it runs.",
-  },
-];
+import { projects } from "../data/projects";
+interface Props { order?: string[]; label?: string }
+const { order = projects.map(p => p.slug), label = 'Product design · Frontend · Agent workflows' } = Astro.props;
+const selected = order.map(slug => projects.find(p => p.slug === slug)).filter(Boolean);
 ---
-
-<section id="work">
+<section id="work" class="work-index">
   <div class="wrap">
-    <div class="head">
-      <div class="k">Selected work</div>
-      <h2>Systems and products I've built.</h2>
+    <div class="section-heading">
+      <h2>Selected work</h2>
+      <span class="k">{label}</span>
     </div>
-
-    <div class="work-stack">
-      <!-- Pandora: featured -->
-      <article class="proj proj-feature">
-        <figure class="shot">
-          <Image
-            src={pandoraBox}
-            alt="Pandora Box console: an overview of active agents, sessions by model and spec drift, shown with synthetic demo data."
-            widths={[800, 1200, 1600]}
-            sizes="(max-width: 1120px) 100vw, 1080px"
-            loading="lazy"
-          />
-        </figure>
-        <div class="proj-body">
-          <div class="proj-meta">PERSONAL SYSTEM · 2026 · IN DAILY USE</div>
-          <h3>Pandora, an agent operating system</h3>
-          <p class="proj-desc">
-            The workflow I use to build software with AI agents: shared memory, governance, skills and runners so
-            Claude Code, Codex and the Hermes agent work from one source of truth. Pandora Box is its observability
-            console (shown with demo data).
-          </p>
-
-          <div class="stats">
-            {
-              stats.map((s) => (
-                <div class="stat">
-                  <b>{s.v}</b>
-                  <span>{s.l}</span>
-                </div>
-              ))
-            }
+    <div class="project-list">
+      {selected.map(p => p && (
+        <article class="project-row">
+          <span class="project-number" aria-hidden="true">{p.number}</span>
+          <div class="project-identity">
+            <h3><a href={`/work/${p.slug}/`}>{p.name}</a></h3>
+            <p class="project-category">{p.category}</p>
           </div>
-
-          <figure class="flow" aria-label="Pandora delivery loop: intake, plan, agents, evidence, delivery">
-            <div class="flow-bar">
-              <b>Governance</b> one contract, many agents · scoped authorization · protected environments
-            </div>
-            <ol class="flow-steps">
-              {
-                steps.map((s, i) => (
-                  <li class="flow-step" style={`--i:${i}`}>
-                    <span class="n">{s.n}</span>
-                    <b>{s.title}</b>
-                    <small>{s.body}</small>
-                  </li>
-                ))
-              }
-            </ol>
-            <div class="flow-bar bottom">
-              <b>Observability</b> Pandora Box · live agent state, spec drift, delegation runs
-            </div>
-          </figure>
-
-          <ul class="decisions">
-            {
-              decisions.map((d) => (
-                <li>
-                  <span>
-                    <strong>{d.t}</strong> {d.b}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-
-          <div class="tags">
-            <span class="tag">TypeScript</span>
-            <span class="tag">Rust</span>
-            <span class="tag">Astro</span>
-            <span class="tag">Python</span>
-            <span class="tag">MCP</span>
-          </div>
-          <p class="proj-meta">Private repository. Architecture and numbers only.</p>
-        </div>
-      </article>
-
-      <div class="proj-grid">
-        <!-- B-Boss -->
-        <article class="proj">
-          <figure class="shot">
-            <Image
-              src={bbossShot}
-              alt="B-Boss Club barbershop dashboard, shown with demo data."
-              widths={[600, 900, 1200]}
-              sizes="(max-width: 760px) 100vw, 540px"
-              loading="lazy"
-            />
-          </figure>
-          <div class="proj-body">
-            <div class="proj-meta">PRODUCT · 2026</div>
-            <h3>B-Boss Club</h3>
-            <p class="proj-desc">
-              A SaaS and marketplace for barbershops: client booking, a business dashboard, barber and admin apps on
-              one Nx monorepo with shared packages.
-            </p>
-            <div class="tags">
-              <span class="tag">React 19</span>
-              <span class="tag">TanStack</span>
-              <span class="tag">Fastify</span>
-              <span class="tag">Prisma</span>
-              <span class="tag">PostgreSQL</span>
-            </div>
-            <div class="proj-links">
-              <a class="link" href="https://stage-app.bbossclub.com.br" target="_blank" rel="noopener"
-                >Open live demo ↗</a
-              >
-              <a class="link" href="https://github.com/Gabriel300p/bboss-template" target="_blank" rel="noopener"
-                >Starter template ↗</a
-              >
-            </div>
+          <div class="project-excerpt">
+            <p>{p.summary}</p>
+            <a class="text-link" href={`/work/${p.slug}/`} aria-label={`Read case study: ${p.name}`}>Read case study <span aria-hidden="true">↗</span></a>
           </div>
         </article>
-
-        <!-- Allumove -->
-        <article class="proj">
-          <figure class="shot">
-            <Image
-              src={allumoveShot}
-              alt="Allumove rental platform, shown with demo data."
-              widths={[600, 900, 1200]}
-              sizes="(max-width: 760px) 100vw, 540px"
-              loading="lazy"
-            />
-          </figure>
-          <div class="proj-body">
-            <div class="proj-meta">PRODUCT · IN DEVELOPMENT</div>
-            <h3>Allumove</h3>
-            <p class="proj-desc">
-              A residential rental platform: a resident app for finding and managing a home, and a CRM for brokers
-              and landlords. Built by reusing B-Boss packages, with an agent-operated workflow.
-            </p>
-            <div class="tags">
-              <span class="tag">React 19</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Fastify</span>
-            </div>
-            <p class="proj-meta">Private. In development.</p>
-          </div>
-        </article>
-      </div>
+      ))}
     </div>
   </div>
 </section>

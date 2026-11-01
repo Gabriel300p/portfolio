@@ -20,3 +20,7 @@ pnpm-debug.log*
 docs/*.pdf
 C\:*
 .impeccable/hook.cache.json
+.vercel
+
+output/
+.playwright-cli/

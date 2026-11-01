@@ -1,0 +1,80 @@
+---
+// Editorial adaptation of Allumove's MatchPainel and its four-axis assessment.
+// Static fictional data: this is a case-study exhibit, not a live application.
+const criteria = [
+  { name: 'Identity', status: 'Verified', detail: 'Identity document matches the applicant’s profile.', source: 'Source: identity document', review: false },
+  { name: 'Documents', status: 'Verified', detail: 'Income and proof of address have been reviewed.', source: 'Source: income statement and utility bill', review: false },
+  { name: 'Financial condition', status: 'Needs review', detail: 'Declared income is below this property’s requirement.', source: 'Source: declared monthly income', review: true },
+  { name: 'Preferences', status: 'Matches', detail: 'Three bedrooms and parking match the resident’s search.', source: 'Source: resident’s search preferences', review: false },
+];
+---
+<figure class="qualification-exhibit">
+  <div class="qualification" aria-label="Example rental qualification assessment">
+    <div class="q-heading">
+      <span class="q-brand">allumove<span aria-hidden="true">.</span></span>
+      <span class="q-demo">Illustrative case</span>
+    </div>
+    <div class="q-intro">
+      <span class="q-eyebrow">APPLICATION REVIEW</span>
+      <h3>One condition to review.</h3>
+      <p>Resolve the financial requirement before moving forward with this property.</p>
+    </div>
+    <ul class="q-criteria">
+      {criteria.map(item => <li class:list={['q-criterion', { 'q-review': item.review }]}>
+        <div class="q-criterion-top">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            {item.review ? <><path d="m12 3 10 18H2L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v5m0 3v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></> : <><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="m8 12 3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></>}
+          </svg>
+          <span class="q-state">{item.status}</span>
+        </div>
+        <h4>{item.name}</h4>
+        <p>{item.detail}</p>
+        <span class="q-source">{item.source}</span>
+      </li>)}
+    </ul>
+    <div class="q-rule">
+      <span class="q-eyebrow">PROPERTY REQUIREMENT</span>
+      <p>Monthly income of at least <strong>3× the total monthly cost</strong>.</p>
+      <span class="q-source">Example: R$ 3,200 total cost → R$ 9,600 required income. Declared: R$ 8,400.</span>
+    </div>
+    <div class="q-follow-up">
+      <span class="q-step" aria-hidden="true">↗</span>
+      <div><h4>Next step: request additional information</h4><p>Ask for updated income evidence, then reassess the financial criterion.</p></div>
+    </div>
+  </div>
+  <figcaption>Presentation adapted from Allumove’s implemented qualification component. Translated into English with fictional data; this is a static explanation of the interface, not a live assessment.</figcaption>
+</figure>
+<style>
+  .qualification-exhibit { margin: 36px 0; }
+  .qualification { color-scheme: light; background: #f8fafc; color: #192537; border: 1px solid #dce3ed; border-radius: 16px; overflow: hidden; }
+  .q-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 28px; border-bottom: 1px solid #e0e6ee; }
+  .q-brand { font-size: 22px; font-weight: 650; letter-spacing: -.06em; color: #174ac6; }
+  .q-brand span { color: #628bed; }
+  .q-demo { color: #56657b; font-size: 11px; }
+  .q-intro { padding: 28px 28px 24px; }
+  .q-eyebrow { display: block; font: 10px/1.6 var(--mono); letter-spacing: .1em; color: #56657b; }
+  .qualification h3 { color: #192537; font-size: clamp(23px, 3vw, 30px); letter-spacing: -.035em; line-height: 1.2; font-weight: 550; margin: 10px 0; }
+  .qualification p { font-size: 13px; line-height: 1.65; color: #4c5c72; margin: 8px 0 0; }
+  .q-criteria { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; list-style: none; padding: 0 28px; margin: 0; }
+  .q-criterion { display: flex; flex-direction: column; padding: 20px; background: #fff; border: 1px solid #dce3ed; border-radius: 10px; }
+  .q-criterion-top { display: flex; align-items: center; gap: 8px; color: #157052; margin-bottom: 18px; }
+  .q-state { font-size: 11px; font-weight: 550; }
+  .qualification h4 { color: #192537; font-size: 14px; font-weight: 600; line-height: 1.5; margin: 0; }
+  .q-source { display: block; font-size: 11px; line-height: 1.6; color: #58677c; }
+  .q-criterion .q-source { padding-top: 16px; margin-top: auto; }
+  .q-review { background: #fffaf0; border-color: #e3c58a; }
+  .q-review .q-criterion-top { color: #89540c; }
+  .q-rule { padding: 24px 28px; }
+  .q-rule .q-source { margin-top: 6px; }
+  .q-follow-up { display: flex; gap: 14px; align-items: start; padding: 22px 28px; border-top: 1px solid #dce3ed; background: #edf2fc; }
+  .q-step { font-size: 22px; line-height: 1.2; color: #174ac6; }
+  .q-follow-up p { margin-top: 4px; }
+  figcaption { color: var(--text-muted); font-size: 12px; line-height: 1.7; margin-top: 14px; max-width: 68ch; }
+  @media (max-width: 540px) {
+    .q-heading { padding: 16px 20px; }
+    .q-intro, .q-rule, .q-follow-up { padding: 22px 20px; }
+    .q-criteria { grid-template-columns: 1fr; padding: 0 20px; }
+    .q-criterion { padding: 18px; }
+    .q-criterion-top { margin-bottom: 12px; }
+  }
+</style>

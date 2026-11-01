@@ -1,0 +1,6 @@
+output
+.playwright-cli
+.agent-loop
+docs
+scripts
+.git
