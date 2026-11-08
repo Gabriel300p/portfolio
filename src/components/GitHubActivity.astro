@@ -1,0 +1,79 @@
+---
+import { PROFILE, calendarLayout, formatDate } from '../lib/github-activity.mjs';
+
+interface Props {
+  activity: import('../lib/github-activity.mjs').Activity;
+}
+const { activity } = Astro.props;
+const layout = activity.status === 'unavailable' ? null : calendarLayout(activity.days);
+const number = new Intl.NumberFormat('en-US');
+---
+
+<section id="github-activity" class="github-activity" aria-labelledby="github-heading">
+  <div class="wrap">
+    <div class="activity-content">
+      <div class="activity-heading">
+        <h2 id="github-heading">GitHub activity</h2>
+        <a class="text-link" href={PROFILE}>View GitHub profile <span aria-hidden="true">↗</span></a>
+      </div>
+      {activity.status !== 'unavailable' && layout ? (
+        <>
+          <p class="activity-summary">
+            <strong>{number.format(activity.total)} contributions</strong> in the last 12 months.
+            {' '}{number.format(activity.activeDays)} of {activity.days.length} days with activity.
+          </p>
+          <p class="activity-period">
+            <time datetime={activity.start}>{formatDate(activity.start)}</time> – <time datetime={activity.end}>{formatDate(activity.end)}</time>
+          </p>
+          <div class="activity-calendar" aria-hidden="true" style={`--weeks: ${layout.weeks}`}>
+            <div class="activity-months">
+              {layout.months.map(month => <span style={`grid-column: ${month.week + 1}`}>{month.label}</span>)}
+            </div>
+            <svg viewBox={`0 0 ${layout.weeks * 15 - 3} 102`} width={layout.weeks * 15 - 3} height="102" focusable="false">
+              {layout.cells.map(day => <rect x={day.week * 15} y={day.weekday * 15} width="12" height="12" rx="2" data-level={day.level} />)}
+            </svg>
+            <div class="activity-legend">
+              <span>Less</span>
+              {[0, 1, 2, 3, 4].map(level => <span class="activity-swatch" data-level={level}></span>)}
+              <span>More</span>
+            </div>
+          </div>
+          <p class="activity-collected">
+            {activity.status === 'cached' ? 'Cached · Collected' : 'Collected'}{' '}
+            <time datetime={activity.collectedAt}>{formatDate(activity.collectedAt)}</time> (UTC)
+          </p>
+        </>
+      ) : (
+        <p class="activity-summary">GitHub activity is currently unavailable. Visit the profile for recent contributions.</p>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .github-activity { padding-block: 0 40px; }
+  .activity-content { border-top: 1px solid var(--line); padding-top: 28px; }
+  .activity-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; margin-bottom: 18px; }
+  .activity-heading h2 { font-size: 18px; letter-spacing: -.02em; }
+  .activity-heading .text-link { padding-block: 6px; gap: 12px; }
+  .activity-summary { font-size: 14px; color: var(--text-muted); }
+  .activity-summary strong { color: var(--text); font-weight: 500; }
+  .activity-period, .activity-collected { font: 11px/1.6 var(--mono); color: var(--text-faint); }
+  .activity-period { margin-top: 6px; }
+  .activity-calendar { max-width: 840px; margin-block: 20px 12px; }
+  .activity-months { display: grid; grid-template-columns: repeat(var(--weeks), minmax(0, 1fr)); margin-bottom: 7px; font: 10px/1.6 var(--mono); color: var(--text-faint); }
+  svg { display: block; width: 100%; height: auto; }
+  [data-level="0"] { --activity-tone: var(--surface-2); }
+  [data-level="1"] { --activity-tone: var(--line-strong); }
+  [data-level="2"] { --activity-tone: var(--text-faint); }
+  [data-level="3"] { --activity-tone: var(--text-muted); }
+  [data-level="4"] { --activity-tone: var(--text); }
+  rect { fill: var(--activity-tone); }
+  .activity-legend { display: flex; justify-content: end; align-items: center; gap: 4px; margin-top: 8px; font: 10px/1.6 var(--mono); color: var(--text-faint); }
+  .activity-legend > span:first-child { margin-right: 4px; }
+  .activity-legend > span:last-child { margin-left: 4px; }
+  .activity-swatch { width: 9px; height: 9px; border-radius: 2px; background: var(--activity-tone); }
+  @media (max-width: 480px) {
+    .activity-heading { align-items: start; flex-direction: column; }
+  }
+</style>

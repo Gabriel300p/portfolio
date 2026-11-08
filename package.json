@@ -5,6 +5,7 @@
   "private": true,
   "description": "Gabriel Andrade \u2014 design engineer portfolio",
   "scripts": {
+    "test": "node --test",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

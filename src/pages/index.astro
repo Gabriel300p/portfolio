@@ -3,8 +3,12 @@ import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import Work from "../components/Work.astro";
+import GitHubActivity from "../components/GitHubActivity.astro";
+import { loadGitHubActivity } from "../lib/github-activity.mjs";
+import githubSnapshot from "../data/github-activity.snapshot.json";
 import Background from "../components/Background.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+const githubActivity = await loadGitHubActivity({ snapshot: githubSnapshot });
 ---
-<Base><Nav/><main id="main" tabindex="-1"><Hero track="home"/><Work order={['pandora','bboss','allumove']}/><Background/><Contact track="home"/></main><Footer/></Base>
+<Base><Nav/><main id="main" tabindex="-1"><Hero track="home"/><Work order={['pandora','bboss','allumove']}/><GitHubActivity activity={githubActivity}/><Background/><Contact track="home"/></main><Footer/></Base>
