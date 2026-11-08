@@ -1,7 +1,7 @@
 ---
 import { projects } from "../data/projects";
 interface Props { order?: string[]; label?: string }
-const { order = projects.map(p => p.slug), label = 'Product design · Frontend · Agent workflows' } = Astro.props;
+const { order = projects.map(p => p.slug), label = 'Agent workflows · Product engineering' } = Astro.props;
 const selected = order.map(slug => projects.find(p => p.slug === slug)).filter(Boolean);
 ---
 <section id="work" class="work-index">
