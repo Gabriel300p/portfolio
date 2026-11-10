@@ -1,0 +1,17 @@
+---
+import Information from '../../layouts/Information.astro';
+---
+<Information title="Gmail integration privacy notice" description="How Pandora's Box uses Gmail data for Gabriel Andrade's personal career workflow.">
+  <p>Updated November 10, 2026. This notice covers the Forge Gmail integration in Pandora’s Box, operated by Gabriel Andrade for his personal job search.</p>
+  <h2>Access and purpose</h2>
+  <p>The connection requests the Google Gmail read-only permission. That permission technically allows reading the mailbox. Forge uses bounded searches and message history to find replies connected to tracked applications and recruiter conversations. It may read message headers and bodies to associate a reply with a process and identify an acknowledgement, human reply, interview, offer, or rejection.</p>
+  <p>This integration does not send messages, create drafts, modify messages or labels, archive mail, mark it as read, or download attachments. Gabriel handles replies and negotiations.</p>
+  <h2>Data stored</h2>
+  <p>OAuth credentials are kept in private runtime storage on Gabriel’s VM. Tracking records can include message and thread identifiers, the associated process, a classification, a short summary, and observation times. Full email bodies and attachments are not persisted by the monitoring workflow. Identifiers and summaries remain until Gabriel deletes them; revoking Google access does not automatically delete existing tracking records.</p>
+  <h2>Processing and notifications</h2>
+  <p>A minimized excerpt of a relevant message and its subject may be sent to the OpenAI API to classify the reply. Email addresses in the body excerpt are redacted before this request. These requests use the API with response storage disabled and remain subject to OpenAI’s applicable data-handling rules. A summary may be delivered to Gabriel’s configured private Discord channel. Email content is not sold, used for advertising, or used by Forge to train a general-purpose model.</p>
+  <p>Google, OpenAI, Discord, and the VM hosting provider process the data needed to provide their respective services. Access is limited to Gabriel, authorized operational access, and the providers needed for this workflow.</p>
+  <h2>Control and removal</h2>
+  <p>Gabriel can stop the integration and remove its local OAuth credentials and tracking records. Google access can also be revoked from <a href="https://myaccount.google.com/connections">Google Account connections</a>. To ask about this integration or request removal of related records, use the <a href="/#contact">contact details on Gabriel’s portfolio</a>.</p>
+  <p>The use and transfer of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements.</p>
+</Information>
